@@ -25,60 +25,72 @@
 <script lang="ts">
 
 import { post, ApiError, bus } from "../../api/api";
-import { LoginResponse, AccessToken, AuthConstants, User, loginUser } from "./";
+import { LoginResponse, AccessToken, AuthConstants, User, api } from "../../api/auth";
 import { resolveTransitionHooks, defineComponent } from "vue";
 import { getCurrentInstance } from 'vue'
+import { useStore } from 'vuex'
 
+import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useToast } from "primevue/usetoast";
 export default defineComponent({
   name: "Login",
-  data() {
-    return {
-      email: "joga.singh@gmail.com",
-      password: ""
-    };
-  },
-  methods: {
-    handleSubmit(e: any) {
-      e.preventDefault();
-      const bodyObj = {
-        email: this.email,
-        password: this.password
-      };
-      post("/api/login", bodyObj)
-        .then(resp => {
-          this.handleSuccess(resp);
-        })
-        .catch(reason => {
-          this.handleFailure(reason);
-        });
-    },
-    handleSuccess(resp: LoginResponse) {
-      const user: User = loginUser(resp)
-      bus.emit("login");
-      if (this.$route.params.nextUrl != null) {
-        if (Array.isArray(this.$route.params.nextUrl)) {
-            this.$router.push(this.$route.params.nextUrl[0]);
+
+   setup () {
+    const router = useRouter()
+    const route = useRoute()
+    const store = useStore()
+    const toast = useToast();
+
+    const email = ref("joga.singh@gmail.com")
+    const password = ref('')
+
+    function handleSuccess(resp: LoginResponse) {
+      const user: User = api.loginUser(resp)
+      store.dispatch('auth/login', user)
+      if (route.params.nextUrl != null) {
+        if (Array.isArray(route.params.nextUrl)) {
+            router.push(route.params.nextUrl[0]);
         }else{
-          this.$router.push(this.$route.params.nextUrl);
+          router.push(route.params.nextUrl);
         }
       } else {
         if (user.isAdmin) {
-          this.$router.push("admin");
+          router.push("admin");
         } else if (user.isSysAdmin) {
-          this.$router.push("sysadmin");
+          router.push("sysadmin");
         } else {
-          this.$router.push("customer");
+          router.push("customer");
         }
       }
-    },
-    handleFailure(resp: ApiError) {
-      this.$toast.add({
+    }
+    function handleFailure(resp: ApiError) {
+      toast.add({
         severity: "error",
         summary: "Error",
         detail: resp.message,
         life: 3000
       });
     }
+    function handleSubmit(e: any) {
+      e.preventDefault();
+      const bodyObj = {
+        email: email.value,
+        password: password.value
+      };
+      post("/api/login", bodyObj)
+        .then(resp => {
+          handleSuccess(resp);
+        })
+        .catch(reason => {
+          handleFailure(reason);
+        });
+    }
+    return {
+      email: email,
+      password: password,
+      handleSubmit: handleSubmit
+    };
   }
 });
 </script>

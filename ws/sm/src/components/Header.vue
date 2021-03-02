@@ -6,7 +6,8 @@
       </template>
       <template #end>
         <InputText placeholder="Search" type="text" />
-        <Button v-show="showLogoutButton"
+        <Button
+          v-if="user"
           label="Logout"
           icon="pi pi-power-off"
           :style="{'margin-left': '0 .5em'}"
@@ -57,40 +58,36 @@ const menuItems = [
     ]
   }
 ];
+import { resolveTransitionHooks, defineComponent, computed } from "vue";
 import { Options, Vue } from "vue-class-component";
-import { logoutUser, getUser } from "./auth";
 import { post, ApiError, bus } from "../api/api";
-
-@Options({
-  props: {
-    msg: String
-  },
-  data() {
-    return {
-      showLogoutButton: false
+import { LoginResponse, AccessToken, AuthConstants, User, api } from "../api/auth";
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+import { ref } from 'vue'
+export default defineComponent({
+  name: "Header",
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+    function handleLogout() {
+      api.logoutUser();
+      //bus.emit("logout");
+            console.log("Call logout")
+      store.dispatch('auth/logout')
+      router.push("/login");
     }
-  },
-  created() {
-    bus.on('login',(user) => {
-      this.showLogoutButton = true
-    })
-    bus.on('logout',(user) => {
-      this.showLogoutButton = false
-    })
+    function getUser() {
+      const ret = store.getters['auth/loggedUser']
+      return ret
+    }
+    return {
+      items: menuItems,
+      user:computed(() => getUser()),
+      handleLogout: handleLogout
+    }
   }
-})
-export default class Header extends Vue {
-  items = menuItems;
-
-  handleLogout() {
-    logoutUser();
-    bus.emit("logout");
-    this.$router.push("/");
-  }
-  isUserLogged() {
-    return getUser() != null;
-  }
-}
+});
 </script>
 
 <style scoped>

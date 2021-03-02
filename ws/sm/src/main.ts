@@ -23,6 +23,7 @@ const app = createApp(App);
 app.use(PrimeVue);
 app.use(router)
 app.use(ToastService);
+app.use(store)
 app.component('InputText', InputText);
 app.component('Button', Button);
 app.component('Toolbar', Toolbar)
