@@ -23,35 +23,38 @@
   </div>
 </template>
 <script lang="ts">
-
 import { post, ApiError, bus } from "../../api/api";
-import { LoginResponse, AccessToken, AuthConstants, User, api } from "../../api/auth";
+import {
+  LoginResponse,
+  AccessToken,
+  AuthConstants,
+  User,
+  api
+} from "../../api/auth";
 import { resolveTransitionHooks, defineComponent } from "vue";
-import { getCurrentInstance } from 'vue'
-import { useStore } from 'vuex'
+import { getCurrentInstance } from "vue";
+import { useStore } from "vuex";
 
-import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useToast } from "primevue/usetoast";
 export default defineComponent({
   name: "Login",
 
-   setup () {
-    const router = useRouter()
-    const route = useRoute()
-    const store = useStore()
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const store = useStore();
     const toast = useToast();
 
-    const email = ref("joga.singh@gmail.com")
-    const password = ref('')
+    const email = ref("joga.singh@gmail.com");
+    const password = ref("");
 
-    function handleSuccess(resp: LoginResponse) {
-      const user: User = api.loginUser(resp)
-      store.dispatch('auth/login', user)
+    function handleSuccess(user: User) {
       if (route.params.nextUrl != null) {
         if (Array.isArray(route.params.nextUrl)) {
-            router.push(route.params.nextUrl[0]);
-        }else{
+          router.push(route.params.nextUrl[0]);
+        } else {
           router.push(route.params.nextUrl);
         }
       } else {
@@ -78,9 +81,11 @@ export default defineComponent({
         email: email.value,
         password: password.value
       };
-      post("/api/login", bodyObj)
-        .then(resp => {
-          handleSuccess(resp);
+
+      store
+        .dispatch("auth/login", bodyObj) //
+        .then(user => {
+          handleSuccess(user);
         })
         .catch(reason => {
           handleFailure(reason);

@@ -11,10 +11,14 @@ const allGetters = {
   }
 }
 const actions = {
-  login(context: any, user: any) {
+  async login(context: any, credentials: any) {
+    const user = await api.loginUser(credentials.email, credentials.password)
     context.commit('setLoggedUser', user)
+    return user
   },
-  logout(context: any) {
+
+  async logout(context: any) {
+    const user = await api.logoutUser()
     context.commit('setLoggedUser', null)
   }
 
@@ -30,6 +34,6 @@ export const authModule = {
     loggedUser: api.getUser() // {email:'joga.singh@gmail.com'}
   }),
   mutations: mutations,
-  getters:allGetters,
+  getters: allGetters,
   actions: actions
 }

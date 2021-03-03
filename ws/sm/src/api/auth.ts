@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import jwt_decode from "jwt-decode";
-
+import { post, ApiError, bus } from "../api/api";
 export interface LoginResponse {
     "access_token": string;
     "token_type": string;
@@ -42,12 +42,19 @@ export class Api {
         return user;
     }
 
-    public loginUser(resp: LoginResponse): User {
-        const user: User = this.parseUser(resp.access_token)
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("jwt", resp.access_token);
+    public async loginUser(email: string, password: string): Promise<User> {
+        const bodyObj = {
+            email: email,
+            password: password
+        };
 
-        return user;
+        const resp = await post("/api/login", bodyObj)
+        const token = resp.access_token
+        const user: User = this.parseUser(token)
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("jwt", token);
+        return user
+
     }
     getUser(): User | null {
         const accessToken = localStorage.getItem("jwt")
@@ -58,7 +65,7 @@ export class Api {
 
         return user;
     }
-    logoutUser() {
+    public async logoutUser() {
         localStorage.removeItem("user")
         localStorage.removeItem("jwt")
     }
