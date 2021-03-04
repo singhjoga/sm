@@ -26,7 +26,8 @@ import Panel from 'primevue/panel';
 import { makeServer } from './api/mocks/server'
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
-const app = createApp(App);
+import i18n from './i18n'
+const app = createApp(App).use(i18n);
 app.config.globalProperties.$appState = reactive({ inputStyle: 'outlined' });
 app.config.globalProperties.$primevue = reactive({ ripple: true });
 app.use(PrimeVue);

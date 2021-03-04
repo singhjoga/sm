@@ -1,0 +1,20 @@
+{
+  "menu": {
+    "login": "Login",
+    "logout": "Logout",
+    "account": "Account",
+    "dashboard": "Dashboard",
+    "restaurant-management": "Restaurant Management",
+    "restaurant-list": "Restaurants",
+    "restaurant-menu": "Menu",
+    "customer-management": "Customer Management",
+    "customer-list": "Customers",
+    "about": "About",
+    "help": "Help",
+    "search": "Search",
+    "email": "Email",
+    "password": "Password",
+    "shopping-cart": "Shopping Cart"
+  }
+
+}
