@@ -1,11 +1,25 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import jwt_decode from "jwt-decode";
 import { post, ApiError, bus } from "../api/api";
+//import Keycloak from 'keycloak-js';
+
 export interface LoginResponse {
     "access_token": string;
     "token_type": string;
     "expires_in": number;
 }
+
+const initOptions = {
+    url: "http://localhost:8080/auth/",
+    realm: "sm",
+    clientId: "sm-ui",
+    silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
+    //    onLoad: "login-required"
+};
+
+let keycloakInitialized = false
+let isUserLoggedIn = false
+let isInitError = false
 export interface AccessToken {
     iss: string;
     sub: string;
@@ -17,7 +31,8 @@ export interface AccessToken {
     name: string;
     role: string[];
 }
-
+const keycloak = null; //Keycloak(initOptions)
+console.log("Auth API Initialized")
 export interface User {
     name: string;
     email: string;
@@ -41,13 +56,37 @@ export class Api {
 
         return user;
     }
+    
+    public async getAccessToken() {
+        return keycloak.token
+    }
+    public async isUserLoggedIn() {
+        if (isInitError) {
+          //  keycloak.login().then((success) => {
+          //      console.log("Login success=" + success)
+          //  })
+        }
+        return isUserLoggedIn
+    }
+    public async loginUserKeycloak(): Promise<User> {
+        try {
+            const token = keycloak.token
+            const user: User = this.parseUser(token)
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("jwt", token);
+            return user
+        } catch (e) {
+            console.error(e)
+        } finally {
+            console.error("Login done!")
+        }
 
+    }
     public async loginUser(email: string, password: string): Promise<User> {
         const bodyObj = {
             email: email,
             password: password
         };
-
         const resp = await post("/api/login", bodyObj)
         const token = resp.access_token
         const user: User = this.parseUser(token)
@@ -66,9 +105,11 @@ export class Api {
         return user;
     }
     public async logoutUser() {
+        await this.initKeycloak()
         localStorage.removeItem("user")
         localStorage.removeItem("jwt")
+        await keycloak.logout()
     }
 }
-export const api = new Api();
+export const authApi = new Api();
 
