@@ -9,15 +9,15 @@
     "restaurant-menu": "Menu",
     "customer-management": "Customer Management",
     "customer-list": "Customers",
-    "about": "About",
+    "about": "Über",
     "help": "Help",
-    "search": "Search",
+    "search": "Suchen",
     "email": "Email",
     "password": "Password",
     "shopping-cart": "Shopping Cart"
   },
   "messages": {
-    "footer":"Copyright. All rights reserved"
+    "footer":"Copyright. Alle Rechte vorbehalten"
   }
 
 }

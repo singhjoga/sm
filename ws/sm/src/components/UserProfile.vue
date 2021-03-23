@@ -39,12 +39,19 @@
             <span>Register</span>
           </router-link>
         </li>
+        <li>
+          <button class="p-link" @click="handleLogout">
+            <i class="pi pi-fw pi-power-off"></i>
+            <span>Logout</span>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import {api} from '@/api/auth'
 export default {
   data() {
     return {
@@ -57,17 +64,19 @@ export default {
       event.preventDefault();
     },
     handleLogout() {
-      this.$store.dispatch("auth/logout")
-        .then(resp=>{
-          this.$router.push("/login");
+     // alert(api.getAccessToken())
+      this.$store
+        .dispatch("auth/logout")
+        .then(resp => {
+        //  this.$router.push("/login");
         })
         .catch(resp => {
           this.$toast.add({
-        severity: "error",
-        summary: "Error",
-        detail: resp.message,
-        life: 3000
-      });
+            severity: "error",
+            summary: "Error",
+            detail: resp.message,
+            life: 3000
+          });
         });
     }
   },

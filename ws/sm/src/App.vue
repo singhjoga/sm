@@ -23,13 +23,15 @@
 </template>
 
 <script >
-import { Options, Vue } from "vue-class-component";
 import Header from "./components/Header.vue";
 import LeftPanel from "./components/LeftPanel.vue";
 import UserProfile from "./components/UserProfile.vue";
 import ShoppingCart from "./components/ShoppingCart.vue";
 import Footer from "./components/Footer.vue";
-export default {
+import {defineComponent,ref} from "vue";
+import { useI18n } from 'vue-i18n'
+import { useStore } from 'vuex'
+export default defineComponent({
   data() {
     return {
       layoutMode: "static",
@@ -39,39 +41,39 @@ export default {
       mobileMenuActive: false,
       menu: [
         {
-          label: "Dashboard",
+          label: "menu.dashboard",
           icon: "pi pi-fw pi-home",
           to: "/",
           visible: () => this.user != null
         },
         {
-          label: "Restaurant Management",
+          label: "menu.restaurant-management",
           icon: "pi pi-fw pi-sitemap",
           visible: () => this.user != null && !this.user.isCustomer,
           items: [
             {
-              label: "Restaurants",
+              label: "menu.restaurant-list",
               icon: "pi pi-fw pi-table",
               to: "/restaurants"
             },
-            { label: "Menu", icon: "pi pi-fw pi-list", to: "/menus" }
+            { label: "menu.restaurant-menu", icon: "pi pi-fw pi-list", to: "/menus" }
           ]
         },
         {
-          label: "Customer Management",
+          label: "menu.customer-management",
           icon: "pi pi-fw pi-globe",
           visible: () => this.user != null && this.user.isSysAdmin,
           items: [
-            { label: "Customers", icon: "pi pi-fw pi-list", to: "/customers" }
+            { label: "menu.customer-list", icon: "pi pi-fw pi-list", to: "/customers" }
           ]
         },
         {
-          label: "About",
+          label: 'menu.about',
           icon: "pi pi-fw pi-question",
           to: "/about"
         },
         {
-          label: "Help",
+          label: "menu.help",
           icon: "pi pi-fw pi-question",
           to: "/help"
         }
@@ -203,7 +205,7 @@ export default {
     ShoppingCart: ShoppingCart,
     Footer: Footer,
   }
-};
+});
 </script>
 
 <style lang="scss">

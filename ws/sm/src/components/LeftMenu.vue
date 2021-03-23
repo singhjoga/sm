@@ -8,14 +8,14 @@
 				<router-link v-if="item.to" :to="item.to" :class="[item.class, 'p-ripple',{'active-route': activeIndex === i, 'p-disabled': item.disabled}]" :style="item.style"
 							@click="onMenuItemClick($event,item,i)" :target="item.target" exact role="menuitem" >
 					<i :class="item.icon"></i>
-					<span>{{item.label}}</span>
+					<span>{{t(item.label)}}</span>
 					<i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon"></i>
 					<span v-if="item.badge" class="menuitem-badge">{{item.badge}}</span>
 				</router-link>
 				<a v-if="!item.to" :href="item.url||'#'" :style="item.style" :class="[item.class, 'p-ripple', {'p-disabled': item.disabled}]"
 					@click="onMenuItemClick($event,item,i)" :target="item.target" role="menuitem">
 					<i :class="item.icon"></i>
-					<span>{{item.label}}</span>
+					<span>{{t(item.label)}}</span>
 					<i v-if="item.items" class="pi pi-fw pi-angle-down menuitem-toggle-icon"></i>
 					<span v-if="item.badge" class="menuitem-badge">{{item.badge}}</span>
 				</a>
@@ -30,7 +30,9 @@
 	</ul>
 </template>
 <script>
-export default {
+import {defineComponent,ref} from "vue";
+import { useI18n } from 'vue-i18n'
+export default defineComponent({
 	name: 'LeftMenu',
 	props: {
 		items: Array,
@@ -66,8 +68,14 @@ export default {
 		visible(item) {
 			return (typeof item.visible === 'function' ? item.visible() : item.visible !== false);
 		}
+	},
+	setup() {
+		const {t} = useI18n()
+		return {
+			t
+		}
 	}
-}
+})
 </script>
 
 <style scoped>

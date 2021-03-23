@@ -1,15 +1,21 @@
 <template>
-	<div class="layout-footer">
-		<span class="footer-text" style="margin-right: 5px">PrimeVue</span>
-		<img src="assets/layout/images/logo.svg" alt="sigma" width="80"/>
-		<span class="footer-text" style="margin-left: 5px">Theme and Layout</span>
-	</div>
+  <div class="layout-footer">
+    <span class="footer-text" style="margin-left: 5px">{{t('messages.footer')}}</span>
+  </div>
 </template>
 
 <script>
-	export default {
-		name: "Footer"
+import {defineComponent} from "vue";
+import { useI18n } from 'vue-i18n'
+export default defineComponent({
+  name: "Footer",
+  setup() {
+	const {t} = useI18n()
+	return {
+		t
 	}
+  }
+});
 </script>
 
 <style scoped>

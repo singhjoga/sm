@@ -3,6 +3,7 @@
   <div style="height:300px;position:relative;">
     <Panel header="Login" class="centered">
       <div class="p-fluid">
+        <!--
         <div class="p-field p-grid">
           <label for="email" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">E-Mail</label>
           <div class="p-col-12 p-md-10">
@@ -15,6 +16,7 @@
             <InputText id="password" type="password" v-model="password" />
           </div>
         </div>
+        -->
       </div>
       <div class="p-p-4">
         <Button label="Login" @click="handleSubmit" class="p-d-block p-mx-auto" />
@@ -24,12 +26,13 @@
 </template>
 <script lang="ts">
 import { post, ApiError, bus } from "../../api/api";
+
 import {
   LoginResponse,
   AccessToken,
   AuthConstants,
   User,
-  api
+  authApi
 } from "../../api/auth";
 import { resolveTransitionHooks, defineComponent } from "vue";
 import { getCurrentInstance } from "vue";
@@ -42,6 +45,7 @@ export default defineComponent({
   name: "Login",
 
   setup() {
+    console.log("Loading login")
     const router = useRouter();
     const route = useRoute();
     const store = useStore();
@@ -82,14 +86,18 @@ export default defineComponent({
         password: password.value
       };
 
+      console.log("Calling login")
       store
         .dispatch("auth/login", bodyObj) //
         .then(user => {
+          console.log("Calling login . 1")
           handleSuccess(user);
         })
         .catch(reason => {
+          console.log("Calling login . 2")
           handleFailure(reason);
         });
+        
     }
     return {
       email: email,

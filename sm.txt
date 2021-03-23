@@ -2,6 +2,10 @@ hungrykiya
 mysupermama
 spydermama
 
+Keycloak users
+joga.singh@gmail.com /Let
+admin/admin123
+
 Joga Singh: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTQ0MzQ2NjUsImV4cCI6MTY0NTk3MDg0MywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiam9nYS5zaW5naEBnbWFpbC5jb20iLCJuYW1lIjoiSm9nYSBTaW5naCIsImVtYWlsIjoiam9nYS5zaW5naEBnbWFpbC5jb20iLCJyb2xlIjpbImFkbWluIiwic3lzYWRtaW4iXX0.m5CVQqt9Z2V1AGMHgGjW4-VgfhOvDyMRIEWcdUByNa8
 
 Customer 1: 
