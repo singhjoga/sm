@@ -28,22 +28,16 @@
     <div class="layout-menu-container" v-if="user === null">
       <ul class="layout-menu">
         <li>
-          <router-link to="/login" :class="'p-ripple'" exact role="menuitem">
-            <i class="pi-user"></i>
-            <span>Login</span>
-          </router-link>
-        </li>
+        <a class="p-link p-ripple" @click="handleLogin"  role="menuitem">
+					<i class="pi pi-fw pi-unlock"></i>
+					<span>Login</span>
+				</a>
+         </li>
         <li>
-          <router-link to="/register" :class="'p-ripple'" exact role="menuitem">
-            <i class="pi-user"></i>
+         <a class="p-link p-ripple" @click="handleRegister"  role="menuitem">
+            <i class="pi pi-fw pi-book"></i>
             <span>Register</span>
-          </router-link>
-        </li>
-        <li>
-          <button class="p-link" @click="handleLogout">
-            <i class="pi pi-fw pi-power-off"></i>
-            <span>Logout</span>
-          </button>
+          </a>
         </li>
       </ul>
     </div>
@@ -78,6 +72,25 @@ export default {
             life: 3000
           });
         });
+    },
+    handleLogin() {
+     // alert(api.getAccessToken())
+      this.$store
+        .dispatch("auth/login")
+        .then(resp => {
+        //  this.$router.push("/login");
+        })
+        .catch(resp => {
+          this.$toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: resp.message,
+            life: 3000
+          });
+        });
+    },
+    handleRegister() {
+      console.log("Register")
     }
   },
   computed: {

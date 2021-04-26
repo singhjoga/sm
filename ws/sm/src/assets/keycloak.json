@@ -1,8 +1,0 @@
-{
-   
-    "clientId": "sm-ui",
-    "realm" : "sm",
-    "auth-server-url" : "http://localhost:8080/auth/",
-    "ssl-required" : "external",
-    "resource" : "sm-ui"
-  }

@@ -18,7 +18,6 @@ import 'primeflex/primeflex.css';
 //import '@fullcalendar/timegrid/main.min.css';
 import './assets/layout/layout.scss';
 import './assets/layout/flags/flags.css';
-import Keycloak from 'keycloak-js'
 
 import Toolbar from 'primevue/toolbar';
 import Menubar from 'primevue/menubar';
@@ -29,9 +28,10 @@ import Toast from 'primevue/toast';
 import { setupI18n } from './i18n'
 import en from './locales/en.json'
 import de from './locales/de.json'
-import {doLogin, doVerify, doLogout} from '@/assets/test'
+import {initAuth} from '@/api/auth'
 
 export function start(initSuccess: boolean, loginSuccess: boolean, keycloak) {
+  initAuth(initSuccess,loginSuccess,keycloak)
   const i18n = setupI18n({
     // globalInjection: true,
      legacy: false,
@@ -59,5 +59,8 @@ export function start(initSuccess: boolean, loginSuccess: boolean, keycloak) {
   app.mount('#app')
   if (process.env.NODE_ENV === "development") {
     makeServer()
+  }
+  if (loginSuccess) {
+    store.dispatch("auth/loginChanged")
   }
 }

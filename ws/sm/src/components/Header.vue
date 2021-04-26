@@ -4,9 +4,6 @@
         <span class="pi pi-bars"></span>
       </button>
     <div class="layout-topbar-icons">
-        <button @click="doLogin1">Login</button>
-        <button @click="doVerify1">Verify</button>
-        <button @click="doLogout1">Logout</button>
       <span class="layout-topbar-search">
         <InputText type="text" :placeholder="t('menu.search')" />
         <span class="layout-topbar-search-icon pi pi-search"></span>
@@ -20,7 +17,6 @@
 import { resolveTransitionHooks, defineComponent, computed, watch, ref } from "vue";
 import LangSwitch from "./LangSwitch.vue"
 import { useI18n } from 'vue-i18n'
-import {doLogin, doVerify, doLogout} from '@/assets/test'
 const comp = defineComponent({
   name: "Header",
   data() {
@@ -31,15 +27,6 @@ const comp = defineComponent({
   methods: {
       onMenuToggle(event: any) {
           this.$emit('menu-toggle', event);
-      },
-      doLogin1() {
-        doLogin()
-      },
-      doVerify1() {
-        doVerify()
-      },
-      doLogout1() {
-        doLogout()
       }
   },
   components: {

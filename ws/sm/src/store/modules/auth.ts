@@ -17,6 +17,11 @@ const actions = {
     context.commit('setLoggedUser', user)
     return user
   },
+  async loginChanged(context: any) {
+    const user = await authApi.getUser()
+    context.commit('setLoggedUser', user)
+    return user
+  },
 
   async logout(context: any) {
     const user = await authApi.logoutUser()

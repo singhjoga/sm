@@ -11,10 +11,10 @@ const keycloak = Keycloak(initOptions);
 
 keycloak.init({ onLoad: 'check-sso'}).then((auth) => {
   if (!auth) {
-    alert("Not Authenticated");
+    console.log("Not Authenticated");
     //window.location.reload();
   } else {
-    alert("Authenticated");
+    console.log("Authenticated");
   }
   start(true, auth, keycloak)
 }).catch(() => {

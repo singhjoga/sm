@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import jwt_decode from "jwt-decode";
 import { post, ApiError, bus } from "../api/api";
+
 //import Keycloak from 'keycloak-js';
 
 export interface LoginResponse {
@@ -9,17 +10,6 @@ export interface LoginResponse {
     "expires_in": number;
 }
 
-const initOptions = {
-    url: "http://localhost:8080/auth/",
-    realm: "sm",
-    clientId: "sm-ui",
-    silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
-    //    onLoad: "login-required"
-};
-
-let keycloakInitialized = false
-let isUserLoggedIn = false
-let isInitError = false
 export interface AccessToken {
     iss: string;
     sub: string;
@@ -31,7 +21,6 @@ export interface AccessToken {
     name: string;
     role: string[];
 }
-const keycloak = null; //Keycloak(initOptions)
 console.log("Auth API Initialized")
 export interface User {
     name: string;
@@ -41,12 +30,15 @@ export interface User {
     isCustomer?: boolean;
 }
 export enum AuthConstants {
-    ROLE_CUSTOMER = "customer",
-    ROLE_ADMIN = "admin",
-    ROLE_SYSADMIN = "sysadmin",
+    ROLE_CUSTOMER = "sm_customer",
+    ROLE_ADMIN = "sm_client_admin",
+    ROLE_SYSADMIN = "sm_sys_admin",
 }
+let isUserLoggedIn = false
+let initSuccess = false
+let keycloak = null
 
-export class Api {
+export class AuthApi {
     parseUser(token: string): User {
         const accessToken: AccessToken = jwt_decode(token);
         const user: User = { name: accessToken.name, email: accessToken.sub, isAdmin: false };
@@ -61,20 +53,18 @@ export class Api {
         return keycloak.token
     }
     public async isUserLoggedIn() {
-        if (isInitError) {
-          //  keycloak.login().then((success) => {
-          //      console.log("Login success=" + success)
-          //  })
-        }
+  
         return isUserLoggedIn
     }
+    
     public async loginUserKeycloak(): Promise<User> {
         try {
-            const token = keycloak.token
-            const user: User = this.parseUser(token)
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("jwt", token);
-            return user
+            await keycloak.login()
+           // const token = keycloak.token
+           // const user: User = this.parseUser(token)
+           // localStorage.setItem("user", JSON.stringify(user));
+           //localStorage.setItem("jwt", token);
+            return this.getUser()
         } catch (e) {
             console.error(e)
         } finally {
@@ -82,34 +72,33 @@ export class Api {
         }
 
     }
-    public async loginUser(email: string, password: string): Promise<User> {
-        const bodyObj = {
-            email: email,
-            password: password
-        };
-        const resp = await post("/api/login", bodyObj)
-        const token = resp.access_token
-        const user: User = this.parseUser(token)
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("jwt", token);
-        return user
-
-    }
     getUser(): User | null {
-        const accessToken = localStorage.getItem("jwt")
-        if (accessToken === null) {
+        //const accessToken = localStorage.getItem("jwt")
+        if (isUserLoggedIn === false) {
             return null;
         }
-        const user: User = this.parseUser(accessToken)
+
+        const user: User = { name: keycloak.idTokenParsed.name, email: keycloak.idTokenParsed.email, isAdmin: false };
+        user.isCustomer = keycloak.hasRealmRole(AuthConstants.ROLE_CUSTOMER);
+        user.isAdmin = keycloak.hasRealmRole(AuthConstants.ROLE_ADMIN);
+        user.isSysAdmin = keycloak.hasRealmRole(AuthConstants.ROLE_SYSADMIN);
+
+        return user;
 
         return user;
     }
     public async logoutUser() {
-        await this.initKeycloak()
-        localStorage.removeItem("user")
-        localStorage.removeItem("jwt")
+       // localStorage.removeItem("user")
+        //localStorage.removeItem("jwt")
         await keycloak.logout()
+        isUserLoggedIn=false
     }
 }
-export const authApi = new Api();
+
+export function initAuth(initOK: boolean, loginOK: boolean, keycloakObj) {
+    initSuccess=initOK
+    isUserLoggedIn=loginOK
+    keycloak=keycloakObj
+}
+export const authApi = new AuthApi()
 
