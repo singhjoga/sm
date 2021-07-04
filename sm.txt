@@ -10,3 +10,13 @@ Joga Singh: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWx
 
 Customer 1: 
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTQ0MzQ2NjUsImV4cCI6MTY0NTk3MDg0MywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiY3VzdG9tZXIxQGdtYWlsLmNvbSIsIm5hbWUiOiJDdXN0b21lciAxIiwiZW1haWwiOiJjdXN0b21lcjFAZ21haWwuY29tIiwicm9sZSI6WyJjdXN0b21lciIsImd1ZXMiXX0.NcEl4Xe3Ft9DWeJj3dBC5-Edo4U_8l9PjeNez4t6V2c
+
+
+
+
+Open shell from from control panel and start mysql with this command:
+
+mysqld –-console –-skip-grant-tables –-skip-external-locking
+Open another shell from control panel and repair database with this command:
+
+mysqlcheck -r --databases mysql --use-frm

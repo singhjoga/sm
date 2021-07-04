@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="cac7589c-c585-4b4f-aaa0-c8fa0f121068" activeEnvironment="Default" name="ADAMS" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+	<con:settings>
+		<con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[
+			<xml-fragment
+			xmlns:con="http://eviware.com/soapui/config"><con:entry key="Report Format(s)" value=""/><con:entry key="Host:Port" value=""/><con:entry key="Export JUnit Results" value="false"/><con:entry key="Export All" value="false"/><con:entry key="Save After" value="false"/><con:entry key="Add Settings" value="false"/><con:entry key="WSS Password Type" value=""/><con:entry key="TestSuite" value="RegressionTests"/><con:entry key="Endpoint" value=""/><con:entry key="Select Report Type" value=""/><con:entry key="System Properties" value=""/><con:entry key="Password" value=""/><con:entry key="Print Report" value="false"/><con:entry key="Open Report" value="false"/><con:entry key="Export JUnit Results with test properties" value="false"/><con:entry key="Global Properties" value=""/><con:entry key="Project Properties" value=""/><con:entry key="Project Password" value=""/><con:entry key="TestCase" value="EnvironmentTests"/><con:entry key="Username" value=""/><con:entry key="user-settings.xml Password" value=""/><con:entry key="TestRunner Path" value=""/><con:entry key="Environment" value="Default"/><con:entry key="Coverage Report" value="false"/><con:entry key="Enable UI" value="false"/><con:entry key="Root Folder" value=""/><con:entry key="Ignore Errors" value="false"/><con:entry key="Domain" value=""/><con:entry key="Tool Args" value=""/><con:entry key="Save Project" value="false"/></xml-fragment>
+		]]></con:setting>
+	</con:settings>
+	<con:interface xsi:type="con:RestService" id="bae7d25d-f998-4932-aaa9-eeff2759d79e" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://devops-release-management-tst.intranet.deutschebahn.com" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<con:settings/>
+		
+		<con:definitionCache type="TEXT" rootPart=""/><con:endpoints>
+			<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+			<con:endpoint>https://localhost:8443</con:endpoint>
+			<con:endpoint>{#Project#Endpoint}</con:endpoint>
+		</con:endpoints>
+		
+		
+		
+		
+	
+		<con:resource name="version" path="/api/v3" id="25b10365-554e-4a03-bab4-af3b5dbf728c">
+			<con:settings/>
+			<con:parameters>
+				<con:parameter>
+					<con:name>#Project#PathPrefix</con:name>
+					<con:value>#Project#PathPrefix</con:value>
+					<con:style>TEMPLATE</con:style>
+					<con:default>#Project#PathPrefix</con:default>
+				</con:parameter>
+			</con:parameters>
+				<con:resource name="refdata" path="/${#Project#PathPrefix}/refdata" id="42b26944-12b9-492b-a6be-349bee115452">
+			<con:settings/>
+			<con:parameters>
+				<con:parameter>
+					<con:name>#Project#PathPrefix</con:name>
+					<con:value>#Project#PathPrefix</con:value>
+					<con:style>TEMPLATE</con:style>
+					<con:default>#Project#PathPrefix</con:default>
+				</con:parameter>
+			</con:parameters>
+			<con:resource name="refdataByCode" path="{code}" id="0c099bfd-7e5e-40da-9823-5cded066e164">
+				<con:settings/>
+				<con:parameters>
+					<con:parameter>
+						<con:name>code</con:name>
+						<con:value>code</con:value>
+						<con:style>TEMPLATE</con:style>
+						<con:default>code</con:default>
+					</con:parameter>
+				</con:parameters>
+				<con:method name="Get" id="90916c76-4aca-441b-8928-7fb12eab8276" method="GET">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="22ba6aa8-6770-4f2b-a337-cae7990d30c5" mediaType="application/json">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+				<con:method name="Update" id="5c11cc01-e109-4715-be2b-beda9eb6c8ea" method="POST">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="d85adf4b-a9d5-4ddf-b8e1-fd93d9bf2ce0" mediaType="application/json" postQueryString="false">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+				<con:method name="Delete" id="b3407a72-104e-4963-86d2-0342a033314d" method="DELETE">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="5a185af0-2e28-46e3-a772-ed6a5cc0c39f" mediaType="application/json" postQueryString="false">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+			</con:resource>
+			<con:resource name="refdataByType" path="{referenceType}" id="bb7e24a0-35df-4484-9f59-e6a8b50315ac">
+				<con:settings/>
+				<con:parameters>
+					<con:parameter>
+						<con:name>referenceType</con:name>
+						<con:value>referenceType</con:value>
+						<con:style>TEMPLATE</con:style>
+						<con:default>referenceType</con:default>
+					</con:parameter>
+				</con:parameters>
+				<con:method name="Get" id="c548f606-43e2-4d24-a27b-8a0284cf988d" method="GET">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="28ab0feb-9504-43dd-a71c-5675cf7cf127" mediaType="application/json">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+			</con:resource>
+			<con:resource name="refdataTypes" path="types" id="fd2da88b-11b0-4146-943e-3bb1a2889368">
+				<con:settings/>
+				<con:parameters/>
+				<con:method name="Get" id="da7847be-26ad-4055-9b2b-d40637f089e5" method="GET">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="1a46fa19-60ed-4480-9563-add89de7cebe" mediaType="application/json">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+			</con:resource>
+			<con:resource name="refdataHistory" path="history" id="384e4c3b-437a-4261-b185-b9c47c4d0643">
+				<con:settings/>
+				<con:parameters/>
+				<con:method name="Get" id="eda353a4-ea04-4bbd-9d86-7170786de009" method="GET">
+					<con:settings/>
+					<con:parameters/>
+					<con:request name="Request 1" id="7a3fb94c-f7d6-44ce-8b70-5781d4609688" mediaType="application/json">
+						<con:settings/>
+						<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+						<con:request/>
+						<con:credentials>
+							<con:authType>No Authorization</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:request>
+				</con:method>
+			</con:resource>
+			<con:method name="Add" id="669db14a-6735-4890-a518-ac58d079cfd2" method="POST">
+				<con:settings/>
+				<con:parameters/>
+				<con:request name="Request 1" id="e891b948-4301-4a03-a4d8-864d63e587e8" mediaType="application/json" postQueryString="false">
+					<con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings>
+					<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+					<con:request/>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters/>
+				</con:request>
+			</con:method>
+			<con:method name="Get" id="dcb929b0-2671-4d34-ab61-3aa7b52f1ac1" method="GET">
+				<con:settings/>
+				<con:parameters/>
+				<con:request name="Request 1" id="89777493-93e9-4db0-980f-577ff5a5bd0e" mediaType="application/json">
+					<con:settings/>
+					<con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint>
+					<con:request/>
+					<con:credentials>
+						<con:authType>No Authorization</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters/>
+				</con:request>
+			</con:method>
+		</con:resource>
+		<con:resource name="environments" path="environments" id="a08704f6-be9c-4b10-b32d-b243e3d6a704"><con:settings/><con:parameters/><con:resource name="environmentsByCode" path="{code}" id="816a2513-83e3-4921-9577-1a923681f716"><con:settings/><con:parameters><con:parameter><con:name>code</con:name><con:value>code</con:value><con:style>TEMPLATE</con:style><con:default>code</con:default></con:parameter></con:parameters><con:method name="getOne" id="6eced3cf-64e7-4c89-8b61-d89900809b19" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:tst="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/TST-X">tst:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404 401</con:status><con:params/><con:element xmlns:tst="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/TST-X">tst:Fault</con:element></con:representation><con:request name="Request 1" id="bd09ff8a-8d9b-4dc0-a3d6-9e3ae3133ce3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/code</con:originalUri><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="update" id="91d9e39f-feb3-466f-b82c-e65efb24e732" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:int="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/INT-X">int:Fault</con:element></con:representation><con:request name="Request 1" id="6752beea-ec26-46f0-92c4-04b2201af67c" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="delete" id="e1c933ea-5d64-4916-b249-eccd0eb09163" method="DELETE"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="6debc378-7c48-4e0b-8990-d315b2e52a94" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="getAll" id="9c18150c-1e47-4fbb-bc37-0ca7c35c9afa" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="5c4c6b4a-a0e0-4c51-abb5-6cdeba0156b9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments</con:originalUri><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="add" id="8e634e73-e2e9-4a55-a10a-b19931afa419" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:env="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments">env:Fault</con:element></con:representation><con:request name="Request 1" id="d4b70c0c-9d0f-4cdf-bfe4-11f44eb387dc" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="products" path="products" id="fe8b9001-8f37-44a3-9192-d0d532e73fee"><con:settings/><con:parameters/><con:resource name="instances" path="instances" id="94b549f7-8b11-4dcd-ae49-728a619dc203"><con:settings/><con:parameters/><con:resource name="InstanceById" path="{id}" id="45c00d2e-944e-49be-9e50-1e3326748b8c"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>id</con:value><con:style>TEMPLATE</con:style><con:default>id</con:default></con:parameter></con:parameters><con:resource name="history" path="history" id="25251475-1c41-4842-8a3f-1a7f8a1127c7"><con:settings/><con:parameters/><con:method name="Get" id="fcebb2f2-4885-4fd0-9a1d-652dbf25ea2d" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="23170941-1e80-4c01-a5df-058152b95b1f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:method name="GetOne" id="e25e9e8e-851c-42cf-b187-7591939205e6" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="5d806efd-d711-4e41-909e-3626fbe5b1bc" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Update" id="75c6a2d9-6990-41fc-8e31-aa926f226ac4" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="cb25da5f-c6a7-4911-ad14-dce3a5aa5a95" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Delete" id="6599c4df-4d0a-4003-8d42-e0b714c61c9e" method="DELETE"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500 404</con:status><con:params/><con:element xmlns:id="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/instances/id">id:Fault</con:element></con:representation><con:request name="Request 1" id="75f35b5c-2d57-4aa1-b67e-2862293f7dee" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:method name="GetAll" id="bffe6a46-4c12-4a20-86af-3db6ece4fe71" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="f7f9dd70-127e-4121-9623-7639f45a9333" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Add" id="0975e500-bacd-44be-a11f-4b3dfc1ab5e6" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="2812a669-efb4-4011-b6f0-a4b04e02c47d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="versions" path="versions" id="1c0c135a-a36d-4d94-a65c-d6ec20271066"><con:settings/><con:parameters/><con:resource name="VersionById" path="{id}" id="c80366ad-a5c5-4622-8d87-90a8aeded5d1"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>id</con:value><con:style>TEMPLATE</con:style><con:default>id</con:default></con:parameter></con:parameters><con:method name="GetVersion" id="ab64d4d1-4706-4367-ad92-4daa2d14d572" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:ns="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions/159">ns:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ns="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions/159">ns:Response</con:element></con:representation><con:request name="Request 1" id="e8e83d08-7e71-4778-83f7-4c93a13511e4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Update" id="264edf15-3f9f-4586-985a-4dc77ebdb28c" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="e11070b7-a8fb-4707-86d1-56ca38e95f37" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Delete" id="596fd183-74d6-4f1e-b5aa-54f47e395c3a" method="DELETE"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="f1d481bb-059b-448e-a505-b8cb6d6ef87a" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GetAllFromProduct" id="e578abc0-3826-41fd-9f4c-cb4c0b02e0f5" method="GET"><con:settings/><con:parameters><con:parameter><con:name>parentId</con:name><con:value/><con:style>QUERY</con:style><con:default/></con:parameter></con:parameters><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/><con:element xmlns:ver="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions">ver:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request1" id="5d9c9017-091b-4ed0-871e-194f77e80055" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="parentId" value="${#TestStep#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>#Project#PathPrefix</con:entry><con:entry>parentId</con:entry><con:entry/></con:parameterOrder></con:request></con:method><con:method name="Add" id="25511361-d61a-4ab0-b475-5a11a11b668b" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201</con:status><con:params/><con:element xmlns:ver="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions">ver:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="08fe280b-3ff6-4811-b8d2-167c20ef6617" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="ProductById" path="{id}" id="9f528cca-3753-42a0-9c21-446a219ef18d"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>id</con:value><con:style>TEMPLATE</con:style><con:default>id</con:default></con:parameter></con:parameters><con:resource name="history" path="history" id="94969154-9bb9-4e89-87c7-d1559b0e956e"><con:settings/><con:parameters/><con:method name="Get" id="99a9b1cd-671b-4402-94ba-6eebd98a72bf" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="38302b28-d3dd-4f5e-9bf3-72c23e779a5f" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:method name="GetOne" id="70ef2b52-74b8-4377-b71c-02540f58e67a" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:id="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/id">id:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500 404</con:status><con:params/><con:element xmlns:id="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/id">id:Fault</con:element></con:representation><con:request name="Request 1" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Update" id="8eec2beb-7e47-4414-beb3-a27d63e2baad" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/><con:element xmlns:ns="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/159">ns:Fault</con:element></con:representation><con:request name="Request 1" id="1a3bd3fe-7935-428c-94de-f629188574e9" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method><con:method name="Delete" id="1150a5dd-6e7f-4858-a0f6-759bf1565c36" method="DELETE"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="17fdc5f3-117e-4a8b-897f-d694a6ce3d67" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:request></con:method></con:resource><con:method name="GetAll" id="ba950da6-158d-4e64-8d9b-beab43b572e5" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:prod="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products">prod:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="548035f9-f175-4712-a78a-187ddce46d39" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Add" id="8fd1b1ff-a59c-4f21-b32c-e6c13006dc7f" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400 401</con:status><con:params/><con:element xmlns:prod="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products">prod:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201</con:status><con:params/><con:element xmlns:prod="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products">prod:Response</con:element></con:representation><con:request name="Request 1" id="eac0e020-b9cf-4c64-a09b-ff6817667627" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+	"name": "Testing",
+	"shortName": "TSTIN",
+	"description": "This is just a test product",
+	"categoryCode": "Database",
+	"vendorCode": "Oracle"
+}</con:request><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="hosts" path="hosts" id="53e8d75c-0c92-4a2a-9ef7-6b8cc10c0f56"><con:settings/><con:parameters/><con:resource name="HostById" path="{id}" id="cd484fad-eb9c-4903-bbd7-3d7ed1497790"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>id</con:value><con:style>TEMPLATE</con:style><con:default>id</con:default></con:parameter></con:parameters><con:resource name="patches" path="patches" id="bb00739f-f342-46ed-a5ec-99397b74314d"><con:settings/><con:parameters/><con:method name="GetOne" id="c24c9cdc-9cf3-4ab7-bbd6-1b79c9cab66e" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/><con:element xmlns:pat="https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/hosts/id/patches">pat:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="cf399143-cee1-463f-ba59-e49c32ad15c7" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="AddOne" id="6d3d62c3-70d8-4231-8084-4d520d2c6d04" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="bc0c441f-7a44-465d-8a5b-da296e72f472" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Delete" id="de473d0b-9f3e-4507-b30c-8acae1f128c2" method="DELETE"><con:settings/><con:parameters/><con:request name="Request 1" id="326feef9-3eb7-49e0-b5cd-a1beeb126c8f" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="history" path="history" id="4fa8fba1-cf11-4d77-bf1c-951b47afe3bf"><con:settings/><con:parameters/><con:method name="GetChangeHistory" id="9f2c4088-5280-460b-9acc-109ae81fc59c" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="22eb094a-679d-4aea-8d43-49015525bc45" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GetOne" id="480d50ae-b154-4f38-b840-99d5724d466b" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="bdcb349e-feee-4c61-801d-d60670b886d2" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Update" id="b095ff0d-3a90-4269-b1af-e35e48fc395f" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="02185562-8230-4803-95f2-24938532ea68" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Delete" id="2a8de142-7594-4e56-9a8d-33f06d93d5ab" method="DELETE"><con:settings/><con:parameters/><con:request name="Request 1" id="812cbd38-afb6-4d86-bbde-6be6912213f9" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="patches" path="patches" id="5554f595-34fc-4f63-ab44-9d9b021fd89a"><con:settings/><con:parameters/><con:resource name="{id}" path="{id}" id="20735c0c-4799-4907-be1f-7c0bf44b45c7"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>id</con:value><con:style>TEMPLATE</con:style><con:default>id</con:default></con:parameter></con:parameters><con:method name="GetOne" id="17e7d5ee-06f3-4498-b1e3-f084bd8fc362" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="72373707-19da-4d88-beff-067a0d384ea9" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Update" id="49e21cca-9bc1-470d-a910-919aca548dad" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="924c8adb-10e0-4eaa-a4db-447907aa88ae" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Delete" id="f99e8d36-40dc-4e01-81d3-cac132e14f9b" method="DELETE"><con:settings/><con:parameters/><con:request name="Request 1" id="c269ee7f-1e9f-4dd7-887e-a96adcea2500" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="bulkupdate" path="bulkupdate" id="e8a51ab2-e63f-4325-a283-89dc02be9e58"><con:settings/><con:parameters/><con:method name="UpdateMore" id="ec4e3a73-1c51-4bb5-84f4-391de4fb04c9" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="5f131eb0-e337-4866-b31e-5b847151bc99" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="deploy" path="deploy" id="d4a01f85-c709-4083-a434-602996ddb0a0"><con:settings/><con:parameters/><con:resource name="end" path="end" id="52d44566-7421-43dd-b336-1f8031b604bb"><con:settings/><con:parameters/><con:method name="MarkAsComplete" id="fffcb9a9-2d36-4cd6-b9c4-d3c3a406e253" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="168dabab-a19c-4043-841e-b1e5e2f6a394" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="start" path="start" id="a4258850-105c-450a-936b-5176f22f28d6"><con:settings/><con:parameters/><con:method name="MarkAsInProgress" id="c72f0ca2-5791-42c4-9106-f6ac4fe84596" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="69e36604-deaf-4ee7-ab0e-864dec2eb6ee" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource><con:resource name="groupedsearch" path="groupedsearch" id="f633b8bb-dadb-40a8-bcc0-a20392e994c7"><con:settings/><con:parameters/><con:resource name="bydomain" path="bydomain" id="9f68fc29-9a2a-4691-917c-e951ece714ab"><con:settings/><con:parameters/><con:method name="GetByDomain" id="e10daae5-1d9a-4516-be66-0b1b7b183a99" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="f1efd545-c7d3-4b1d-b4b5-39ca4f66c9c7" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="SearchGroup" id="bb1dd0d5-60e5-4b15-9c43-5a4bb77ed549" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="bc4727c8-97c3-4ff2-abad-3159fdb7b55c" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="search" path="search" id="ea847f5e-ea70-4080-b85c-4c5cf564b67e"><con:settings/><con:parameters/><con:method name="GetBySearch" id="d75e0bd9-ecb1-4099-85ef-cb2a3270c207" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="cd0972d5-a2d3-4588-9331-41d6fbfa7fd3" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GetAll" id="8259f577-4333-444e-ad6e-d65c7532694e" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="af3fc1a3-9efd-45e7-bddd-8c868d38dfb2" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Add" id="d4189477-be86-491d-958f-dc8c9b9fab87" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="27b63cfb-750b-4954-8a6b-74d2696730d1" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="bulkupdate" path="bulkupdate" id="a02d6ff4-d205-4cb2-bc3b-eb0f6f2826e5"><con:settings/><con:parameters/><con:method name="Method 1" id="fa636f51-bac4-4e9f-882c-2d869eb1e0bb" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="d2d7a0b8-b3ad-4428-81d4-044848b31152" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="findbyname" path="findByName" id="d748a529-efac-4164-bcb5-3b9bb134c005"><con:settings/><con:parameters/><con:method name="GetByName" id="6c202f81-f91c-4108-84dc-55faa5982743" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="792fc5e7-7261-41e4-abde-ddac15b6cd47" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="NOT_USED" path="NOT_USED" id="6394dc7b-08aa-4621-86fa-d9e8cde5022c"><con:settings/><con:parameters/><con:method name="Method 1" id="0fd757cc-75ec-46a1-be5e-a12b58382655" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="22764825-71e5-4b69-96c0-6c28bf3a53c9" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="InstanceID" path="{InstanceID}" id="5f1b3dd4-3bd4-4335-8149-663ac65bf200"><con:settings/><con:parameters/><con:method name="GetByInstanceID" id="d63b2cb6-bc38-432e-8938-149e227d49a0" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="8a41617e-ead2-4d00-b539-c1dcb8b8c744" mediaType="application/json"><con:settings/><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="{Name}" path="{Name}" id="25a2ea52-3bbe-49c6-90b5-8313c7af3241"><con:settings/><con:parameters><con:parameter><con:name>Name</con:name><con:value>Name</con:value><con:style>TEMPLATE</con:style><con:default>Name</con:default></con:parameter></con:parameters><con:resource name="patches" path="patches" id="f0a2eae7-4a12-4ed3-9b7e-8fb62a198da5"><con:settings/><con:parameters/><con:method name="UpdateByName" id="7acfd0db-7050-4e93-9729-aebc62ccdfdb" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="22220119-096c-4a43-b664-b1211e0f6f0a" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource><con:method name="GetAll" id="cdfa5c0c-5855-4c57-92e1-a00137bd9328" method="GET"><con:settings/><con:parameters/><con:request name="Request 1" id="596657b8-5a14-43f6-9178-ecace5d1a943" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="Add" id="9df8990a-cad6-4319-af0c-a6ff4e34c448" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="5ad05f3a-11ac-4c1c-93a7-5cd1092cc9ba" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource>
+	</con:interface>
+	<con:testSuite id="502a1d55-3b99-4ab7-84ca-fd510ad562e0" name="RegressionTests">
+		<con:settings/>
+		<con:runType>SEQUENTIAL</con:runType>
+		<con:testCase id="fe2cac0d-52aa-4383-bb05-b179d872b628" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="EnvironmentTests" searchProperties="true">
+			<con:settings/>
+			<con:testStep type="restrequest" name="GetEnvironments" id="cb79ff34-9bdd-45a8-845c-6f9363b42fdf">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/environments" methodName="getAll" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="GetEnvironments" id="2c6b1974-583d-4c24-9ff8-74b0bf572d1b" mediaType="application/json">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-type" value="application/json" xmlns="http://eviware.com/soapui/config"/></con:setting>
+						</con:settings>
+						<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+						<con:request/>
+						<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/globalproperties</con:originalUri>
+						<con:assertion type="GroovyScriptAssertion" id="b85ac4ff-c312-4951-b354-3a92652d0bdd" name="Script Assertion">
+							<con:configuration><scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertOK();</scriptText></con:configuration>
+						</con:assertion>
+						<con:credentials>
+							<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+							<con:authType>OAuth 2.0</con:authType>
+						</con:credentials>
+						<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+						<con:jmsPropertyConfig/>
+						<con:parameters/>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="Add" id="3b8d1a3f-c1e6-4c06-91b6-d4e905760687">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/environments" methodName="add" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="Add" id="6dcf179b-4af0-47cb-979c-351f55c463f5" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request>{
+  "code": "INT-X",
+  "name": "Automated testing environment",
+  "displayOrder": 0,
+  "colorCode": "#f439f0",
+  "labels": "DEV"
+}</con:request>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="ee7af963-2b4c-47cd-8503-a6fcbd666712" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertCreatedWithID();
+tester.save();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+						<entry key="id" value="DEV" xmlns="http://eviware.com/soapui/config"/>
+						</con:parameters>
+						<con:parameterOrder>
+							<con:entry>id</con:entry>
+						</con:parameterOrder>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="Get" id="4148c901-9cd5-46ec-ac5f-6680e519d79d">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="getOne" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="Get" id="3692e2cd-45e2-4dd8-af89-1199b99b21ba" mediaType="application/json">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request/>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/TST-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="7d48cef7-f2fe-49e1-823b-67430b65c921" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertOK();
+tester.assertContainsRequestLast();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="AddDuplicate" id="7d54ee9a-78e6-436d-b464-8dd5e3420da3">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/environments" methodName="add" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="AddDuplicate" id="6dcf179b-4af0-47cb-979c-351f55c463f5" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request>{
+  "code": "${#TestCase#envCode}",
+  "name": "Automated testing environment",
+  "displayOrder": 0,
+  "colorCode": "#f439f0",
+  "labels": "DEV"
+}</con:request>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="ee7af963-2b4c-47cd-8503-a6fcbd666712" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertBadRequestMessageContains("exists");
+</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+						<entry key="id" value="DEV" xmlns="http://eviware.com/soapui/config"/>
+						</con:parameters>
+						<con:parameterOrder>
+							<con:entry>id</con:entry>
+						</con:parameterOrder>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="AddValidationErrors" id="90506926-fd41-4968-bc13-a5ba5cff1185">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/environments" methodName="add" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="AddValidationErrors" id="6dcf179b-4af0-47cb-979c-351f55c463f5" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request>{
+  "code": "$ass",
+  "name": "A",
+  "displayOrder": 0,
+  "colorCode": "#f439f0saasassasssssssssssssssssssssssssssssssssss"
+}</con:request>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="ee7af963-2b4c-47cd-8503-a6fcbd666712" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertBadRequestErrorCount(4);
+tester.assertBadRequestErrorInField("Size","name");
+tester.assertBadRequestErrorInField("Size","colorCode");
+tester.assertBadRequestErrorInField("Pattern","code");
+tester.assertBadRequestErrorInField("NotNull","labels");</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+						<entry key="id" value="DEV" xmlns="http://eviware.com/soapui/config"/>
+						</con:parameters>
+						<con:parameterOrder>
+							<con:entry>id</con:entry>
+						</con:parameterOrder>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="Update" id="514320e2-bc62-4c56-ac17-c8f62c309031">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="update" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="Update" id="9d5b955b-f5d7-4de7-943c-8c6c931eec29" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request>{
+   "name": "Automated testing environment-Update",
+   "displayOrder": 1
+}</con:request>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/INT-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="ca6a0935-f8de-4d4e-9f77-c0fd73799d2e" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertOK();
+tester.save();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="GetAfterUpdate" id="c5582aa2-c146-4921-9388-40abe3086701">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="getOne" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="GetAfterUpdate" id="3692e2cd-45e2-4dd8-af89-1199b99b21ba" mediaType="application/json">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request/>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/TST-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="7d48cef7-f2fe-49e1-823b-67430b65c921" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertOK();
+tester.assertContainsRequestLast();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="UpdateValidationErrors" id="aaa0c507-c13b-434e-8cb8-f2cf8a3eeedb">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="update" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="UpdateValidationErrors" id="9d5b955b-f5d7-4de7-943c-8c6c931eec29" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request>{
+   "name": "1",
+   "displayOrder": 100,
+   "colorCode": "weweweweweweweweeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+}</con:request>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/INT-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="ca6a0935-f8de-4d4e-9f77-c0fd73799d2e" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertBadRequestErrorCount(3);
+tester.assertBadRequestErrorInField("Size","name");
+tester.assertBadRequestErrorInField("Size","colorCode");
+tester.assertBadRequestErrorInField("Max","displayOrder");</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="Delete" id="13715ceb-0f71-4b3b-b82d-59424c54ac76">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="delete" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="Delete" id="7626ef26-b9dd-46a0-b738-4b5b5c71756e" mediaType="application/json" postQueryString="false">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request/>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/INT-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="7beb43f3-ffa9-41e6-9299-2e5e1e142465" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertOK();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:testStep type="restrequest" name="GetAfterDelete" id="f3797a19-8bbb-423b-8377-32eb2d6e12ab">
+				<con:settings/>
+				<con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="getOne" resourcePath="/api/v3/environments/{code}" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+					<con:restRequest name="GetAfterDelete" id="3692e2cd-45e2-4dd8-af89-1199b99b21ba" mediaType="application/json">
+						<con:settings>
+							<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+					</con:settings>
+					<con:encoding>UTF-8</con:encoding>
+					<con:endpoint>${#Project#EndpointUrl}</con:endpoint>
+					<con:request/>
+					<con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/environments/TST-X</con:originalUri>
+					<con:assertion type="GroovyScriptAssertion" id="7d48cef7-f2fe-49e1-823b-67430b65c921" name="Script Assertion">
+						<con:configuration>
+							<scriptText>import com.dbsystel.devops.adams.soapui.Tester;
+
+Tester tester = new Tester(messageExchange);
+tester.assertNotFound();</scriptText>
+						</con:configuration>
+					</con:assertion>
+					<con:credentials>
+						<con:selectedAuthProfile>Default</con:selectedAuthProfile>
+						<con:authType>OAuth 2.0</con:authType>
+					</con:credentials>
+					<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+					<con:jmsPropertyConfig/>
+					<con:parameters>
+  <con:entry key="envCode" value="INT-X"/>
+  <con:entry key="code" value="${#TestCase#envCode}"/>
+</con:parameters>
+					</con:restRequest>
+				</con:config>
+			</con:testStep>
+			<con:properties>
+				<con:property>
+					<con:name>envCode</con:name>
+					<con:value>INT-X</con:value>
+				</con:property>
+			</con:properties>
+		</con:testCase>
+		<con:testCase id="bdd584d7-3f44-476e-aeb0-8afcc3c2599d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UserReferenceDataTests" searchProperties="true">
+			<con:settings/>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<con:properties>
+				<con:property>
+					<con:name>envCode</con:name>
+					<con:value>INT-X</con:value>
+				</con:property>
+			</con:properties>
+		</con:testCase>
+		<con:properties>
+			<con:property>
+				<con:name>accessToken</con:name>
+				<con:value>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyMjM1ODksInVzZXJfbmFtZSI6IkpvZ2FTaW5naCIsImF1dGhvcml0aWVzIjpbImctYS1BcnRpZmFjdG9yeSIsImctei1EQkUtYXV0by1CQy1EZXZPcHMiLCJnYXUtT2ZmaWNlMzY1X1NQT19Db25kQWNjZXNzMyIsImctei1EQkUtSmlyYS1Vc2VyLVBSRCIsImdwdS1wYXNzd29yZF9jb21wbGV4X0FMTCIsImctei1JbnRyYW5ldCIsImdwdS1CS1VWLVNlY0Jhc2VsaW5lLVVzZXItUGlsb3QiLCJkLXotMDAxMDlGMTEtMDAwLTAtQyIsImctei1EQkUtVUktTkItci1ERVYiLCJnLXotREJFLVVJLU5CLXItVFNUIiwiZy16LURCRS1hdXRvLVJNUC1BZG1pbiIsImd6dS1ERS1EQlN5c3RlbEdtYkgtVC5JVkFFLTAxLUV4dCIsImdwdS1CS1VWLUlFSW50ZXJuZXQiLCJncHUtQktVVi1TZWNCYXNlbGluZS1JRVVzZXItUGlsb3QiLCJnLXotREJFLUplbmtpbnMtRGV2T3BzLVJYIiwiZy16LURCRS1hdXRvLVJlTE0iLCJnLXotRnVsbF9WUE5fQktVIiwiZ3B1LVZEU1gtUkRTLUlFLUludGVybmV0IiwiZy16LU5ldHdvcmtDb25uZWN0X0Z1bGwiLCJnLXotREJFLWF1dG8tUm9MTSIsImctei1NYW5kYW50X0JLVSIsImdhdS1CS1VWLWVtbV9BUFBfT2ZmaWNlLUNlcnRPMzY1LWlPU19Nb2JpbGVNYWlsIiwiZ3B1LUJLVVYtQ2VydFNXIiwiZ2F1LUJLVVYtZW1tX0FQUF9PZmZpY2UtQ2VydE8zNjUtQW5kcm9pZCIsImctcC11LUlFLUludGVybmV0IiwiZy16LURCRS1hdXRvLUJDLUFkbWluIiwiZy16LVRva2VuVXNlclNlbGZTZXJ2aWNlIiwiZy16LURCX1BsYW5ldF9Db3lvIiwiZ2F1LUJLVVYtZW1tX0FQUF9PZmZpY2VfRTMiLCJnbS1CS1VWLUxvZ29uTG9jYWx5IiwiZy16LURCRS1hdXRvLVNURVA0MiIsImd6dS1EQlVzZXIiLCJnLXotREJFLWF1dG8tRGV2T3BzIiwiZy16LVNlcnZpY2Vwb3J0YWwiLCJnLXotREJFLVBMUy1Vc2VyIiwiZ3B1LVZEUy1SRFMtSUUtSW50ZXJuZXQiLCJnLXotSW50cmFuZXRfQktVIiwiZ3p1LURCVXNlci1TdGQiLCJnenUtRFRNLVVzZXIiLCJnLXotREJFLUplbmtpbnMtRkJGLVJXWCIsImctei1EQkUtU1RFUDQyLXhCRiIsImctei1SQVMtVlBOIl0sImp0aSI6IjU3OWUxNDAzLWQ2NzMtNDcxNC04M2I0LTMzZWNkYmRhZmEwMyIsImNsaWVudF9pZCI6ImNtZGItc2VydmVyIiwic2NvcGUiOlsid3JpdGUiXX0.Z3PTC8tP8K6SNrN81mrYrrF9Z3z3q08d3ms9nIbcpgM</con:value>
+			</con:property>
+		</con:properties>
+	</con:testSuite>
+	
+	<con:testSuite id="b3d4b01a-5273-4ed7-952c-5d6bd1a13522" name="Products"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="98a1aea9-d44a-47c5-8774-05eddda6229a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="General Products Test" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="GetProducts" id="fe11468e-b825-44e6-a9a4-86a399f99db8"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products" methodName="GetAll" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetProducts" id="548035f9-f175-4712-a78a-187ddce46d39" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="d80ec2af-8515-4f5c-a9fa-e687f814675a" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="1e0a7285-cf5d-48dd-8372-2f0e43fae356" name="JsonPath Existence Match"><con:configuration><path>$[0].id</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Add" id="fd4cd9dd-da77-4d05-8181-56ebd521691d"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="Add" resourcePath="/api/v3/products" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Add" id="779b0e6e-42aa-4c76-ad1e-8ab433cc19f5" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+	"name": "Testing",
+	"shortName": "TSTIN",
+	"description": "This is just a test product",
+	"categoryCode": "Database",
+	"vendorCode": "Oracle"
+}</con:request><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="dc583499-5586-403c-8bfa-b87cd76177fb" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="36f137b6-7883-486a-8849-8c4cc32ab8ca" name="JsonPath Existence Match"><con:configuration><path>id</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:entry key="#Project#PathPrefix" value="#Project#PathPrefix"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="CopyID" id="07b43dcd-95d3-48d7-9945-ce40c739a5c9"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>IdTransfer</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Add</con:sourceStep><con:sourcePath>id</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="GetOne" id="f92a5297-5dd0-4f76-82ff-30b5048f1fe1"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="GetOne" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetOne" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/id</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="3ac0eef2-1b30-448b-b5bc-7514bf5c676a" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="defaf73c-47af-45c3-9fbb-3b419c347df5" name="JsonPath Existence Match"><con:configuration><path>$</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="e95699b9-d020-45d4-95fb-48cc1a3c50bc" name="JsonPath Match"><con:configuration><path>$.description</path><content>This is just a test product</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Update" id="3f1bc222-0c5a-47b5-93d8-3c2bfad851df"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="Update" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Update" id="1a3bd3fe-7935-428c-94de-f629188574e9" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+  "description": "now this description was changed!"
+}</con:request><con:assertion type="Valid HTTP Status Codes" id="effab786-8b2a-4955-90d8-e07352f645e4" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="5d06d4f0-9828-44bf-9ab0-95856f12f1f0" name="JsonPath Match"><con:configuration><path>$</path><content>{}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetChange" id="189192dd-633b-4cee-b4ae-6ff9d83a400d"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="GetOne" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetChange" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/id</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="3ac0eef2-1b30-448b-b5bc-7514bf5c676a" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="245b8119-6cde-45ca-9fab-f8a7ce0438d8" name="JsonPath Match"><con:configuration><path>$.description</path><content>now this description was changed!</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="DeleteOne" id="19beeeed-4a20-4901-982f-4e41822c022a"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="DeleteOne" id="17fdc5f3-117e-4a8b-897f-d694a6ce3d67" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/152</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="d499c94e-b78c-405f-a68c-b6b8a973a7b6" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="abeca7f3-46be-4126-9231-64789c0d65ba" name="JsonPath Match"><con:configuration><path>$</path><content>{}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="CheckifExist" id="0c09c0fd-3a16-4789-9a0b-17a5c39c64a0"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="GetOne" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="CheckifExist" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/157</con:originalUri><con:assertion type="Simple Contains" id="776ff96f-5a91-49ec-a406-6040fb7b01c8" name="Contains"><con:configuration><token>Resource not found</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="849667fe-a607-4ffe-90cf-3dfe60b5570f" name="Valid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#id}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>id</con:name><con:value>158</con:value></con:property></con:properties></con:testCase><con:testCase id="8520438e-c6ee-4bc1-a68b-c30ce0ea3792" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Version Test" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="GetProducts" id="1c6fb5d1-6d89-4edd-a902-a40b81065f39"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products" methodName="GetAll" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetProducts" id="548035f9-f175-4712-a78a-187ddce46d39" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="d80ec2af-8515-4f5c-a9fa-e687f814675a" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="1e0a7285-cf5d-48dd-8372-2f0e43fae356" name="JsonPath Existence Match"><con:configuration><path>$[0].id</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="AddProduct" id="2b46a823-4742-4fbb-8702-58ad09911b9b"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" methodName="Add" resourcePath="/api/v3/products" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="AddProduct" id="779b0e6e-42aa-4c76-ad1e-8ab433cc19f5" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+	"name": "Testing",
+	"shortName": "TSTIN",
+	"description": "This is just a test product",
+	"categoryCode": "Database",
+	"vendorCode": "Oracle"
+}</con:request><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="dc583499-5586-403c-8bfa-b87cd76177fb" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="36f137b6-7883-486a-8849-8c4cc32ab8ca" name="JsonPath Existence Match"><con:configuration><path>id</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:entry key="#Project#PathPrefix" value="#Project#PathPrefix"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="Transfer ProductID" id="ad5f2eb2-c7d8-4439-8d45-762462c08f7b"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="false" failOnError="true" ignoreEmpty="false" transferToAll="true" entitize="false" transferChildNodes="false"><con:name>IdTransfer</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>AddProduct</con:sourceStep><con:sourcePath>id</con:sourcePath><con:targetType>productid</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:targetPath/><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" transferToAll="false" ignoreEmpty="false" entitize="false" transferChildNodes="false"><con:name>idTransferJson</con:name><con:sourceType>productid</con:sourceType><con:sourceStep>#TestCase#</con:sourceStep><con:sourcePath/><con:targetType>parentId</con:targetType><con:targetStep>GetAllVersionsFromProduct</con:targetStep><con:targetPath/><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>TransferParentId</con:name><con:sourceType>productid</con:sourceType><con:sourceStep>#TestCase#</con:sourceStep><con:sourcePath/><con:targetType>parentId</con:targetType><con:targetStep>GetAllVersionsFromProduct</con:targetStep><con:targetPath/><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>TransferProductId</con:name><con:sourceType>productid</con:sourceType><con:sourceStep>#TestCase#</con:sourceStep><con:sourcePath/><con:targetType>Request</con:targetType><con:targetStep>AddVersion</con:targetStep><con:targetPath>$.productId</con:targetPath><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="GetOneProduct" id="16ae1d62-a9ea-4c1a-83c0-9e401540e87f"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="GetOne" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetOneProduct" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/161</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="e75eb774-acc4-4367-9236-6e6f53ac4768" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="609f38b4-c523-461f-99b6-0c9af8f7fad4" name="JsonPath Match"><con:configuration><path>$.id</path><content>${#TestCase#productid}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#productid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetAllVersionsFromProduct" id="bae32a04-970f-4514-811b-50335175ff6b"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/versions" methodName="GetAllFromProduct" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetAllVersionsFromProduct" id="5d9c9017-091b-4ed0-871e-194f77e80055" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions</con:originalUri><con:assertion type="JsonPath Count" id="a81abf29-479f-422e-837d-23a91ab8f1f9" name="JsonPath Count"><con:configuration><path>$[*]</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="42a9a2aa-1f15-46ac-87a1-05daaf745139" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="parentId" value="163" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>#Project#PathPrefix</con:entry><con:entry>parentId</con:entry><con:entry/></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="AddVersion" id="b1711148-1c95-4c09-aa27-34b29d6d6161"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/versions" methodName="Add" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="AddVersion" id="08fe280b-3ff6-4811-b8d2-167c20ef6617" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+   "productId": "163",
+   "hotFixes": "string",
+   "endOfLifeDate": "2020-07-27T11:23:46.196Z",
+   "endOfSupportDate": "2020-07-27T11:23:46.196Z",
+   "version": "string"
+}</con:request><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="50beb6a0-a194-40db-96f0-55c06624f273" name="Valid HTTP Status Codes"><con:configuration><codes>201</codes></con:configuration></con:assertion><con:assertion type="JsonPath Existence Match" id="8394db5d-6035-43f2-a2cb-f9f6c22593ff" name="JsonPath Existence Match"><con:configuration><path>$.id</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="Transfer Version ID" id="79066725-3b0b-4ad7-ac30-952299106319"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>versionIdTransfer</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>AddVersion</con:sourceStep><con:sourcePath>id</con:sourcePath><con:targetType>versionid</con:targetType><con:targetStep>#TestCase#</con:targetStep><con:type>JSONPATH</con:type><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="UpdateVersion" id="3b4fa701-af00-41c2-a8ef-e6e0d1f89154"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="Update" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="UpdateVersion" id="1a3bd3fe-7935-428c-94de-f629188574e9" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request>{
+  "version": "137",
+  "hotFixes": "1.0",
+  "endOfLifeDate": "2020-12-27T17:45:00.000Z",
+  "endOfSupportDate": "2021-12-27T17:45:00.000Z"
+}</con:request><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/159</con:originalUri><con:assertion type="JsonPath Match" id="2a1f3242-0351-4003-b4a8-66f5293f3318" name="JsonPath Match"><con:configuration><path>$</path><content>{}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="eff2b9d3-7b21-4661-9a84-989ee15c2faa" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#productid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetVersion" id="a9175d8f-e171-4409-9ff6-46751f07637b"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/versions/{id}" methodName="GetVersion" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetVersion" id="e8e83d08-7e71-4778-83f7-4c93a13511e4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions/159</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="8f0ebc85-5f34-4d55-af95-4dc38c37ee89" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="cb5134ed-854d-4c75-83b0-c595c769ad5f" name="Check Version ID"><con:configuration><path>$.id</path><content>${#TestCase#versionId}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="410690ef-a0d5-45e0-abe2-eb8aa130e5ff" name="Check Product ID"><con:configuration><path>$.productId</path><content>${#TestCase#productId}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#versionid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="DeleteVersion" id="9d689ef8-5f4c-4a36-83ba-9b1cb4e376c3"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/versions/{id}" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="DeleteVersion" id="f1d481bb-059b-448e-a505-b8cb6d6ef87a" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions/142</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="dc0aea3b-87b4-430b-9700-18d75460dd6f" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="c03a7b08-ad0f-4eec-9de5-2f4301fbb621" name="JsonPath Match"><con:configuration><path>$</path><content>{}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#versionId}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetVersionCheck" id="86217ccf-a330-40a2-bc03-83cd682f6687"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/versions/{id}" methodName="GetVersion" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetVersionCheck" id="e8e83d08-7e71-4778-83f7-4c93a13511e4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/versions/159</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="ced45df4-bd6f-48d9-a259-201805c0e1dc" name="Valid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:assertion type="Simple Contains" id="d426ed61-137b-451c-a01e-21aedcfae5ce" name="Contains"><con:configuration><token>Resource not found ProductVersion for id ${#TestCase#versionid}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#versionid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="DeleteProduct" id="afd60944-873b-4d6a-9beb-4c87167939de"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="DeleteProduct" id="17fdc5f3-117e-4a8b-897f-d694a6ce3d67" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/161</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="24f5d6f2-77b2-4648-824a-a0c51e85c542" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="JsonPath Match" id="0c4f835a-40f1-487b-8b61-4acc51fe07ff" name="JsonPath Match"><con:configuration><path>$</path><content>{}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#productid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GetOneProductCheck" id="a2b1fe13-9804-437e-8a6e-df424d603954"><con:settings/><con:config service="https://devops-release-management-tst.intranet.deutschebahn.com" resourcePath="/api/v3/products/{id}" methodName="GetOne" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetOneProductCheck" id="c3669e16-1f0c-4f31-8f77-9e0a95a9abd9" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:endpoint><con:request/><con:originalUri>https://devops-release-management-tst.intranet.deutschebahn.com/cmdb/api/v3/products/161</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="e75eb774-acc4-4367-9236-6e6f53ac4768" name="Valid HTTP Status Codes"><con:configuration><codes>404</codes></con:configuration></con:assertion><con:assertion type="Simple Contains" id="cf0ad655-c371-4d8c-811e-975715ca747d" name="Contains"><con:configuration><token>Resource not found Product for id ${#TestCase#productid}</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Default</con:selectedAuthProfile><con:authType>OAuth 2.0</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="id" value="${#TestCase#productid}" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>productid</con:name><con:value>163</con:value></con:property><con:property><con:name>versionid</con:name><con:value>148</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>id</con:name><con:value>159</con:value></con:property></con:properties></con:testSuite><con:properties>
+		<con:property>
+			<con:name>AccessToken</con:name>
+			<con:value>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM0NTY0NDgsInVzZXJfbmFtZSI6IkpvZ2FTaW5naCIsImF1dGhvcml0aWVzIjpbImctYS1BcnRpZmFjdG9yeSIsImctei1EQkUtYXV0by1CQy1EZXZPcHMiLCJnYXUtT2ZmaWNlMzY1X1NQT19Db25kQWNjZXNzMyIsImctei1EQkUtSmlyYS1Vc2VyLVBSRCIsImdwdS1wYXNzd29yZF9jb21wbGV4X0FMTCIsImctei1JbnRyYW5ldCIsImdwdS1CS1VWLVNlY0Jhc2VsaW5lLVVzZXItUGlsb3QiLCJkLXotMDAxMDlGMTEtMDAwLTAtQyIsImctei1EQkUtVUktTkItci1ERVYiLCJnLXotREJFLVVJLU5CLXItVFNUIiwiZy16LURCRS1hdXRvLVJNUC1BZG1pbiIsImd6dS1ERS1EQlN5c3RlbEdtYkgtVC5JVkFFLTAxLUV4dCIsImdwdS1CS1VWLUlFSW50ZXJuZXQiLCJncHUtQktVVi1TZWNCYXNlbGluZS1JRVVzZXItUGlsb3QiLCJnLXotREJFLUplbmtpbnMtRGV2T3BzLVJYIiwiZy16LURCRS1hdXRvLVJlTE0iLCJnLXotRnVsbF9WUE5fQktVIiwiZ3B1LVZEU1gtUkRTLUlFLUludGVybmV0IiwiZy16LU5ldHdvcmtDb25uZWN0X0Z1bGwiLCJnLXotREJFLWF1dG8tUm9MTSIsImctei1NYW5kYW50X0JLVSIsImdhdS1CS1VWLWVtbV9BUFBfT2ZmaWNlLUNlcnRPMzY1LWlPU19Nb2JpbGVNYWlsIiwiZ3B1LUJLVVYtQ2VydFNXIiwiZ2F1LUJLVVYtZW1tX0FQUF9PZmZpY2UtQ2VydE8zNjUtQW5kcm9pZCIsImctcC11LUlFLUludGVybmV0IiwiZy16LURCRS1hdXRvLUJDLUFkbWluIiwiZy16LVRva2VuVXNlclNlbGZTZXJ2aWNlIiwiZy16LURCX1BsYW5ldF9Db3lvIiwiZ2F1LUJLVVYtZW1tX0FQUF9PZmZpY2VfRTMiLCJnbS1CS1VWLUxvZ29uTG9jYWx5IiwiZy16LURCRS1hdXRvLVNURVA0MiIsImd6dS1EQlVzZXIiLCJnLXotREJFLWF1dG8tRGV2T3BzIiwiZy16LVNlcnZpY2Vwb3J0YWwiLCJnLXotREJFLVBMUy1Vc2VyIiwiZ3B1LVZEUy1SRFMtSUUtSW50ZXJuZXQiLCJnLXotSW50cmFuZXRfQktVIiwiZ3p1LURCVXNlci1TdGQiLCJnenUtRFRNLVVzZXIiLCJnLXotREJFLUplbmtpbnMtRkJGLVJXWCIsImctei1EQkUtU1RFUDQyLXhCRiIsImctei1SQVMtVlBOIl0sImp0aSI6IjgzYzlmNDY3LWY1YzAtNDBlZC1iMjNmLWI1YjYyYTliY2I3ZiIsImNsaWVudF9pZCI6ImNtZGItc2VydmVyIiwic2NvcGUiOlsid3JpdGUiXX0.R1Ku0iM4ifSqmxErvqYJ_yD-JJEtjV0QRHnoLfU9RqU</con:value>
+		</con:property>
+		<con:property>
+			<con:name>EndpointUrl</con:name>
+			<con:value>https://${#Project#TestServer}</con:value>
+		</con:property>
+		<con:property>
+			<con:name>TestServer</con:name>
+			<con:value>devops-release-management-tst.intranet.deutschebahn.com/cmdb</con:value>
+		</con:property>
+		<con:property>
+			<con:name>Local</con:name>
+			<con:value>localhost:8443</con:value>
+		</con:property>
+		<con:property>
+			<con:name>PathPrefix</con:name>
+			<con:value>/api/v3</con:value>
+		</con:property>
+	</con:properties>
+	<con:wssContainer/>
+	<con:oAuth2ProfileContainer>
+		<con:oAuth2Profile>
+			<con:name>Default</con:name>
+			<con:clientID>cmdb-server</con:clientID>
+			<con:clientSecret>cmdb-server@2018</con:clientSecret>
+			<con:accessTokenURI>https://@devops-release-management-tst.intranet.deutschebahn.com:8553/oauth/token</con:accessTokenURI>
+			<con:accessToken>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTU5Nzg4MzYsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiZy16LURCRS1hdXRvLVJNUC1BZG1pbiJdLCJqdGkiOiJjYzdmNDhmNC00NTk2LTQ0ZmQtYjFlNi1hYjVjMTk2YWIxNmUiLCJjbGllbnRfaWQiOiJjbWRiLXNlcnZlciIsInNjb3BlIjpbIndyaXRlIl19.tw8TjN-7IOgmZ_ccHmg83tB5ZJoRmOxRT23H-SpiMEg</con:accessToken>
+			<con:accessTokenPosition>HEADER</con:accessTokenPosition>
+			<con:oAuth2Flow>RESOURCE_OWNER_PASSWORD_CREDENTIALS</con:oAuth2Flow>
+			<con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
+			<con:refreshToken>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIndyaXRlIl0sImF0aSI6ImNjN2Y0OGY0LTQ1OTYtNDRmZC1iMWU2LWFiNWMxOTZhYjE2ZSIsImV4cCI6MTU5NzI0MzQ4MywiYXV0aG9yaXRpZXMiOlsiZy16LURCRS1hdXRvLVJNUC1BZG1pbiJdLCJqdGkiOiJkNWI4ZjQ2NC1hODRhLTRhY2EtYTkyNS00NDUzYTZjYTgxNDEiLCJjbGllbnRfaWQiOiJjbWRiLXNlcnZlciJ9.-hP9qvQjVAphDxfo_RJ6wvCFRz9hYfL9as--iZnJwtg</con:refreshToken>
+			<con:scope>write</con:scope>
+			<con:accessTokenStatus>RETRIEVED_FROM_SERVER</con:accessTokenStatus>
+			<con:accessTokenStartingStatus>RETRIEVED_FROM_SERVER</con:accessTokenStartingStatus>
+			<con:accessTokenExpirationTime>35999</con:accessTokenExpirationTime>
+			<con:accessTokenIssuedTime>1595942836</con:accessTokenIssuedTime>
+			<con:manualAccessTokenExpirationTime/>
+			<con:manualAccessTokenExpirationTimeUnit>SECONDS</con:manualAccessTokenExpirationTimeUnit>
+			<con:resourceOwnerName>admin</con:resourceOwnerName>
+			<con:resourceOwnerPassword>Oauth2@2018</con:resourceOwnerPassword>
+		</con:oAuth2Profile>
+	</con:oAuth2ProfileContainer>
+	<con:oAuth1ProfileContainer/>
+	<con:sensitiveInformation/>
+</con:soapui-project>

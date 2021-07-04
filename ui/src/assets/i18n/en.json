@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "area": "Area",
+    "city": "City",
+    "countryId": "Country",
+    "email": "Email",
+    "houseNo": "House No.",
+    "mobile": "Mobile",
+    "phone": "Phone",
+    "state": "State",
+    "street": "Street",
+    "zipCode": "Zip Code",
+    "languageId": "Language"
+  },
+  "errors": {
+    "required": "Mandatory field",
+    "email": "Invalid email"
+  }
+}

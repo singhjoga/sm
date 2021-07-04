@@ -1,0 +1,52 @@
+
+  <span>
+    <h3 mat-dialog-title>{{modeText()}} - Customer Details</h3>
+  </span>
+  <span class="devops-spacer"></span>
+<br>
+<div fxLayout="column" fxFlexFill>
+<div mat-dialog-content>
+  <form #frm="ngForm"  [formGroup]="formGroup" (ngSubmit)="onSave()">
+
+    <div class="input-row" fxFlexFill  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_FIRST_NAME"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_LAST_NAME"></input-control>
+    </div>
+
+    <div class="input-row" fxFlexFill fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_EMAIL"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_MOBILE"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_PHONE"></input-control>
+    </div>
+    <div class="input-row" fxFlexFill fxLayout="row" >
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_STREET"></input-control>
+    </div>
+    <div class="input-row" fxFlexFill fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_HNO"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_AREA"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_ZIP_CODE"></input-control>
+    </div>
+    <div class="input-row" fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_CITY"></input-control>
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_STATE"></input-control>
+    </div>
+    <div class="input-row" fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <input-control fxFlex [controller]="this" [controlName]="FIELD_LANGUAGE_ID"></input-control>
+
+      <div fxFlex>
+        <mat-checkbox [formControlName]="FIELD_IS_DISABLED">Is Disabled?</mat-checkbox>
+      </div>
+   
+    </div> 
+
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button type="submit" [disabled]="!formGroup.valid || isReadOnly()">
+        <span>Save</span>
+      </button>
+      <button mat-raised-button type="reset" (click)="onClose()">
+        Close
+      </button>
+    </div>
+  </form>
+</div>
+</div>

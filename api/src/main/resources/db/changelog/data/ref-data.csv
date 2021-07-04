@@ -1,0 +1,15 @@
+code;typecode
+comm_medium;NULL
+comm_event_type;NULL
+rest_cuisine;NULL
+call;comm_medium
+whatsapp;comm_medium
+sms;comm_medium
+email;comm_medium
+cust_order;comm_event_type
+billing;comm_event_type
+indian;rest_cuisine
+italien;rest_cuisine
+chinese;rest_cuisine
+arabic;rest_cuisine
+pizza;rest_cuisine

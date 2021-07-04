@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog  
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"  
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd  http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">  
+	
+	<changeSet id="01.01" author="jogasingh" context="tst">
+		<loadUpdateData  
+	            encoding="UTF-8"  
+	            file="customers.csv"  
+	            primaryKey="id"  
+	            quotchar="'"  
+	            relativeToChangelogFile="true"    
+	            separator=";"  
+	            tableName="CUST">  
+	        <column  header="id" name="id" type="STRING"/>  
+	        <column  header="firstName" name="FIRST_NAME" type="STRING"/>   
+	        <column  header="lastName" name="LAST_NAME" type="STRING"/>   
+	        <column  header="email" name="EMAIL" type="STRING"/>   
+	        <column  header="street" name="STREET" type="STRING"/>   
+	        <column  header="hno" name="HNO" type="STRING"/>   
+	        <column  header="city" name="CITY" type="STRING"/>   
+	        <column  header="area" name="AREA" type="STRING"/>   
+	        <column  header="zipCode" name="ZIP" type="STRING"/>   
+	        <column  header="mobile" name="MOBILE" type="STRING"/>   
+	        <column  header="phone" name="PHONE" type="STRING"/>
+	        <column  header="state" name="STATE" type="STRING"/>     
+	    </loadUpdateData> 
+    </changeSet>
+</databaseChangeLog>
