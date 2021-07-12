@@ -4,10 +4,11 @@ import {CustomerService} from '../customer.service';
 import {CommonFields, DialogMode} from '@app/shared/constants';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import {FormConroller} from '@app/core/components/controls/form-controller';
-import { RequiredValidator } from '@app/core/components/validators/required-validator';
-import { EmailValidator } from '@app/core/components/validators/email-validator';
+import { FormGroup, FormControl, NgForm } from '@angular/forms'; 
+import {FormConroller} from '@app/core/classes/form-controller';
+import { ErrorResponse } from '@app/01_models/RestResponse';
+import {TranslateService} from '@ngx-translate/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'customer-details',
   templateUrl: './customer-details.component.html',
@@ -30,16 +31,16 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   readonly FIELD_LANGUAGE_ID='languageId';
   readonly FIELD_IS_DISABLED=CommonFields.IsDisabled;
   readonly formGroup = this.createFormGroup({
-    [this.FIELD_FIRST_NAME]: [null, [new RequiredValidator]],
+    [this.FIELD_FIRST_NAME]: [null, [Validators.required]],
     [this.FIELD_LAST_NAME]: [null],
-    [this.FIELD_EMAIL]: [null,[new EmailValidator, new RequiredValidator]],
-    [this.FIELD_STREET]: [null, [new RequiredValidator]],
+    [this.FIELD_EMAIL]: [null,[Validators.email, Validators.required]],
+    [this.FIELD_STREET]: [null, [Validators.required]],
     [this.FIELD_HNO]: [null],
     [this.FIELD_AREA]: [null],
     [this.FIELD_CITY]: [null],
     [this.FIELD_STATE]: [null],  
     [this.FIELD_COUNTRY_ID]: [null], 
-    [this.FIELD_ZIP_CODE]: [null, [new RequiredValidator]],
+    [this.FIELD_ZIP_CODE]: [null, [Validators.required]],
     [this.FIELD_MOBILE]: [null],
     [this.FIELD_PHONE]: [null],
     [this.FIELD_LANGUAGE_ID]: [null],
@@ -47,6 +48,7 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   });
 
   obj: Customer = new Customer();
+  errorMessages:string[]=[];
   @ViewChild('frm') 
   public userFrm?: NgForm;
   constructor(
@@ -55,6 +57,7 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
     private service: CustomerService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CustomerDetailsComponent>,
+   // private translate:TranslateService,
     @Inject(MAT_DIALOG_DATA) private data: {
       mode: DialogMode, id: string
     }
@@ -75,7 +78,7 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
         this.model2Form(this.obj);
       })
     }
-   // super.init();
+    super.init();
   }
   add() {
     
@@ -83,16 +86,22 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   model2Form(obj:Customer) {
     Object.keys(this.formGroup.controls).forEach(key => {
       let value:any = obj[key];
+      let control:AbstractControl  = this.formGroup.controls[key];
       if (!(value == undefined || value==null)) {
-        let control:AbstractControl  = this.formGroup.controls[key];
         control.setValue(value);
       }
-    });
+      if (this.mode() == DialogMode.View) {
+        control.disable();
+      }
+  });
   }
   form2Model(obj:Customer) {
     Object.keys(this.formGroup.controls).forEach(key => {
       let control:AbstractControl  = this.formGroup.controls[key];
       let value:any = control.value;
+      if (value =='') {
+        value=null;
+      }
       if (obj[key] != undefined) {
         obj[key]=value;
       }
@@ -106,7 +115,26 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
     this.form2Model(this.obj);
     this.service.add(this.obj).subscribe(id => {
       this.dialogRef.close(id);
-    })
+    },
+    (error: ErrorResponse) => {
+      this.errorMessages=this.getErrorMessage(error);
+    }
+    );
+  }
+  getErrorMessage(error: ErrorResponse) {
+    let result:string[] = [error.message];
+    if (error.errors) {
+      error.errors.forEach(e => {
+        let msg ='';
+        if (e.field) {
+          msg += e.field+': ';
+        }
+        msg += e.message;
+        result.push(msg);
+      });
+    }
+
+    return result;
   }
   mode(): DialogMode {
     return this.data.mode;

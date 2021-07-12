@@ -72,7 +72,7 @@ export class HttpClientService {
         map((_: any) => _)
       );
   }
-  getHTTPErrorMessage(response:any) {
+  getHTTPErrorMessage(response:any): ErrorResponse {
     if (!(response instanceof HttpErrorResponse)) {
       let result: ErrorResponse = new ErrorResponse();
       result.message=response.toString();

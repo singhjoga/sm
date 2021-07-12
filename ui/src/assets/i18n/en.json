@@ -1,5 +1,14 @@
 {
   "labels": {
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "add": "Add",
+    "edit": "Edit",
+    "confirmation":"Confirmation",
+    "delete": "Delete",
+    "view": "View",
     "firstName": "First Name",
     "lastName": "Last Name",
     "area": "Area",
@@ -17,5 +26,8 @@
   "errors": {
     "required": "Mandatory field",
     "email": "Invalid email"
+  },
+  "messages": {
+    "delete": "Are you sure you want to delete {{count}} items"
   }
 }

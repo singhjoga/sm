@@ -1,0 +1,31 @@
+.close-button{
+   // float: right;
+   // top:-10px;
+   // right:-24px;
+  }
+  .title{
+    float: left;
+    top:-24px;
+    left:0;
+  }
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+  
+  .close-icon:hover {
+    transform: rotate(180deg);
+  }
+  .icon-display {
+    transform: scale(2);
+    margin-right: 1em;
+ }
+ .container {
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+}
+.container .btn-holder {
+  justify-content: flex-end;
+  display: flex;
+}

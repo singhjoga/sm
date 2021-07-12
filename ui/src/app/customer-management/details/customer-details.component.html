@@ -1,9 +1,9 @@
 
-  <span>
-    <h3 mat-dialog-title>{{modeText()}} - Customer Details</h3>
-  </span>
-  <span class="devops-spacer"></span>
-<br>
+<span>
+  <h3 mat-dialog-title>{{modeText()}} - Customer Details</h3>
+</span>
+<form-error [messages]="errorMessages"></form-error>
+
 <div fxLayout="column" fxFlexFill>
 <div mat-dialog-content>
   <form #frm="ngForm"  [formGroup]="formGroup" (ngSubmit)="onSave()">

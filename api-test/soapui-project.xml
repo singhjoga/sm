@@ -649,7 +649,7 @@ tester.assertNotFound();</scriptText>
 			<con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
 			<con:refreshToken>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIndyaXRlIl0sImF0aSI6ImNjN2Y0OGY0LTQ1OTYtNDRmZC1iMWU2LWFiNWMxOTZhYjE2ZSIsImV4cCI6MTU5NzI0MzQ4MywiYXV0aG9yaXRpZXMiOlsiZy16LURCRS1hdXRvLVJNUC1BZG1pbiJdLCJqdGkiOiJkNWI4ZjQ2NC1hODRhLTRhY2EtYTkyNS00NDUzYTZjYTgxNDEiLCJjbGllbnRfaWQiOiJjbWRiLXNlcnZlciJ9.-hP9qvQjVAphDxfo_RJ6wvCFRz9hYfL9as--iZnJwtg</con:refreshToken>
 			<con:scope>write</con:scope>
-			<con:accessTokenStatus>RETRIEVED_FROM_SERVER</con:accessTokenStatus>
+			<con:accessTokenStatus>UNKNOWN</con:accessTokenStatus>
 			<con:accessTokenStartingStatus>RETRIEVED_FROM_SERVER</con:accessTokenStartingStatus>
 			<con:accessTokenExpirationTime>35999</con:accessTokenExpirationTime>
 			<con:accessTokenIssuedTime>1595942836</con:accessTokenIssuedTime>

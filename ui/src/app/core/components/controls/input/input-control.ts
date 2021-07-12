@@ -1,7 +1,7 @@
 import { OnInit, Component, Input,LOCALE_ID} from '@angular/core';
 import {ValidationErrors} from '@angular/forms';
 import { ControlContainer,FormGroupDirective} from '@angular/forms';
-import {FormConroller} from '../form-controller';
+import {FormConroller} from '../../../classes/form-controller';
 import {TranslateService} from '@ngx-translate/core';
 import { CustomFormControl } from '../custom-form-control';
 @Component({

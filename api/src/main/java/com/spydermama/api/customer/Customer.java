@@ -29,14 +29,13 @@ public class Customer extends AbstractResource<String>{
 	private String firstName;	
 
 	@Column(name="LAST_NAME")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Last name", position = 3, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String lastName;	
 
 	@Column(name="EMAIL")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Email address", position = 4, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
@@ -45,70 +44,63 @@ public class Customer extends AbstractResource<String>{
 	
 	@Column(name="COUNTRY_CODE")
 	@ApiModelProperty(value = "Reference Id for Country", position = 5, required=true)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Country.class)
 	private String countryId;
 
 	@Column(name="ZIP")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Zip code", position = 6, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String zipCode;
 
 	@Column(name="AREA")
-	@Size(min = 1, max = 500, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 500, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Area", position = 7, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String area;
 
 	@Column(name="STREET")
-	@Size(min = 1, max = 500, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 500, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Street", position = 8, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String street;
 
 	@Column(name="HNO")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "House No.", position = 9, required=true)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String houseNo;
 
 	@Column(name="CITY")
-	@Size(min = 1, max = 100, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 100, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "City", position = 10, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String city;
 
 	@Column(name="STATE")
-	@Size(min = 1, max = 100, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Zip code", position = 11, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
+	@Size(min = 0, max = 100, groups=OperationGroups.Always.class)
+	@ApiModelProperty(value = "State", position = 11, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String state;
 
 	@Column(name="PHONE")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Phone", position = 12, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String phone;
 
 	@Column(name="MOBILE")
-	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
+	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@ApiModelProperty(value = "Mobile phone no", position = 13, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String mobile;
 
 	@Column(name="LANG_CODE")
 	@ApiModelProperty(value = "Reference Id for Language", position = 14, required=false)
-	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Language.class)
 	private String languageId;	

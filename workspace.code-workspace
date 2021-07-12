@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "ui"
+		},
+		{
+			"name": "keycloak-quickstarts",
+			"path": "..\\..\\temp\\keycloak-quickstarts"
+		},
+		{
+			"path": "ui-vue"
+		},
+		{
+			"path": "..\\workspace\\webportal\\ui"
+		},
+		{
+			"path": "..\\wapn\\ws\\belegungsplan\\apnplus-belegungsplan"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "ui\\node_modules\\typescript\\lib"
+	}
+}

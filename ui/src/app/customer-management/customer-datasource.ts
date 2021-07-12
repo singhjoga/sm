@@ -1,32 +1,86 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { Observable, of as observableOf, merge, Subject, Subscription } from 'rxjs';
 import {Customer} from '@app/01_models/Customer';
 import {CustomerService} from './customer.service';
-export class CustomerDataSource extends DataSource<Customer> {
-  data: Customer[]=[];
-  paginator: MatPaginator | undefined;
-  sort: MatSort | undefined;
 
-  constructor(private service: CustomerService) {
+export class CustomerDataSource extends DataSource<Customer>{
+  data: Customer[]=[];
+  paginator: MatPaginator ;
+  sort: MatSort ;
+  dataPipe$: Subject<Customer[]> = new Subject();
+  subscription!: Subscription;
+  sortedData?: Customer[];
+  constructor(private service: CustomerService,
+    paginator: MatPaginator,
+    sort: MatSort) {
     super();
+    this.paginator=paginator;
+    this.sort=sort;
+    const all = merge(this.sort.sortChange, this.paginator.page);
+    this.subscription =all.subscribe(()=> {
+      this.setPipeData();
+    })
   }
 
+  public refresh():Promise<void> {
+    return new Promise<void>((resolve,reject)=> {
+      setTimeout(()=> {
+        this.service.findAll().subscribe(resp => {
+          this.data=resp;
+          this.setPipeData();
+          resolve();
+        })
+      })
+    });
+
+  }
+  public findInDataById(id: string):[number, Customer|null] {
+    let tableData = this.sortedData == undefined?this.data:this.sortedData;
+    console.log("Item count: "+tableData.length);
+    let index:number=-1;
+    let dataObj;
+    for (dataObj of tableData) {
+      index++;
+      console.log(dataObj.email);
+      if (dataObj.id==id) {
+        break;
+      }
+    }
+    console.log("Index: "+index);
+    if (index==-1) {
+      return [-1,null];
+    }
+    let pageIndex = Math.trunc(index / this.paginator.pageSize);
+    console.log("Pageindex: "+pageIndex);
+    return [pageIndex,dataObj];
+  }
+  public pageNoOf(obj: Customer):[number, Customer|null] {
+    if (obj.id == undefined || obj.id == null) {
+      throw Error('Object id cannot be null or undefined');
+    }
+    return this.findInDataById(obj.id);
+  }
+  private setPipeData() {
+    this.dataPipe$.next(this.getPagedData(this.getSortedData([...this.data ])));
+  }
   connect(): Observable<Customer[]> {
     if (this.paginator && this.sort) {
-      return this.service.findAll()
-      .pipe(map((resp) => {
-        this.data=resp;
-        return this.getPagedData(this.getSortedData([...this.data ]));
-      }));
+      if (this.data.length ==0) {
+        this.refresh();
+      }else{
+        this.setPipeData();
+      }
+      return this.dataPipe$;
     } else {
       throw Error('Please set the paginator and sort on the data source before connecting.');
     }
   }
 
-  disconnect(): void {}
+  disconnect(): void {
+    this.subscription.unsubscribe();
+  }
 
   private getPagedData(data: Customer[]): Customer[] {
     if (this.paginator) {
@@ -39,17 +93,19 @@ export class CustomerDataSource extends DataSource<Customer> {
 
   private getSortedData(data: Customer[]): Customer[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
-      return data;
+      this.sortedData= data;
+    }else{
+      this.sortedData=data.sort((a, b) => {
+        const isAsc = this.sort?.direction === 'asc';
+        let sortField=this.sort?.active;
+        if (!sortField || sortField === undefined) {
+            sortField='firstName';
+        }
+        return compare(a[sortField], b[sortField], isAsc);
+      });
     }
 
-    return data.sort((a, b) => {
-      const isAsc = this.sort?.direction === 'asc';
-      let sortField=this.sort?.active;
-      if (!sortField || sortField === undefined) {
-          sortField='firstName';
-      }
-      return compare(a[sortField], b[sortField], isAsc);
-    });
+    return [...this.sortedData];
   }
 }
 
