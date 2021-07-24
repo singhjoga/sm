@@ -16,6 +16,9 @@ import { CustomMissingTranslationHandler } from './missing-translation';
 import { ConfirmationDialog } from './components/dialogs/confirmation-dialog/confirmation-dialog';
 import { DialogService } from './components/dialogs/dialog-service';
 import {InjectorModule} from './injector.module';
+import { TableFilterDirective } from './directives/table-filter';
+import { TableColumnFilterDirective } from './directives/table-column-filter';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
@@ -24,7 +27,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NumericDirective,
     InputControl,
     FormError,
-    ConfirmationDialog
+    ConfirmationDialog,
+    TableColumnFilterDirective,
+    TableFilterDirective
   ],
   imports: [
     AngularMaterialModule,
@@ -50,7 +55,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule,
     FormError,
     ConfirmationDialog,
-    InjectorModule
+    InjectorModule,
+    TableColumnFilterDirective,
+    TableFilterDirective
   ],
   providers: [
     KeycloakService,

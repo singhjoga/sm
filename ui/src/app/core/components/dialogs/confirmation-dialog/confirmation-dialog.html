@@ -1,5 +1,5 @@
 <div fxLayout="column" fxFill>
-  <div fxLayout="row" style="margin-bottom: 0;">
+  <div fxLayout="row" style="margin-bottom: 1em;">
     <h1 fxFlex mat-dialog-title>{{title}}</h1>
     <button mat-icon-button class="close-button" [mat-dialog-close]="false" >
       <mat-icon >close</mat-icon>
@@ -7,12 +7,13 @@
   </div>
   <div fxFlex>
     <div fxLayout="row">
-      <mat-icon color="primary" class="icon-display">live_help</mat-icon>
-      <p>{{msgText}}</p>
+      <mat-icon [color]="iconColor" class="icon-display">{{icon}}</mat-icon>
+      <p [innerHtml]="msgText"></p>
     </div>
   </div>
-  <div mat-dialog-actions align="end">
-    <button (click)="onOK()" style="margin-right: 0;">{{okLabel}}</button>
-    <button cdkFocusInitial [mat-dialog-close]="false" (click)="onCancel()">{{cancelLabel}}</button>
+  <div align="center">
+    <button cdkFocusInitial *ngIf="yesLabel != ''" (click)="onYes()" style="margin-right: 1em;">{{yesLabel}}</button>
+    <button *ngIf="noLabel != ''" (click)="onNo()" style="margin-right: 1em;">{{noLabel}}</button>
+    <button *ngIf="cancelLabel != ''"  [mat-dialog-close]="false" (click)="onCancel()">{{cancelLabel}}</button>
   </div>
 </div>

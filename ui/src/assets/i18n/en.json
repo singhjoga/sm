@@ -7,6 +7,9 @@
     "add": "Add",
     "edit": "Edit",
     "confirmation":"Confirmation",
+    "information":"Information",
+    "error":"Error",
+    "warning":"Warning",
     "delete": "Delete",
     "view": "View",
     "firstName": "First Name",
@@ -28,6 +31,9 @@
     "email": "Invalid email"
   },
   "messages": {
-    "delete": "Are you sure you want to delete {{count}} items"
+    "save-success":"Record saved successfully",
+    "delete": "Are you sure you want to delete {{count}} items",
+    "delete-success": "{{count}} items deleted successfully",
+    "delete-failed": "Error deleting: {{error}}.<br>{{count}} items deleted successfully"
   }
 }

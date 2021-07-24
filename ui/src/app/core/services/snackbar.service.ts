@@ -6,11 +6,20 @@ export class SnackbarService {
 
     constructor(private snackBar: MatSnackBar) { }
 
-    openSnackBar(message: string, action: string, snackbarType: string, duration = 5000) {
+    show(message: string, snackbarType: string, action: string='',duration = 5000) {
         this.snackBar.open(message, action, {
             duration,
             verticalPosition: 'top',
             panelClass: [snackbarType]
         });
+    }
+    showSuccess(message: string) {
+        this.show(message,'success-snackbar');
+    }
+    showError(message: string) {
+        this.show(message,'error-snackbar');
+    }
+    showInfo(message: string) {
+        this.show(message,'info-snackbar');
     }
 }

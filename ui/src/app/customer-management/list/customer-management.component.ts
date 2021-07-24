@@ -10,7 +10,8 @@ import { DialogMode } from '@app/shared/constants';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerDetailsComponent } from '../details/customer-details.component';
 import { ListController } from '@app/core/classes/list-controller';
-import { DialogService } from '@app/core/components/dialogs/dialog-service';
+import { ErrorResponse } from '@app/01_models/RestResponse';
+
 @Component({
   selector: 'app-customer-management',
   templateUrl: './customer-management.component.html',
@@ -24,8 +25,7 @@ export class CustomerManagementComponent extends ListController implements OnIni
   displayedColumns = ['select', 'firstName', 'lastName', 'email', 'address', 'area', 'city', 'zipCode', 'contactInfo'];
   selection = new SelectionModel<Customer>(true, []);
   constructor(private service: CustomerService,
-    private dialog: MatDialog,
-    private dialogService: DialogService) {
+    private dialog: MatDialog) {
       super();
   }
   ngOnInit() {
@@ -47,10 +47,31 @@ export class CustomerManagementComponent extends ListController implements OnIni
     this.openDetailsDialog(DialogMode.Edit, obj.id);
   }
   onDelete() {
-    this.dialogService.isDeleteOK(this.selection.selected.length)
-      .then(result => {
-        if (this.dialogService.isConfirmationResultOK(result)) {
-
+    this.askIsDeleteOK(this.selection.selected.length)
+      .then(async result => {
+        if (this.dialogService.isConfirmationResultYes(result)) {
+          let deletedCount:number=0;
+          let lastError:ErrorResponse|null=null;
+          let selection = [...this.selection.selected];
+          for (let obj of selection) {
+            const id = obj.id!;
+            try {
+              await this.service.delete(id);
+              deletedCount++;
+              this.selection.deselect(obj);
+            }catch (error:any) {
+              lastError=error;
+              break;
+            }
+          }
+          if (deletedCount > 0) {
+            this.dataSource.refresh();
+          }
+          if (lastError) {
+            this.showDeleteFailed(this.getApiErrorAsString(lastError).toString(),deletedCount);
+          }else{
+            this.showDeleteSuccessful(deletedCount);
+          }
         }
       });
   }

@@ -27,11 +27,11 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+      <th table-column-filter mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
       <td mat-cell *matCellDef="let row"><a href="javascript:void(0)" (click)="onView(row)">{{row.firstName}}</a></td>
     </ng-container>
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+      <th table-column-filter mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
       <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
     </ng-container>
     <ng-container matColumnDef="email">
@@ -59,7 +59,14 @@
       <td mat-cell *matCellDef="let row">{{row.mobile}} {{row.phone}}</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-container matColumnDef="filterRow1">
+      <th mat-header-cell *matHeaderCellDef>1</th>
+    </ng-container>
+    <ng-container matColumnDef="filterRow2">
+      <th mat-header-cell *matHeaderCellDef>2</th>
+    </ng-container>
+    <tr table-filter mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="['filterRow1','filterRow2']"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selection.isSelected(row)}"></tr>
   </table>
 

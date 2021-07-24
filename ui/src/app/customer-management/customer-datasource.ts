@@ -27,7 +27,7 @@ export class CustomerDataSource extends DataSource<Customer>{
   public refresh():Promise<void> {
     return new Promise<void>((resolve,reject)=> {
       setTimeout(()=> {
-        this.service.findAll().subscribe(resp => {
+        this.service.findAll().then(resp => {
           this.data=resp;
           this.setPipeData();
           resolve();

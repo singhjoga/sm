@@ -33,7 +33,7 @@ export class HttpClientService {
       );
   }
 
-  public put = <T>(url: string, body: any, headers?: HttpHeaders): any => {
+  public put = <T>(url: string, body: any, headers?: HttpHeaders): Observable<any> => {
     return this.httpClient.post<T>(url, body, { headers })
       .pipe(
         catchError(err => {

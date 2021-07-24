@@ -15,34 +15,54 @@ export abstract class CrudService< T extends AbstractResource, ID> extends BaseS
     }
     abstract getApiUrl();
 
-    add(obj:T): Observable<string> {
+    async add(obj:T): Promise<string> {
         return this.http.post<AddResponse>(this.getApiUrl(),obj)
         .pipe(
             map((resp: AddResponse) => resp.id),
             catchError(error => {
-                this.snackBar.openSnackBar(error.message, '', 'error-snackbar');
+                this.snackBar.showError(error.message);
                 return throwError(error);
             })
-        );
+        ).toPromise();
     }
-    findAll(): Observable<T[]> {
+    async update(id:string, obj:T): Promise<any> {
+        const url=this.getApiUrl()+"/"+id;
+        return this.http.put<any>(url,obj)
+        .pipe(
+            catchError(error => {
+                this.snackBar.showError(error.message);
+                return throwError(error);
+            })
+        ).toPromise();
+    }
+    async delete(id:string): Promise<any> {
+        const url=this.getApiUrl()+"/"+id;
+        return this.http.delete(url)
+        .pipe(
+            catchError(error => {
+                this.snackBar.showError(error.message);
+                return throwError(error);
+            })
+        ).toPromise();
+    }
+    async findAll(): Promise<T[]> {
         return this.http.get<T[]>(this.getApiUrl())
         .pipe(
             catchError(error => {
-                this.snackBar.openSnackBar(error.message, '', 'error-snackbar');
+                this.snackBar.showError(error.message);
                 return throwError(error);
             })
-        );
+        ).toPromise();
     }
-    findById(id: string): Observable<T> {
+    async findById(id: string): Promise<T> {
         let url=this.getApiUrl()+'/'+id
         return this.http.get<T>(url)
         .pipe(
             catchError(error => {
-                this.snackBar.openSnackBar(error.message, '', 'error-snackbar');
+                this.snackBar.showError(error.message);
                 return throwError(error);
             })
-        );
+        ).toPromise();
     }
 
     public getHttp(): HttpClientService {

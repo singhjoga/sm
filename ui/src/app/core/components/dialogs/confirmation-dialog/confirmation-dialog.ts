@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-
+import { ConfigmrationDialogButton} from '../constants';
 @Component({
   selector: 'configmration-dialog',
   templateUrl: './confirmation-dialog.html',
@@ -9,17 +9,23 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 export class ConfirmationDialog implements OnInit {
   title:string='';
   msgText:string='';
-  okLabel:string='';
+  yesLabel:string='';
+  noLabel:string='';
   cancelLabel:string='';
+  icon='live_help';
+  iconColor="primary";
   constructor(public dialogRef: MatDialogRef<ConfirmationDialog>,
     ) { }
 
   ngOnInit(): void {
   }
-  onOK(): void {
-    this.dialogRef.close('ok');
+  onYes(): void {
+    this.dialogRef.close(ConfigmrationDialogButton.Yes);
+  }
+  onNo(): void {
+    this.dialogRef.close(ConfigmrationDialogButton.No);
   }
   onCancel(): void {
-    this.dialogRef.close('cancel');  
+    this.dialogRef.close(ConfigmrationDialogButton.Cancel);  
   }
 }

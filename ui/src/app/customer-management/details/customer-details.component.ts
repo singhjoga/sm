@@ -9,6 +9,7 @@ import {FormConroller} from '@app/core/classes/form-controller';
 import { ErrorResponse } from '@app/01_models/RestResponse';
 import {TranslateService} from '@ngx-translate/core';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { SnackbarService } from '@app/core/services/snackbar.service';
 @Component({
   selector: 'customer-details',
   templateUrl: './customer-details.component.html',
@@ -57,7 +58,7 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
     private service: CustomerService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CustomerDetailsComponent>,
-   // private translate:TranslateService,
+    private snackbar: SnackbarService,
     @Inject(MAT_DIALOG_DATA) private data: {
       mode: DialogMode, id: string
     }
@@ -73,15 +74,12 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
       this.model2Form(this.obj);
       this.formGroup.controls[this.FIELD_IS_DISABLED].disable();
     }else{
-      this.service.findById(this.id()).subscribe(resp => {
+      this.service.findById(this.id()).then(resp => {
         this.obj=resp;
         this.model2Form(this.obj);
       })
     }
     super.init();
-  }
-  add() {
-    
   }
   model2Form(obj:Customer) {
     Object.keys(this.formGroup.controls).forEach(key => {
@@ -111,31 +109,17 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
     this.dialogRef.close();
   }
   onSave() {
-    let f=this.userFrm;
     this.form2Model(this.obj);
-    this.service.add(this.obj).subscribe(id => {
+    this.service.add(this.obj).then(id => {
+      this.snackbar.showSuccess(this.getMessageText('save-success'));
       this.dialogRef.close(id);
     },
     (error: ErrorResponse) => {
-      this.errorMessages=this.getErrorMessage(error);
+      this.errorMessages=this.getApiErrorAsString(error);
     }
     );
   }
-  getErrorMessage(error: ErrorResponse) {
-    let result:string[] = [error.message];
-    if (error.errors) {
-      error.errors.forEach(e => {
-        let msg ='';
-        if (e.field) {
-          msg += e.field+': ';
-        }
-        msg += e.message;
-        result.push(msg);
-      });
-    }
 
-    return result;
-  }
   mode(): DialogMode {
     return this.data.mode;
   }

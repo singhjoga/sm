@@ -89,7 +89,22 @@ $theme: mat-light-theme($primary, $accent);
 }
 .dialog-panel {
     mat-dialog-container {
-        padding: 5px;
-        margin: 5px;
+        padding-top: 0.5em;
+        padding-left: 1em;
+        padding-right: 0.8em;
+        padding-bottom: 0.75em;
+        margin: 0px;
     }
+}
+.error-snackbar {
+    background-color: red;
+    color: white;
+}
+.success-snackbar {
+    background-color:green;
+    color: white;
+}
+.info-snackbar {
+    background-color:blue;
+    color: white;
 }

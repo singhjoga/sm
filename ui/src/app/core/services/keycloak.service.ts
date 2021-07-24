@@ -17,7 +17,7 @@
 
 import {Injectable} from '@angular/core';
 import {KeycloakInstance, KeycloakInitOptions} from "keycloak-js";
-import { inherits } from 'util';
+
 const configOptions = {
     url: 'http://127.0.0.1:8080/auth', realm: 'sm', clientId: 'sm-ui'
 }
