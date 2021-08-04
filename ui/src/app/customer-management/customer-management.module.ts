@@ -2,10 +2,9 @@ import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CoreModule } from '@app/core/core.module';
-import { AngularMaterialModule } from '../shared/angular-material.module';
+import { PrimengModule } from '../shared/primeng.module';
 import { CustomerManagementComponent} from './list/customer-management.component'
 import { CustomerDetailsComponent} from './details/customer-details.component'
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 //import {TranslateModule} from '@ngx-translate/core';
 const routes: Routes = [
@@ -21,8 +20,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     CoreModule,
-    AngularMaterialModule,
-    MatPaginatorModule,
+    PrimengModule,
     FlexLayoutModule,
     //TranslateModule
   ],

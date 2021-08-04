@@ -34,7 +34,7 @@ export class HttpClientService {
   }
 
   public put = <T>(url: string, body: any, headers?: HttpHeaders): Observable<any> => {
-    return this.httpClient.post<T>(url, body, { headers })
+    return this.httpClient.put<T>(url, body, { headers })
       .pipe(
         catchError(err => {
             let errorObj = this.getHTTPErrorMessage(err);
@@ -80,7 +80,7 @@ export class HttpClientService {
     }
     let resp: HttpErrorResponse = <HttpErrorResponse>response;
     const error = response.error;
-    if (error !== null && typeof error === 'object') {
+    if (error !== null && typeof error === 'object' && !(error instanceof ProgressEvent)) {
       if (error.error) { //unhandeled error from API
         let result: ErrorResponse = new ErrorResponse();
         result.code=resp.status.toString();

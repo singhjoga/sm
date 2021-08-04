@@ -1,29 +1,32 @@
-<div class="navigation-container" [class.navigation-is-mobile]="mobileQuery.matches" >
-  <mat-toolbar color="primary" class="navigation-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="navigation-app-name">Responsive App</h1>
-  </mat-toolbar>
 
-  <mat-sidenav-container class="navigation-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-          <mat-nav-list>
-            <button *ngIf="!authenticated()" name="loginBtn" (click)="login()">Login</button>
-            <button *ngIf="authenticated()" name="logoutBtn" (click)="logout()">Logout</button>
-            <button id="accountBtn" name="accountBtn" (click)="account()">Account</button>
-            <a mat-list-item routerLink="/home">Home</a>
-            <a mat-list-item routerLink="/customers">Customer Management</a>
-        </mat-nav-list>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="navigation-sidenav-ceontent" >
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-</div>
-                
-<div class="navigation-footer" #footer>
-  Your sticky footer with a variable height.
+<div style="width: 100%;height: 100%;" class="card flex flex-column">
+  <p-toolbar styleClass="bg-primary">
+    <ng-template pTemplate="left">
+      <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="500"></p-slideMenu>
+      <p-sidebar [appendTo]="contentArea" [(visible)]="showSideBar">
+        <button *ngIf="!authenticated()" name="loginBtn" (click)="login()">Login</button>
+        <br>
+        <button *ngIf="authenticated()" name="logoutBtn" (click)="logout()">Logout</button>
+        <br>
+        <button id="accountBtn" name="accountBtn" (click)="account()">Account</button>
+        <br>
+        <a routerLink="/home" (click)="toggleSideBar()">Home</a>
+        <br>
+        <a routerLink="/customers" (click)="toggleSideBar()">Customer Management</a>
+    </p-sidebar>
+      <button #btn type="button" pButton icon="pi pi-list" (click)="toggleSideBar()"></button>      
+    </ng-template>
+    <ng-template pTemplate="right">
+        <button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
+    </ng-template>
+  </p-toolbar>
+  <p-toast></p-toast>
+  <div #contentArea class="flex-grow-1 flex flex-column">
+    <div class="flex flex-column flex-grow-1">
+      <div class="flex flex-grow-1">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div>Footer content here</div>
+  </div>
 </div>

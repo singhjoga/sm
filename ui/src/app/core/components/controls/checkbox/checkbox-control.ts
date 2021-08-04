@@ -3,12 +3,12 @@ import { ControlContainer,FormGroupDirective} from '@angular/forms';
 import {FormConroller} from '../../../classes/form-controller';
 import { AbstractControl } from '@app/core/components/controls/abstract-control';
 @Component({
-  selector: 'input-control',
-  templateUrl: './input-control.html',
-  styleUrls: ['./input-control.scss'],
+  selector: 'checkbox-control',
+  templateUrl: './checkbox-control.html',
+  styleUrls: ['./checkbox-control.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class InputControl extends AbstractControl implements OnInit {
+export class CheckboxControl extends AbstractControl implements OnInit {
   @Input() 
   controlName!:string;
   @Input() 

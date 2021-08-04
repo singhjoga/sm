@@ -1,15 +1,15 @@
 import { OnInit, Component, ViewChild,LOCALE_ID, Inject } from '@angular/core';
 import {Customer} from '@app/01_models/Customer';
 import {CustomerService} from '../customer.service';
-import {CommonFields, DialogMode} from '@app/shared/constants';
+import {CommonFields, Constants, DialogMode} from '@app/shared/constants';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DynamicDialogRef, DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { FormGroup, FormControl, NgForm } from '@angular/forms'; 
 import {FormConroller} from '@app/core/classes/form-controller';
 import { ErrorResponse } from '@app/01_models/RestResponse';
-import {TranslateService} from '@ngx-translate/core';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { SnackbarService } from '@app/core/services/snackbar.service';
+import { Language } from '@app/01_models/Language';
+import { SystemService } from '@app/system/system-service';
 @Component({
   selector: 'customer-details',
   templateUrl: './customer-details.component.html',
@@ -49,27 +49,29 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   });
 
   obj: Customer = new Customer();
+  languages:Language[]=[];
   errorMessages:string[]=[];
   @ViewChild('frm') 
   public userFrm?: NgForm;
   constructor(
     @Inject(LOCALE_ID) private locale: string,
-    public matDialog: MatDialog,
     private service: CustomerService,
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CustomerDetailsComponent>,
+    public dialogRef: DynamicDialogRef,
     private snackbar: SnackbarService,
-    @Inject(MAT_DIALOG_DATA) private data: {
-      mode: DialogMode, id: string
-    }
+    private config: DynamicDialogConfig,
+    private systemService: SystemService
   ) {
-    super();
+    super(Constants.inst.CUSTOMER_DETAILS);
   }
   getFormGroup(): FormGroup {
     return this.formGroup;
   }
 
   ngOnInit(): void {
+    this.systemService.getLangues().then(resp =>{
+      this.languages=resp;
+    });
     if (this.mode()==DialogMode.Add) {
       this.model2Form(this.obj);
       this.formGroup.controls[this.FIELD_IS_DISABLED].disable();
@@ -77,9 +79,9 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
       this.service.findById(this.id()).then(resp => {
         this.obj=resp;
         this.model2Form(this.obj);
-      })
+      });
     }
-    super.init();
+  super.init();
   }
   model2Form(obj:Customer) {
     Object.keys(this.formGroup.controls).forEach(key => {
@@ -100,7 +102,7 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
       if (value =='') {
         value=null;
       }
-      if (obj[key] != undefined) {
+      if (typeof obj[key] != 'undefined') {
         obj[key]=value;
       }
     });
@@ -110,21 +112,28 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   }
   onSave() {
     this.form2Model(this.obj);
-    this.service.add(this.obj).then(id => {
+    this.save().then(result => {
       this.snackbar.showSuccess(this.getMessageText('save-success'));
-      this.dialogRef.close(id);
+      this.dialogRef.close(result);
     },
     (error: ErrorResponse) => {
       this.errorMessages=this.getApiErrorAsString(error);
     }
     );
   }
+  save():Promise<any> {
+    if (this.mode()==DialogMode.Add) {
+      return this.service.add(this.obj);
+    }else{
+      return this.service.update(this.id(), this.obj);
+    }
+  }
 
   mode(): DialogMode {
-    return this.data.mode;
+    return this.config.data.mode;
   }
   id():string {
-    return this.data.id;
+    return this.config.data.id;
   }
   isEdit() {
     return this.mode() == DialogMode.Edit;
@@ -140,5 +149,17 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
   }
   isRequired(el) {
     return true;
+  }
+  selectedLanguage():Language|null {
+    var id = this.getValue(this.FIELD_LANGUAGE_ID);
+    if (!id) {
+      return null;
+    }
+    for (var lang of this.languages) {
+      if (lang.id==id) {
+        return lang;
+      }
+    }
+    return null;
   }
 }

@@ -3,7 +3,7 @@ import {TranslateService, LangChangeEvent} from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'ui';
@@ -11,12 +11,12 @@ export class AppComponent {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       translate.get('firstName').subscribe(value => {
-        console.log("Language change loaded. Value="+value);
+        //console.log("Language change loaded. Value="+value);
       })
     });
     translate.onDefaultLangChange.subscribe((event: LangChangeEvent) => {
       translate.get('firstName').subscribe(value => {
-        console.log("Default Language change. Value="+value);
+        //console.log("Default Language change. Value="+value);
       })
     });
     // this language will be used as a fallback when a translation isn't found in the current language

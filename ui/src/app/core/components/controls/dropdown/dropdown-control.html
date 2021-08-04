@@ -1,0 +1,5 @@
+<label [for]="controlName">{{label()}}<span *ngIf="required" style="color:red">*</span></label>
+<p-dropdown [ngModelOptions]="{standalone: true}" [options]="options" [(ngModel)]="value" (onChange)="onValueChange($event)" [style]="{'width':'100%'}"
+    [inputId]="controlName" [optionLabel]="optionLabelField" [showClear]="true" [placeholder]="placeholder">
+</p-dropdown>
+<small style="color:red">{{errorMessage}}</small>

@@ -1,5 +1,7 @@
-<mat-form-field floatLabel="always" fxFlex>
-  <input style="width:100%" matInput [required]="required" type="text" [placeholder]="label()" class="form-control" [formControlName]="controlName">
-  <mat-error >{{errorMessage}}</mat-error>
-</mat-form-field>
+
+<label [for]="controlName">{{label()}}<span *ngIf="required" style="color:red">*</span></label>
+<input pInputText [id] ="controlName" type="text"  class="w-full" [formControlName]="controlName">
+<small style="color:red">{{errorMessage}}</small>
+
+
  

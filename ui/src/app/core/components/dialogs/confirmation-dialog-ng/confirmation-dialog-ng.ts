@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {DynamicDialogRef, DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { ConfigmrationDialogButton} from '../constants';
 @Component({
-  selector: 'configmration-dialog',
-  templateUrl: './confirmation-dialog.html',
-  styleUrls: ['./confirmation-dialog.scss']
+  selector: 'configmration-dialog-ng',
+  templateUrl: './confirmation-dialog-ng.html',
+  styleUrls: ['./confirmation-dialog-ng.scss']
 })
-export class ConfirmationDialog implements OnInit {
+export class ConfirmationDialogNg implements OnInit {
   title:string='';
   msgText:string='';
   yesLabel:string='';

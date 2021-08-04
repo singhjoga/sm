@@ -1,35 +1,27 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Observable, of as observableOf, merge, Subject, Subscription } from 'rxjs';
 import {Customer} from '@app/01_models/Customer';
 import {CustomerService} from './customer.service';
+import { LazyLoadEvent } from 'primeng/api';
 
-export class CustomerDataSource extends DataSource<Customer>{
-  data: Customer[]=[];
-  paginator: MatPaginator ;
-  sort: MatSort ;
-  dataPipe$: Subject<Customer[]> = new Subject();
-  subscription!: Subscription;
+export class CustomerDataSource{
+  allData: Customer[]=[];
+  pageData: Customer[] = [];
   sortedData?: Customer[];
-  constructor(private service: CustomerService,
-    paginator: MatPaginator,
-    sort: MatSort) {
-    super();
-    this.paginator=paginator;
-    this.sort=sort;
-    const all = merge(this.sort.sortChange, this.paginator.page);
-    this.subscription =all.subscribe(()=> {
-      this.setPipeData();
-    })
+  loading: boolean=false;
+  lastLoadEvent: LazyLoadEvent|undefined;
+  constructor(private service: CustomerService) {
+    this.refresh();
   }
 
   public refresh():Promise<void> {
     return new Promise<void>((resolve,reject)=> {
       setTimeout(()=> {
         this.service.findAll().then(resp => {
-          this.data=resp;
-          this.setPipeData();
+          this.allData=resp;
+          if (!this.lastLoadEvent) {
+            this.pageData=[];
+          }else{
+            this.lazyLoad(this.lastLoadEvent);
+          }
           resolve();
         })
       })
@@ -37,8 +29,7 @@ export class CustomerDataSource extends DataSource<Customer>{
 
   }
   public findInDataById(id: string):[number, Customer|null] {
-    let tableData = this.sortedData == undefined?this.data:this.sortedData;
-    console.log("Item count: "+tableData.length);
+    let tableData = this.sortedData == undefined?this.allData:this.sortedData;
     let index:number=-1;
     let dataObj;
     for (dataObj of tableData) {
@@ -48,13 +39,13 @@ export class CustomerDataSource extends DataSource<Customer>{
         break;
       }
     }
-    console.log("Index: "+index);
     if (index==-1) {
       return [-1,null];
     }
-    let pageIndex = Math.trunc(index / this.paginator.pageSize);
-    console.log("Pageindex: "+pageIndex);
-    return [pageIndex,dataObj];
+   // let pageIndex = Math.trunc(index / this.paginator.pageSize);
+   // console.log("Pageindex: "+pageIndex);
+   // return [pageIndex,dataObj];
+    return [0,dataObj];
   }
   public pageNoOf(obj: Customer):[number, Customer|null] {
     if (obj.id == undefined || obj.id == null) {
@@ -62,42 +53,29 @@ export class CustomerDataSource extends DataSource<Customer>{
     }
     return this.findInDataById(obj.id);
   }
-  private setPipeData() {
-    this.dataPipe$.next(this.getPagedData(this.getSortedData([...this.data ])));
-  }
-  connect(): Observable<Customer[]> {
-    if (this.paginator && this.sort) {
-      if (this.data.length ==0) {
-        this.refresh();
-      }else{
-        this.setPipeData();
-      }
-      return this.dataPipe$;
-    } else {
-      throw Error('Please set the paginator and sort on the data source before connecting.');
+
+  items(): Customer[] {
+    if (this.allData.length ==0) {
+     // this.refresh();
     }
+    return this.allData;
+  }
+  lazyLoad(event: LazyLoadEvent) {
+    this.pageData = this.getPagedData(this.getSortedData([...this.allData ], event), event);
+    this.lastLoadEvent=event;
   }
 
-  disconnect(): void {
-    this.subscription.unsubscribe();
+  private getPagedData(data: Customer[], event: LazyLoadEvent): Customer[] {
+    return data.slice(event.first, (event.first! + event!.rows!));
   }
 
-  private getPagedData(data: Customer[]): Customer[] {
-    if (this.paginator) {
-      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-      return data.splice(startIndex, this.paginator.pageSize);
-    } else {
-      return data;
-    }
-  }
-
-  private getSortedData(data: Customer[]): Customer[] {
-    if (!this.sort || !this.sort.active || this.sort.direction === '') {
+  private getSortedData(data: Customer[],  event: LazyLoadEvent): Customer[] {
+    if (!event.sortField) {
       this.sortedData= data;
     }else{
       this.sortedData=data.sort((a, b) => {
-        const isAsc = this.sort?.direction === 'asc';
-        let sortField=this.sort?.active;
+        const isAsc = event.sortOrder==1;
+        let sortField=event.sortField;
         if (!sortField || sortField === undefined) {
             sortField='firstName';
         }

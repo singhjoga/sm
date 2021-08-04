@@ -24,7 +24,8 @@
     "state": "State",
     "street": "Street",
     "zipCode": "Zip Code",
-    "languageId": "Language"
+    "languageId": "Language",
+    "isDisabled": "Is Disabled?"
   },
   "errors": {
     "required": "Mandatory field",
@@ -32,8 +33,12 @@
   },
   "messages": {
     "save-success":"Record saved successfully",
-    "delete": "Are you sure you want to delete {{count}} items",
+    "delete": "Are you sure you want to delete {{count}} items?",
     "delete-success": "{{count}} items deleted successfully",
     "delete-failed": "Error deleting: {{error}}.<br>{{count}} items deleted successfully"
+  },
+  "features": {
+    "customerList": "Customer List",
+    "customerDetails": "Customer Details"
   }
 }

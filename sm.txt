@@ -20,3 +20,11 @@ mysqld –-console –-skip-grant-tables –-skip-external-locking
 Open another shell from control panel and repair database with this command:
 
 mysqlcheck -r --databases mysql --use-frm
+
+
+=====================
+PrimeNG Issues
+- SideNav
+- Dropdown set value
+- Checkbox alignment
+- Dialog header/footer not in template

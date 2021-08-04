@@ -1,11 +1,12 @@
 import { BaseConroller } from "./base-controller";
-import {DialogService} from '../components/dialogs/dialog-service';
+import {DialogUtil} from '../components/dialogs/dialog-service';
 import { AppInjector } from '../injector.module';
-export abstract class ListController extends BaseConroller {
-    public dialogService: DialogService;
-    constructor() {
-        super();
-        this.dialogService = AppInjector.get(DialogService);
+import { ScreenController } from "@app/core/classes/screen-controller";
+export abstract class ListController extends ScreenController {
+    public dialogService: DialogUtil;
+    constructor(screenName:string) {
+        super(screenName);
+        this.dialogService = AppInjector.get(DialogUtil);
     }
     public askIsDeleteOK(itemCount?:number): Promise<any> {
         let msgText = this.getMessageText('delete', {count:itemCount});

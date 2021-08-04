@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseConroller } from '@app/core/classes/base-controller';
+import {MessageService} from 'primeng/api';
 
 @Injectable()
-export class SnackbarService {
-
-    constructor(private snackBar: MatSnackBar) { }
-
-    show(message: string, snackbarType: string, action: string='',duration = 5000) {
-        this.snackBar.open(message, action, {
-            duration,
-            verticalPosition: 'top',
-            panelClass: [snackbarType]
-        });
-    }
+export class SnackbarService extends BaseConroller{
+    constructor(private messageService: MessageService) {
+        super();
+     }
     showSuccess(message: string) {
-        this.show(message,'success-snackbar');
+        this.messageService.add({severity:'success', summary: this.getLabelText('success'), detail: message});
     }
     showError(message: string) {
-        this.show(message,'error-snackbar');
+        this.messageService.add({severity:'error', summary: this.getLabelText('error'), detail: message});
     }
     showInfo(message: string) {
-        this.show(message,'info-snackbar');
+        this.messageService.add({severity:'info', summary: this.getLabelText('information'), detail: message});
     }
 }

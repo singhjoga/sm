@@ -1,19 +1,17 @@
 <div fxLayout="column" fxFill>
   <div fxLayout="row" style="margin-bottom: 1em;">
     <h1 fxFlex mat-dialog-title>{{title}}</h1>
-    <button mat-icon-button class="close-button" [mat-dialog-close]="false" >
-      <mat-icon >close</mat-icon>
-    </button>
+    <button class="close-button" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
   </div>
   <div fxFlex>
     <div fxLayout="row">
-      <mat-icon [color]="iconColor" class="icon-display">{{icon}}</mat-icon>
+      <i class="icon-display pi {{icon}}"></i>
       <p [innerHtml]="msgText"></p>
     </div>
   </div>
   <div align="center">
     <button cdkFocusInitial *ngIf="yesLabel != ''" (click)="onYes()" style="margin-right: 1em;">{{yesLabel}}</button>
     <button *ngIf="noLabel != ''" (click)="onNo()" style="margin-right: 1em;">{{noLabel}}</button>
-    <button *ngIf="cancelLabel != ''"  [mat-dialog-close]="false" (click)="onCancel()">{{cancelLabel}}</button>
+    <button *ngIf="cancelLabel != ''"   (click)="onCancel()">{{cancelLabel}}</button>
   </div>
 </div>

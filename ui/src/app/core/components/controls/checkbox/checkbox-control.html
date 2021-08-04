@@ -1,0 +1,3 @@
+<p-checkbox class="checkbox-style" [id]="controlName" [formControlName]="controlName" [binary]="true"></p-checkbox>
+<label [for]="controlName"> {{label()}}<span *ngIf="required" style="color:red">*</span></label>
+<small style="color:red">{{errorMessage}}</small>

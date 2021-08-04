@@ -1,9 +1,11 @@
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { ScreenController } from '@app/core/classes/screen-controller';
+import { DialogMode } from '@app/shared/constants';
 import { AbstractValidator } from '../components/validators/abstract-validator';
 import { BaseConroller } from './base-controller';
-export abstract class FormConroller extends BaseConroller{
-    constructor() {
-        super();
+export abstract class FormConroller extends ScreenController{
+    constructor(screenName:string) {
+        super(screenName);
     }
     public abstract getFormGroup():FormGroup;
 
@@ -30,5 +32,8 @@ export abstract class FormConroller extends BaseConroller{
     }
     protected init() {
 
+    }
+    getValue(field:string): any {
+        return this.getFormGroup().controls[field].value;
     }
 }

@@ -13,6 +13,9 @@ export abstract class BaseConroller {
     getErrorMessageText(name:string): string {
         return this.translate.instant('errors.' + name);
     }
+    getFeatureText(name:string): string {
+      return this.translate.instant('features.' + name);
+  }
     getMessageText(name:string, obj?:Object): string {
         return this.translate.instant('messages.' + name,obj);
     }

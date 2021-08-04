@@ -1,52 +1,58 @@
-
-<span>
-  <h3 mat-dialog-title>{{modeText()}} - Customer Details</h3>
-</span>
 <form-error [messages]="errorMessages"></form-error>
-
-<div fxLayout="column" fxFlexFill>
-<div mat-dialog-content>
-  <form #frm="ngForm"  [formGroup]="formGroup" (ngSubmit)="onSave()">
-
-    <div class="input-row" fxFlexFill  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_FIRST_NAME"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_LAST_NAME"></input-control>
-    </div>
-
-    <div class="input-row" fxFlexFill fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_EMAIL"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_MOBILE"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_PHONE"></input-control>
-    </div>
-    <div class="input-row" fxFlexFill fxLayout="row" >
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_STREET"></input-control>
-    </div>
-    <div class="input-row" fxFlexFill fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_HNO"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_AREA"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_ZIP_CODE"></input-control>
-    </div>
-    <div class="input-row" fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_CITY"></input-control>
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_STATE"></input-control>
-    </div>
-    <div class="input-row" fxLayout="row" fxFlexFill fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <input-control fxFlex [controller]="this" [controlName]="FIELD_LANGUAGE_ID"></input-control>
-
-      <div fxFlex>
-        <mat-checkbox [formControlName]="FIELD_IS_DISABLED">Is Disabled?</mat-checkbox>
+<form #frm="ngForm" [formGroup]="formGroup" (ngSubmit)="onSave()">
+  <div class="card">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_FIRST_NAME"></input-control>
       </div>
-   
-    </div> 
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_LAST_NAME"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_EMAIL"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_MOBILE"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_PHONE"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_ZIP_CODE"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_STATE"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_CITY"></input-control>
+      </div>
+      <div class="field col-12">
+        <input-control [controller]="this" [controlName]="FIELD_STREET"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_HNO"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_AREA"></input-control>
+      </div>
+      <div class="field col-6 md:col-4">
+        <dropdown-control [controller]="this" [controlName]="FIELD_LANGUAGE_ID" placeholder="Default language"
+          [options]="languages" optionLabelField="localName" optionValueField="id"></dropdown-control>
 
-    <div mat-dialog-actions align="end">
-      <button mat-raised-button type="submit" [disabled]="!formGroup.valid || isReadOnly()">
-        <span>Save</span>
-      </button>
-      <button mat-raised-button type="reset" (click)="onClose()">
-        Close
-      </button>
+      </div>
+      <div class="field col-6 md:col-2">
+
+      </div>
+      <div class="col-12 md:col-6" styleClass="p-field-checkbox">
+        <checkbox-control [controller]="this" [controlName]="FIELD_IS_DISABLED"></checkbox-control>
+      </div>
     </div>
-  </form>
-</div>
-</div>
+  </div>
+  <div class="card flex justify-content-end flex-wrap mt-4">
+    <p-button type="button" styleClass="p-button-sm p-button-outlined p-button-secondary" icon="pi pi-times"
+      label="Cancel" class="" (click)="onClose()"></p-button>
+    <p-button label="Save" icon="pi pi-check" styleClass="p-button-sm" class="ml-3"
+      [disabled]="!formGroup.valid || isReadOnly()" (click)="onSave()"></p-button>
+  </div>
+
+</form>
