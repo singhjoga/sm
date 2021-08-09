@@ -47,20 +47,4 @@ public class BaseEntityService<T extends IdentifiableEntity<ID>, ID extends Seri
 	public List<T> findAll() {
 		return repo.findAll();
 	}
-	
-	public String getApplicableLanguage(String requestLanguage) {
-		Set<String> allowedLangues = staticCache.getLanguages();
-		if (allowedLangues.contains(requestLanguage)) {
-			return requestLanguage;
-		}
-		// if request language contains a locale specific, search without it
-		if (requestLanguage.contains("-")) {
-			requestLanguage = StringUtils.substringBefore(requestLanguage, "-");			
-		}
-		if (allowedLangues.contains(requestLanguage)) {
-			return requestLanguage;
-		}else {
-			return SystemConfiguration.DEFAULT_LANGUAGE;
-		}
-	}
 }

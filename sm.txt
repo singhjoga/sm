@@ -28,3 +28,5 @@ PrimeNG Issues
 - Dropdown set value
 - Checkbox alignment
 - Dialog header/footer not in template
+- Table Lazy Loading - Sorting and Filtering must be manually
+- Go to page - not easy, calculate the page index +1

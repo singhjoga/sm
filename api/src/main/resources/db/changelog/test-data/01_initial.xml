@@ -26,7 +26,21 @@
 	        <column  header="zipCode" name="ZIP" type="STRING"/>   
 	        <column  header="mobile" name="MOBILE" type="STRING"/>   
 	        <column  header="phone" name="PHONE" type="STRING"/>
-	        <column  header="state" name="STATE" type="STRING"/>     
+	        <column  header="state" name="STATE" type="STRING"/>
+	        <column  header="countryId" name="COUNTRY_CODE" type="STRING"/>     
+	    </loadUpdateData> 
+    </changeSet>
+    <changeSet id="01.02" author="jogasingh" context="tst">
+		<loadUpdateData  
+	            encoding="UTF-8"  
+	            file="system-prop.csv"  
+	            primaryKey="name"  
+	            quotchar="'"  
+	            relativeToChangelogFile="true"    
+	            separator=";"  
+	            tableName="SYSTEM_PROP">  
+	        <column  header="name" name="NAME" type="STRING"/>  
+	        <column  header="value" name="VALUE" type="STRING"/>        
 	    </loadUpdateData> 
     </changeSet>
 </databaseChangeLog>

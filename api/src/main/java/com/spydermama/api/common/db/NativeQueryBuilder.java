@@ -57,6 +57,9 @@ public class NativeQueryBuilder {
 		and(where);
 		addFilter(where, value, fieldName, op);
 	}
+	public void appendWhere(String sql) {
+		where.append(" ").append(sql);
+	}
 	public void appendSqlFilter(Object value, String fieldName, String op) {
 		if (value == null) return;
 		//If value is a collection. It is probably an IN clause, make sure collection is not empty

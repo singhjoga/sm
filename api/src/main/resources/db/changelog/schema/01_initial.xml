@@ -98,6 +98,7 @@
             <column name="CODE" type="VARCHAR2(20 BYTE)">
                 <constraints primaryKey="true" primaryKeyName="COUNTRY_PK"/>
             </column>
+            <column name="ENG_NAME" type="VARCHAR2(500 BYTE)"/>
             <column name="DEF_LANG_CODE" type="VARCHAR2(100 BYTE)">
                 <constraints foreignKeyName="COUNTRY_LANG_FK1" referencedTableName="LANG" referencedColumnNames="CODE"/>
             </column>            
@@ -106,17 +107,17 @@
  	<changeSet id="01.06" author="jogasingh">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="COUNTRY_VAL" />
+				<tableExists tableName="COUNTRY_NAME" />
 			</not>
 		</preConditions>
-     	<createTable tableName="COUNTRY_VAL">
+     	<createTable tableName="COUNTRY_NAME">
             <column name="CODE" type="VARCHAR2(20 BYTE)">
                 <constraints primaryKey="true" primaryKeyName="COUNTRY_VAL_PK"/>
             </column>
             <column name="LANG_CODE" type="VARCHAR2(100 BYTE)">
                 <constraints primaryKey="true" primaryKeyName="COUNTRY_VAL_PK" foreignKeyName="COUNTRY_VAL_FK1" referencedTableName="LANG" referencedColumnNames="CODE"/>
             </column>
-            <column name="NAME" type="VARCHAR2(500 BYTE)"/>
+            <column name="LOCAL_NAME" type="VARCHAR2(500 BYTE)"/>
         </createTable>
     </changeSet>    
     <changeSet id="01.07" author="jogasingh">
@@ -132,7 +133,7 @@
             <column name="FIRST_NAME" type="VARCHAR2(500 BYTE)"/>
             <column name="LAST_NAME" type="VARCHAR2(500 BYTE)"/>
             <column name="EMAIL" type="VARCHAR2(500 BYTE)">
-            	<constraints unique="true" uniqueConstraintName="REST_EMAIL_UK"/>
+            	<constraints unique="true" uniqueConstraintName="CUST_EMAIL_UK"/>
             </column>
             <column name="COUNTRY_CODE" type="VARCHAR2(20 BYTE)">
                 <constraints foreignKeyName="CUST_FK1" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
@@ -156,18 +157,18 @@
     <changeSet id="01.08" author="jogasingh">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="REST" />
+				<tableExists tableName="DHABA" />
 			</not>
 		</preConditions>
-     	<createTable tableName="REST">
+     	<createTable tableName="DHABA">
             <column name="ID" type="VARCHAR2(100 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_PK"/>
+                <constraints primaryKey="true" primaryKeyName="DHABA_PK"/>
             </column>
             <column name="NAME" type="VARCHAR2(500 BYTE)">
-                <constraints unique="true" uniqueConstraintName="REST_NAME_UK"/>
+                <constraints unique="true" uniqueConstraintName="DHABA_NAME_UK"/>
             </column>
             <column name="CUST_ID" type="VARCHAR2(100 BYTE)">
-                <constraints foreignKeyName="REST_FK1" referencedTableName="CUST" referencedColumnNames="ID"/>
+                <constraints foreignKeyName="DHABA_FK1" referencedTableName="CUST" referencedColumnNames="ID"/>
             </column>            
             <column name="STREET" type="VARCHAR2(500 BYTE)"/>
             <column name="HNO" type="VARCHAR2(500 BYTE)"/>
@@ -176,7 +177,7 @@
             <column name="STATE" type="VARCHAR2(100 BYTE)"/>
             <column name="ZIP" type="VARCHAR2(100 BYTE)"/>
             <column name="COUNTRY_CODE" type="VARCHAR2(20 BYTE)">
-                <constraints foreignKeyName="REST_FK2" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
+                <constraints foreignKeyName="DHABA_FK2" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
             </column>
             <column name="LONGITUDE" type="DECIMAL(14,9)"/>
             <column name="LATITUDE" type="DECIMAL(14,9)"/>
@@ -185,15 +186,15 @@
    <changeSet id="01.09" author="jogasingh">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="REST_CUISINE" />
+				<tableExists tableName="DHABA_CUISINE" />
 			</not>
 		</preConditions>
-     	<createTable tableName="REST_CUISINE">
-            <column name="REST_ID" type="VARCHAR2(100 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK" foreignKeyName="REST_CUISINE_FK1" referencedTableName="REST" referencedColumnNames="ID"/>
+     	<createTable tableName="DHABA_CUISINE">
+            <column name="DHABA_ID" type="VARCHAR2(100 BYTE)">
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK" foreignKeyName="DHABA_CUISINE_FK1" referencedTableName="DHABA" referencedColumnNames="ID"/>
             </column>
             <column name="CUISINE_CODE" type="VARCHAR2(500 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK" foreignKeyName="REST_CUISINE_FK2" references="REF_DATA(CODE)"/>
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK" foreignKeyName="DHABA_CUISINE_FK2" references="REF_DATA(CODE)"/>
             </column>
         </createTable>
     </changeSet>
@@ -201,21 +202,21 @@
    <changeSet id="01.09" author="jogasingh">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="REST_COMM" />
+				<tableExists tableName="DHABA_COMM" />
 			</not>
 		</preConditions>
-     	<createTable tableName="REST_COMM">
-            <column name="REST_ID" type="VARCHAR2(100 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK"/>
+     	<createTable tableName="DHABA_COMM">
+            <column name="DHABA_ID" type="VARCHAR2(100 BYTE)">
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK"/>
             </column>
             <column name="COMM_EVENT_TYPE_CODE" type="VARCHAR2(50 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK"/>
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK"/>
             </column>
             <column name="COMM_MEDIUM_CODE" type="VARCHAR2(50 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK"/>
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK"/>
             </column>
             <column name="COMM_MEDIUM_CODE" type="VARCHAR2(50 BYTE)">
-                <constraints primaryKey="true" primaryKeyName="REST_CUISINE_PK"/>
+                <constraints primaryKey="true" primaryKeyName="DHABA_CUISINE_PK"/>
             </column>                 
         </createTable>
     </changeSet>
@@ -288,5 +289,44 @@
            <column name="VALUE" type="VARCHAR2(3000 BYTE)"/>
         </createTable>
     </changeSet>
-    
+    <changeSet id="01.14" author="jogasingh" >
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="SYSTEM_PROP"/>
+			</not>
+		</preConditions>
+		<createTable tableName="SYSTEM_PROP">
+           <column name="NAME" type="VARCHAR2(50 BYTE)">
+               <constraints primaryKey="true" primaryKeyName="SYSTEM_PROP_PK"/>
+           </column>
+           <column name="VALUE" type="VARCHAR2(3000 BYTE)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="01.15" author="jogasingh" >
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="ADDR"/>
+			</not>
+		</preConditions>
+		<createTable tableName="ADDR">
+            <column name="ID" type="VARCHAR2(100 BYTE)">
+                <constraints primaryKey="true" primaryKeyName="ADDR_PK"/>
+            </column>
+            <column name="ADDR_TYPE" type="VARCHAR2(50 BYTE)"/>
+            <column name="OBJ_TYPE" type="VARCHAR2(50 BYTE)"/>
+            <column name="OBJ_ID" type="VARCHAR2(50 BYTE)"/>
+            <column name="COUNTRY_CODE" type="VARCHAR2(20 BYTE)">
+                <constraints foreignKeyName="ADDR_FK1" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
+            </column>
+            <column name="ZIP" type="VARCHAR2(100 BYTE)"/>
+            <column name="STATE" type="VARCHAR2(100 BYTE)"/>
+            <column name="CITY" type="VARCHAR2(100 BYTE)"/>
+            <column name="AREA" type="VARCHAR2(1000 BYTE)"/>
+            <column name="STREET" type="VARCHAR2(500 BYTE)"/>
+            <column name="HNO" type="VARCHAR2(500 BYTE)"/>
+            <column name="LONGITUDE" type="DECIMAL(14,9)"/>
+            <column name="LATITUDE" type="DECIMAL(14,9)"/>
+            <column name="IS_DEFAULT" type="BOOL"/>
+        </createTable>
+    </changeSet>    
 </databaseChangeLog>

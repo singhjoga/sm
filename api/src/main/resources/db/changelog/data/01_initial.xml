@@ -58,21 +58,22 @@
 	            separator=";"  
 	            tableName="COUNTRY">  
 	        <column  header="code" name="CODE" type="STRING"/>  
-	        <column  header="deflangcode" name="DEF_LANG_CODE" type="STRING"/>  
+	        <column  header="deflangcode" name="DEF_LANG_CODE" type="STRING"/>
+	        <column  header="engname" name="ENG_NAME" type="STRING"/>  
 	    </loadUpdateData> 
     </changeSet>
 	<changeSet id="01.05" author="jogasingh">
 		<loadUpdateData  
 	            encoding="UTF-8"  
-	            file="country-value.csv"  
+	            file="country-name.csv"  
 	            primaryKey="code"  
 	            quotchar="'"  
 	            relativeToChangelogFile="true"    
 	            separator=";"  
-	            tableName="COUNTRY_VAL">  
+	            tableName="COUNTRY_NAME">  
 	        <column  header="code" name="CODE" type="STRING"/>  
 	        <column  header="langcode" name="LANG_CODE" type="STRING"/>  
-	        <column  header="name" name="NAME" type="STRING"/>  
+	        <column  header="localname" name="LOCAL_NAME" type="STRING"/>  
 	    </loadUpdateData> 
     </changeSet>      
 </databaseChangeLog>

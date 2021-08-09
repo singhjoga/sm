@@ -16,7 +16,7 @@ import { SystemService } from '@app/system/system-service';
   styleUrls: ['./customer-details.component.scss'],
   viewProviders:[{provide: FormConroller, useClass: CustomerDetailsComponent}]
 })
-export class CustomerDetailsComponent extends FormConroller implements OnInit{
+export class CustomerDetailsComponent extends FormConroller<Customer> implements OnInit{
   readonly FIELD_FIRST_NAME='firstName';
   readonly FIELD_LAST_NAME='lastName';
   readonly FIELD_EMAIL='email';
@@ -47,22 +47,16 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
     [this.FIELD_LANGUAGE_ID]: [null],
     [this.FIELD_IS_DISABLED]: [false],
   });
-
-  obj: Customer = new Customer();
   languages:Language[]=[];
-  errorMessages:string[]=[];
-  @ViewChild('frm') 
-  public userFrm?: NgForm;
   constructor(
     @Inject(LOCALE_ID) private locale: string,
-    private service: CustomerService,
+    service: CustomerService,
     private fb: FormBuilder,
-    public dialogRef: DynamicDialogRef,
-    private snackbar: SnackbarService,
-    private config: DynamicDialogConfig,
+    dialogRef: DynamicDialogRef,
+    config: DynamicDialogConfig,
     private systemService: SystemService
   ) {
-    super(Constants.inst.CUSTOMER_DETAILS);
+    super(Constants.inst.CUSTOMER_DETAILS, config, service, dialogRef);
   }
   getFormGroup(): FormGroup {
     return this.formGroup;
@@ -73,82 +67,9 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
       this.languages=resp;
     });
     if (this.mode()==DialogMode.Add) {
-      this.model2Form(this.obj);
-      this.formGroup.controls[this.FIELD_IS_DISABLED].disable();
-    }else{
-      this.service.findById(this.id()).then(resp => {
-        this.obj=resp;
-        this.model2Form(this.obj);
-      });
+      this.getFormGroup().controls[this.FIELD_IS_DISABLED].disable();
     }
-  super.init();
-  }
-  model2Form(obj:Customer) {
-    Object.keys(this.formGroup.controls).forEach(key => {
-      let value:any = obj[key];
-      let control:AbstractControl  = this.formGroup.controls[key];
-      if (!(value == undefined || value==null)) {
-        control.setValue(value);
-      }
-      if (this.mode() == DialogMode.View) {
-        control.disable();
-      }
-  });
-  }
-  form2Model(obj:Customer) {
-    Object.keys(this.formGroup.controls).forEach(key => {
-      let control:AbstractControl  = this.formGroup.controls[key];
-      let value:any = control.value;
-      if (value =='') {
-        value=null;
-      }
-      if (typeof obj[key] != 'undefined') {
-        obj[key]=value;
-      }
-    });
-  }
-  onClose() {
-    this.dialogRef.close();
-  }
-  onSave() {
-    this.form2Model(this.obj);
-    this.save().then(result => {
-      this.snackbar.showSuccess(this.getMessageText('save-success'));
-      this.dialogRef.close(result);
-    },
-    (error: ErrorResponse) => {
-      this.errorMessages=this.getApiErrorAsString(error);
-    }
-    );
-  }
-  save():Promise<any> {
-    if (this.mode()==DialogMode.Add) {
-      return this.service.add(this.obj);
-    }else{
-      return this.service.update(this.id(), this.obj);
-    }
-  }
-
-  mode(): DialogMode {
-    return this.config.data.mode;
-  }
-  id():string {
-    return this.config.data.id;
-  }
-  isEdit() {
-    return this.mode() == DialogMode.Edit;
-  }
-  isAdd() {
-    return this.mode() == DialogMode.Add;
-  }
-  isReadOnly() {
-    return this.mode() == DialogMode.View;
-  }
-  modeText() {
-    return DialogMode[this.mode()];
-  }
-  isRequired(el) {
-    return true;
+    super.init();
   }
   selectedLanguage():Language|null {
     var id = this.getValue(this.FIELD_LANGUAGE_ID);
@@ -161,5 +82,8 @@ export class CustomerDetailsComponent extends FormConroller implements OnInit{
       }
     }
     return null;
+  }
+  public newObj(): Customer {
+    return new Customer();
   }
 }

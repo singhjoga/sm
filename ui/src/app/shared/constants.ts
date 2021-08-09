@@ -12,4 +12,5 @@ export class Constants {
     public static inst: Constants = new Constants();
     readonly CUSTOMER_DETAILS="customerDetails";
     readonly CUSTOMER_LIST="customerList";
+    readonly DIALOG_CLOSE="close";
 }
