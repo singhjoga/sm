@@ -17,8 +17,8 @@ import com.spydermama.api.system.language.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity(name="CUST")
-@ApiModel(description = "Customer profile")
+@Entity(name="DHABA")
+@ApiModel(description = "Dhaba profile")
 public class Dhaba extends AbstractResource<String>{
 
 	@Column(name="FIRST_NAME")

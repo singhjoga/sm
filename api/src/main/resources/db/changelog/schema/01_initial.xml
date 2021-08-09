@@ -169,18 +169,7 @@
             </column>
             <column name="CUST_ID" type="VARCHAR2(100 BYTE)">
                 <constraints foreignKeyName="DHABA_FK1" referencedTableName="CUST" referencedColumnNames="ID"/>
-            </column>            
-            <column name="STREET" type="VARCHAR2(500 BYTE)"/>
-            <column name="HNO" type="VARCHAR2(500 BYTE)"/>
-            <column name="AREA" type="VARCHAR2(1000 BYTE)"/>
-            <column name="CITY" type="VARCHAR2(100 BYTE)"/>
-            <column name="STATE" type="VARCHAR2(100 BYTE)"/>
-            <column name="ZIP" type="VARCHAR2(100 BYTE)"/>
-            <column name="COUNTRY_CODE" type="VARCHAR2(20 BYTE)">
-                <constraints foreignKeyName="DHABA_FK2" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
-            </column>
-            <column name="LONGITUDE" type="DECIMAL(14,9)"/>
-            <column name="LATITUDE" type="DECIMAL(14,9)"/>
+            </column> 
         </createTable>
     </changeSet>
    <changeSet id="01.09" author="jogasingh">

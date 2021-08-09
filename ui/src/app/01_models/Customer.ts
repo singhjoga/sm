@@ -13,4 +13,5 @@ export class Customer extends AbstractResource{
   state: string='';
   street: string='';
   zipCode: string='';
+  languageId: string='';
 }

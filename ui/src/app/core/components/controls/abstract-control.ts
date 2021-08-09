@@ -9,7 +9,7 @@ export abstract class AbstractControl{
   required:boolean=false;
   public translate:TranslateService;
   public controlName!:string;
-  public controller!:FormConroller
+  public controller!:FormConroller<any>
 
   constructor() {
     this.translate = AppInjector.get(TranslateService);
@@ -18,7 +18,7 @@ export abstract class AbstractControl{
  
   }
 
-  onInit(controlName:string, controller:FormConroller): void {
+  onInit(controlName:string, controller:FormConroller<any>): void {
     this.controlName=controlName;
     this.controller=controller;
     

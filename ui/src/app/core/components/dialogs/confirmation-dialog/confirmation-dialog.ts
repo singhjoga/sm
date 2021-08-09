@@ -12,7 +12,7 @@ export class ConfirmationDialog implements OnInit {
   yesLabel:string='';
   noLabel:string='';
   cancelLabel:string='';
-  icon='live_help';
+  icon='pi-question-circle';
   iconColor="primary";
   constructor(public dialogRef: DynamicDialogRef,
     private config: DynamicDialogConfig

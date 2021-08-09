@@ -12,7 +12,7 @@ export class CheckboxControl extends AbstractControl implements OnInit {
   @Input() 
   controlName!:string;
   @Input() 
-  controller!:FormConroller;
+  controller!:FormConroller<any>;
 
   constructor() {
     super();

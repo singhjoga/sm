@@ -1,17 +1,13 @@
-<div fxLayout="column" fxFill>
-  <div fxLayout="row" style="margin-bottom: 1em;">
-    <h1 fxFlex mat-dialog-title>{{title}}</h1>
-    <button class="close-button" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
-  </div>
-  <div fxFlex>
-    <div fxLayout="row">
-      <i class="icon-display pi {{icon}}"></i>
+<div class="card flex flex-column max-w-full max-h-full">
+  <div class="card flex flex-column flex-grow-1">
+    <div class="card flex flex-row align-items-center">
+      <i style="font-size: 2rem;" class="pi {{icon}} mr-3 {{iconColor}}"></i>
       <p [innerHtml]="msgText"></p>
     </div>
   </div>
-  <div align="center">
-    <button cdkFocusInitial *ngIf="yesLabel != ''" (click)="onYes()" style="margin-right: 1em;">{{yesLabel}}</button>
-    <button *ngIf="noLabel != ''" (click)="onNo()" style="margin-right: 1em;">{{noLabel}}</button>
-    <button *ngIf="cancelLabel != ''"   (click)="onCancel()">{{cancelLabel}}</button>
+  <div class="card flex justify-content-center flex-wrap mt-4">
+    <p-button *ngIf="noLabel" (click)="onNo()" styleClass="p-button-sm p-button-outlined p-button-secondary" class="{{iconColor}}">{{noLabel}}</p-button>
+    <p-button *ngIf="cancelLabel"   (click)="onCancel()" styleClass="p-button-sm p-button-outlined p-button-secondary" class="ml-3 {{iconColor}}">{{cancelLabel}}</p-button>
+    <p-button cdkFocusInitial *ngIf="yesLabel"  (click)="onYes()" styleClass="p-button-sm" class="ml-3">{{yesLabel}}</p-button>
   </div>
 </div>

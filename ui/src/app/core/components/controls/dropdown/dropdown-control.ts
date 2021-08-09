@@ -13,7 +13,7 @@ export class DropdownControl extends AbstractControl implements OnInit, AfterVie
   @Input() 
   controlName!:string;
   @Input() 
-  controller!:FormConroller;
+  controller!:FormConroller<any>;
   @Input() 
   placeholder!:string;
   @Input() 

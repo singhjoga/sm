@@ -1,21 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+$var-color-danger:#D32F2F;
+$var-color-help: #9C27B0;
+$var-color-warning: #FBC02D;
+$var-color-info: #0288D1;
+$var-color-success:#689F38;
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .error-snackbar {
-    background-color: red;
+    background-color: $var-color-danger;
     color: white;
 }
 .success-snackbar {
-    background-color:green;
+    background-color: $var-color-success;
     color: white;
 }
 .info-snackbar {
-    background-color:blue;
+    background-color:$var-color-info;
     color: white;
 }
 .table-header {
     display: flex;
     justify-content: space-between;
+}
+.color-danger {
+    color: $var-color-danger;
+}
+.color-help {
+    color: $var-color-help;
+}
+.color-warning {
+    color: $var-color-warning;
+}
+.color-info {
+    color: $var-color-info;
+}
+.color-success {
+    color: $var-color-success;
 }
