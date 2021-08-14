@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spydermama.api.base.Resources;
+import com.spydermama.api.base.ApplicationObjects;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseController;
 
@@ -18,9 +18,9 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = Resources.RefData)
+@Authorization(resource = ApplicationObjects.RefData)
 @RequestMapping({"/api//v1/refdata"})
-@Api(tags = {Resources.RefData})
+@Api(tags = {ApplicationObjects.RefData})
 public class RefDataController extends BaseController{
 	private RefDataService service;
 	

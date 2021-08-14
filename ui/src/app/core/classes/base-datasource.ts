@@ -17,7 +17,7 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
   public refresh():Promise<void> {
     return new Promise<void>((resolve,reject)=> {
       setTimeout(()=> {
-        this.service.findAll().then(resp => {
+        this.findAll().then(resp => {
           this.allData=resp;
           if (!this.lastLoadEvent) {
             this.pageData=[];
@@ -28,7 +28,9 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
         })
       })
     });
-
+  }
+  public findAll():Promise<any[]> {
+    return this.service.findAll();
   }
   public findInDataById(id: string):[number, AbstractResource|null] {
     let tableData = this.sortedData == undefined?this.allData:this.sortedData;

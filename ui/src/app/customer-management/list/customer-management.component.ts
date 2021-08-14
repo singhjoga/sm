@@ -10,13 +10,14 @@ import { ErrorResponse } from '@app/01_models/RestResponse';
 import { Table } from 'primeng/table';
 import { FilterMetadata } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { CustomerWithAddress } from '@app/01_models/CustomerWithAddress';
 @Component({
   selector: 'app-customer-management',
   templateUrl: './customer-management.component.html',
   styleUrls: ['./customer-management.component.scss'],
   providers: [DialogService, ConfirmationService]
 })
-export class CustomerManagementComponent extends ListController<Customer> implements OnInit, AfterViewInit {
+export class CustomerManagementComponent extends ListController<CustomerWithAddress> implements OnInit, AfterViewInit {
 
   displayedColumns = ['firstName', 'lastName', 'email', 'address', 'area', 'city', 'zipCode', 'contactInfo'];
   @ViewChild('dataTable') 
@@ -82,4 +83,8 @@ export class CustomerManagementComponent extends ListController<Customer> implem
   getTable(): Table {
     return this.dataTable;
   }
+  getId(obj: CustomerWithAddress): string {
+    return obj.customer?.id!;
+  }
+
 }

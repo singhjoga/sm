@@ -8,7 +8,7 @@ import { AbstractDataSource } from "@app/core/classes/base-datasource";
 import { Constants, DialogMode } from "@app/shared/constants";
 import { DialogService } from 'primeng/dynamicdialog';
 import { ErrorResponse } from "@app/01_models/RestResponse";
-export abstract class ListController<T extends AbstractResource> extends ScreenController {
+export abstract class ListController<T> extends ScreenController {
     selection: T[] = [];
     dataSource: AbstractDataSource<T>;
     detailsDialog: any;
@@ -28,6 +28,7 @@ export abstract class ListController<T extends AbstractResource> extends ScreenC
 
     }
     abstract getTable(): Table;
+    abstract getId(obj:T):string;
     public askIsDeleteOK(itemCount?: number): Promise<any> {
         let msgText = this.getMessageText('delete', { count: itemCount });
         let titleText = this.getLabelText('confirmation');
@@ -84,7 +85,7 @@ export abstract class ListController<T extends AbstractResource> extends ScreenC
             return;
         }
         let obj: T = this.selection[0];
-        this.openDetailsDialog(DialogMode.Edit, obj.id);
+        this.openDetailsDialog(DialogMode.Edit, this.getId(obj));
     }
     onDelete() {
         this.askIsDeleteOK(this.selection.length)
@@ -96,7 +97,7 @@ export abstract class ListController<T extends AbstractResource> extends ScreenC
                     var i = -1;
                     for (let obj of selection) {
                         i++;
-                        const id = obj.id!;
+                        const id = this.getId(obj);
                         try {
                             await this.dataSource.delete(id);
                             deletedCount++;
@@ -120,7 +121,7 @@ export abstract class ListController<T extends AbstractResource> extends ScreenC
             });
     }
     onView(obj: T) {
-        this.openDetailsDialog(DialogMode.View, obj.id)
+        this.openDetailsDialog(DialogMode.View, this.getId(obj));
     }
 
 }

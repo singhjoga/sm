@@ -36,20 +36,20 @@
             <th pSortableColumn="firstName">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     First Name
-                    <p-sortIcon field="firstName"></p-sortIcon>
-                    <p-columnFilter type="text" field="firstName" display="menu"></p-columnFilter>
+                    <p-sortIcon field="customer.firstName"></p-sortIcon>
+                    <p-columnFilter type="text" field="customer.firstName" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Last Name
-                    <p-columnFilter type="text" field="lastName" display="menu"></p-columnFilter>
+                    <p-columnFilter type="text" field="customer.lastName" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Email
-                    <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                    <p-columnFilter type="text" field="customer.email" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
@@ -60,19 +60,19 @@
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Area
-                    <p-columnFilter type="text" field="area" display="menu"></p-columnFilter>
+                    <p-columnFilter type="text" field="address.area" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
                     City
-                    <p-columnFilter type="text" field="city" display="menu"></p-columnFilter>
+                    <p-columnFilter type="text" field="address.city" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Zip Code
-                    <p-columnFilter type="text" field="zipCode" display="menu"></p-columnFilter>
+                    <p-columnFilter type="text" field="address.zipCode" display="menu"></p-columnFilter>
                 </div>
             </th>
             <th>
@@ -87,14 +87,14 @@
             <td>
                 <p-tableCheckbox [value]="item"></p-tableCheckbox>
             </td>
-            <td>{{item.firstName}}</td>
-            <td>{{item.lastName}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.street}} {{item.houseNo}}</td>
-            <td>{{item.area}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.zipCode}}</td>
-            <td>{{item.mobile}} {{item.phone}}</td>
+            <td>{{item.customer.firstName}}</td>
+            <td>{{item.customer.lastName}}</td>
+            <td>{{item.customer.email}}</td>
+            <td>{{item.address.street}} {{item.address.houseNo}}</td>
+            <td>{{item.address.area}}</td>
+            <td>{{item.address.city}}</td>
+            <td>{{item.address.zipCode}}</td>
+            <td>{{item.customer.mobile}} {{item.customer.phone}}</td>
         </tr>
     </ng-template>
 </p-table>

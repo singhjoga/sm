@@ -1,0 +1,25 @@
+
+<ng-container [formGroup]="formGroup">
+<div class="card">
+  <div class="formgrid grid">
+    <div class="field col-12 md:col-4">
+      <input-control [controller]="this" [controlName]="FIELD_ZIP_CODE"></input-control>
+    </div>
+    <div class="field col-12 md:col-4">
+      <input-control [controller]="this" [controlName]="FIELD_STATE"></input-control>
+    </div>
+    <div class="field col-12 md:col-4">
+      <input-control [controller]="this" [controlName]="FIELD_CITY"></input-control>
+    </div>
+    <div class="field col-12">
+      <input-control [controller]="this" [controlName]="FIELD_STREET"></input-control>
+    </div>
+    <div class="field col-12 md:col-6">
+      <input-control [controller]="this" [controlName]="FIELD_HNO"></input-control>
+    </div>
+    <div class="field col-12 md:col-6">
+      <input-control [controller]="this" [controlName]="FIELD_AREA"></input-control>
+    </div>
+  </div>
+</div>
+</ng-container>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.Resources;
+import com.spydermama.api.base.ApplicationObjects;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseController;
@@ -27,9 +27,9 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = Resources.SystemProperties)
+@Authorization(resource = ApplicationObjects.SystemProperties)
 @RequestMapping({"/api/v1/system"})
-@Api(tags = {Resources.SystemProperties})
+@Api(tags = {ApplicationObjects.SystemProperties})
 public class SystemController extends BaseController{
 	@Autowired
 	private LanguageService langService;

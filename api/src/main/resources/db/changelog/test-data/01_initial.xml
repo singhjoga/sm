@@ -19,18 +19,34 @@
 	        <column  header="firstName" name="FIRST_NAME" type="STRING"/>   
 	        <column  header="lastName" name="LAST_NAME" type="STRING"/>   
 	        <column  header="email" name="EMAIL" type="STRING"/>   
+	        <column  header="mobile" name="MOBILE" type="STRING"/>   
+	        <column  header="phone" name="PHONE" type="STRING"/>
+	    </loadUpdateData> 
+    </changeSet>
+	<changeSet id="01.02" author="jogasingh" context="tst">
+		<loadUpdateData  
+	            encoding="UTF-8"  
+	            file="customers-addresses.csv"  
+	            primaryKey="id"  
+	            quotchar="'"  
+	            relativeToChangelogFile="true"    
+	            separator=";"  
+	            tableName="ADDR">  
+	        <column  header="id" name="id" type="STRING"/>  
+	        <column  header="objtype" name="OBJ_TYPE" type="STRING"/>  
+	        <column  header="objid" name="OBJ_ID" type="STRING"/>  
 	        <column  header="street" name="STREET" type="STRING"/>   
 	        <column  header="hno" name="HNO" type="STRING"/>   
 	        <column  header="city" name="CITY" type="STRING"/>   
 	        <column  header="area" name="AREA" type="STRING"/>   
 	        <column  header="zipCode" name="ZIP" type="STRING"/>   
-	        <column  header="mobile" name="MOBILE" type="STRING"/>   
-	        <column  header="phone" name="PHONE" type="STRING"/>
 	        <column  header="state" name="STATE" type="STRING"/>
-	        <column  header="countryId" name="COUNTRY_CODE" type="STRING"/>     
+	        <column  header="countryId" name="COUNTRY_CODE" type="STRING"/>
+	        <column  header="isdefault" name="IS_DEFAULT" type="BOOLEAN"/>   
 	    </loadUpdateData> 
     </changeSet>
-    <changeSet id="01.02" author="jogasingh" context="tst">
+
+    <changeSet id="01.03" author="jogasingh" context="tst">
 		<loadUpdateData  
 	            encoding="UTF-8"  
 	            file="system-prop.csv"  

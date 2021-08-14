@@ -6,8 +6,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {BaseService} from './base-service';
 export abstract class CrudService< T extends AbstractResource, ID> extends BaseService{
-    http: HttpClientService;
-    snackBar: SnackbarService
+    public http: HttpClientService;
+    public snackBar: SnackbarService
     constructor(http: HttpClientService, sb: SnackbarService) {
         super();
         this.http=http;

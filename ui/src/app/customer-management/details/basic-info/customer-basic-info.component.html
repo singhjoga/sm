@@ -1,0 +1,33 @@
+
+<ng-container [formGroup]="formGroup">
+  <div class="card">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_FIRST_NAME"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_LAST_NAME"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_EMAIL"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_MOBILE"></input-control>
+      </div>
+      <div class="field col-12 md:col-4">
+        <input-control [controller]="this" [controlName]="FIELD_PHONE"></input-control>
+      </div>
+      <div class="field col-6 md:col-4">
+        <dropdown-control [controller]="this" [controlName]="FIELD_LANGUAGE_ID" [formControlName]="FIELD_LANGUAGE_ID" placeholder="Default language"
+          [options]="languages" optionLabelField="localName" optionValueField="id"></dropdown-control>
+
+      </div>
+      <div class="field col-6 md:col-2">
+
+      </div>
+      <div class="col-12 md:col-6" styleClass="p-field-checkbox">
+        <checkbox-control [controller]="this" [controlName]="FIELD_IS_DISABLED"></checkbox-control>
+      </div>
+    </div>
+  </div>
+</ng-container>

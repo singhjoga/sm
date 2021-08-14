@@ -6,6 +6,8 @@ import { PrimengModule } from '../shared/primeng.module';
 import { CustomerManagementComponent} from './list/customer-management.component'
 import { CustomerDetailsComponent} from './details/customer-details.component'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CustomerBasicInfoComponent } from '@app/customer-management/details/basic-info/customer-basic-info.component';
+import { SharedModule } from '@app/shared/shared.module';
 //import {TranslateModule} from '@ngx-translate/core';
 const routes: Routes = [
   { path: 'customers',  component: CustomerManagementComponent}
@@ -14,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CustomerManagementComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    CustomerBasicInfoComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +25,7 @@ const routes: Routes = [
     CoreModule,
     PrimengModule,
     FlexLayoutModule,
+    SharedModule
     //TranslateModule
   ],
   exports: [

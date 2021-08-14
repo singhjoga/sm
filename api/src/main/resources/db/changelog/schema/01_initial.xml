@@ -135,15 +135,6 @@
             <column name="EMAIL" type="VARCHAR2(500 BYTE)">
             	<constraints unique="true" uniqueConstraintName="CUST_EMAIL_UK"/>
             </column>
-            <column name="COUNTRY_CODE" type="VARCHAR2(20 BYTE)">
-                <constraints foreignKeyName="CUST_FK1" referencedTableName="COUNTRY" referencedColumnNames="CODE"/>
-            </column>
-            <column name="ZIP" type="VARCHAR2(100 BYTE)"/>
-            <column name="STREET" type="VARCHAR2(500 BYTE)"/>
-            <column name="HNO" type="VARCHAR2(500 BYTE)"/>
-            <column name="AREA" type="VARCHAR2(1000 BYTE)"/>
-            <column name="CITY" type="VARCHAR2(100 BYTE)"/>
-            <column name="STATE" type="VARCHAR2(100 BYTE)"/>
             <column name="PHONE" type="VARCHAR2(500 BYTE)"/>
             <column name="MOBILE" type="VARCHAR2(500 BYTE)"/>            
             <column name="LANG_CODE" type="VARCHAR2(100 BYTE)">
@@ -169,7 +160,10 @@
             </column>
             <column name="CUST_ID" type="VARCHAR2(100 BYTE)">
                 <constraints foreignKeyName="DHABA_FK1" referencedTableName="CUST" referencedColumnNames="ID"/>
-            </column> 
+            </column>
+            <column name="IS_DISABLED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="CREATE_USER" type="VARCHAR2(50 BYTE)"/>
         </createTable>
     </changeSet>
    <changeSet id="01.09" author="jogasingh">
@@ -316,6 +310,9 @@
             <column name="LONGITUDE" type="DECIMAL(14,9)"/>
             <column name="LATITUDE" type="DECIMAL(14,9)"/>
             <column name="IS_DEFAULT" type="BOOL"/>
+            <column name="IS_DISABLED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="CREATE_DATE" type="TIMESTAMP"/>
+            <column name="CREATE_USER" type="VARCHAR2(50 BYTE)"/>            
         </createTable>
-    </changeSet>    
+    </changeSet>
 </databaseChangeLog>

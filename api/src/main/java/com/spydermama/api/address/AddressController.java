@@ -1,4 +1,4 @@
-package com.spydermama.api.dhaba;
+package com.spydermama.api.address;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = ApplicationObjects.Customers)
-@RequestMapping({"/api/v1/dhabas"})
-@Api(tags = {ApplicationObjects.Customers})
-public class DhabaController extends BaseParentResourceController<Dhaba, String>{
-	private DhabaService service;
+@Authorization(resource = ApplicationObjects.Addresses)
+@RequestMapping({"/api/v1/addresses"})
+@Api(tags = {ApplicationObjects.Addresses})
+public class AddressController extends BaseParentResourceController<Address, String>{
+	private AddressService service;
 	
 	@Autowired
-	public DhabaController(DhabaService service) {
+	public AddressController(AddressService service) {
 		super(service);
 		this.service=service;
 	}
@@ -37,8 +37,8 @@ public class DhabaController extends BaseParentResourceController<Dhaba, String>
 	@JsonView(value = Views.List.class)
 	@ApiOperation( value="Returns all customers")
 	@ResponseBody
-	public ResponseEntity<List<Dhaba>> getHistory() {
-		List<Dhaba> body = service.findAll();
+	public ResponseEntity<List<Address>> getHistory() {
+		List<Address> body = service.findAll();
 		return ResponseEntity.ok(body);
 	}
 }
