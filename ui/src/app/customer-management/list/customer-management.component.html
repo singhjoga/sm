@@ -1,6 +1,6 @@
 <p-toast></p-toast>
-<p-table #dataTable [value]="dataSource.items()" [lazy]="false" (onLazyLoad)="dataSource.lazyLoad($event)"
-    [(selection)]="selection"
+<p-table #dataTable [value]="dataSource.items()"
+    selectionMode="multiple" [(selection)]="selection" [metaKeySelection]=true
     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,30,50,100]"
     [globalFilterFields]="displayedColumns" (onFilter)="onDataTableFilter()" [paginator]="true" [rows]="10"
     [totalRecords]="dataSource.allData.length" [loading]="dataSource.loading">
@@ -9,8 +9,10 @@
         <div class="table-header">
             <span>
                 <button pButton label="Add" class="p-button-outlined" icon="pi pi-plus" (click)="onAdd()"></button>
-                <button pButton label="Edit" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-pencil" (click)="onEdit()"
+                <button pButton label="Edit" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-file-o" (click)="onEdit()"
                     [disabled]="selection.length != 1"></button>
+                <button pButton label="View" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-file-o" (click)="onView()"
+                [disabled]="selection.length != 1"></button>
                 <button pButton label="Delete" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-times" (click)="onDelete()"
                     [disabled]="selection.length==0"></button>
                 <button pButton label="Refresh" style="margin-left: 2rem;" class="p-button-outlined" icon="pi pi-refresh" (click)="dataSource.refresh()"
@@ -30,9 +32,11 @@
 
     <ng-template pTemplate="header">
         <tr>
+            <!--
             <th style="width: 1rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
+            -->
             <th pSortableColumn="firstName">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     First Name
@@ -82,19 +86,20 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-item>
-        <tr>
-            <td>
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="item" [pSelectableRowIndex]="rowIndex" (dblclick)="onView(item)">
+      <!--      <td>
                 <p-tableCheckbox [value]="item"></p-tableCheckbox>
             </td>
+            -->
             <td>{{item.customer.firstName}}</td>
             <td>{{item.customer.lastName}}</td>
             <td>{{item.customer.email}}</td>
-            <td>{{item.address.street}} {{item.address.houseNo}}</td>
-            <td>{{item.address.area}}</td>
-            <td>{{item.address.city}}</td>
-            <td>{{item.address.zipCode}}</td>
-            <td>{{item.customer.mobile}} {{item.customer.phone}}</td>
+            <td>{{item.address?.street}} {{item.address?.houseNo}}</td>
+            <td>{{item.address?.area}}</td>
+            <td>{{item.address?.city}}</td>
+            <td>{{item.address?.zipCode}}</td>
+            <td>{{item.customer?.mobile}} {{item.customer?.phone}}</td>
         </tr>
     </ng-template>
 </p-table>

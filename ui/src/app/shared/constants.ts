@@ -13,4 +13,10 @@ export class Constants {
     readonly CUSTOMER_DETAILS="customerDetails";
     readonly CUSTOMER_LIST="customerList";
     readonly DIALOG_CLOSE="close";
+    readonly ADDRESS_DETAILS="addressDetails";
+    readonly ADDRESS_LIST="addressList";
+    readonly OBJECT_TYPE_CUSTOMER_CODE="cust";
+    readonly OBJECT_TYPE_CUSTOMER="customer";
+    readonly OBJECT_TYPE_ADDRESS_CODE="addr";
+    readonly OBJECT_TYPE_ADDRESS="address";
 }

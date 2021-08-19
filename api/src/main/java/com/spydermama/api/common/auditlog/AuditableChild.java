@@ -1,9 +1,9 @@
-package com.spydermama.api.common.changehistory;
+package com.spydermama.api.common.auditlog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.spydermama.api.common.domain.Resource;
+import com.spydermama.api.common.domain.AppObect;
 
-public interface AuditableChild<PARENT_ID> extends Resource{
+public interface AuditableChild<PARENT_ID> extends AppObect{
 	@JsonIgnore
 	String getName();
 	@JsonIgnore

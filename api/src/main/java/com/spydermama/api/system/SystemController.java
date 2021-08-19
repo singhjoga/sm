@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.ApplicationObjects;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseController;
@@ -27,9 +28,9 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = ApplicationObjects.SystemProperties)
+@Authorization(resource = AppObjects.SystemProperties)
 @RequestMapping({"/api/v1/system"})
-@Api(tags = {ApplicationObjects.SystemProperties})
+@Api(tags = {AppObjects.SystemProperties})
 public class SystemController extends BaseController{
 	@Autowired
 	private LanguageService langService;
@@ -46,7 +47,7 @@ public class SystemController extends BaseController{
 	@ApiOperation( value="Returns all supported languages")
 	@ResponseBody
 	public ResponseEntity<List<Language>> getLanguages() {
-		List<Language> body = langService.findAll();
+		List<Language> body = langService.findAllByIsDisabled(false);
 		return ResponseEntity.ok(body);
 	}
 	@RequestMapping(method = RequestMethod.GET,value = "/countries")
@@ -56,6 +57,16 @@ public class SystemController extends BaseController{
 	@ResponseBody
 	public ResponseEntity<List<CountryView>> getCountries() {
 		List<CountryView> body = countryService.findAllByLanguage(getUserLanguage());
+		return ResponseEntity.ok(body);
+	}
+	@RequestMapping(method = RequestMethod.GET,value = "/countries/{id}")
+	@Authorization(action = Actions.Crud.View)
+	@JsonView(value = Views.List.class)
+	@ApiOperation( value="Returns list of countries")
+	@ResponseBody
+	public ResponseEntity<Country> getCountry(
+			@PathVariable String id) {
+		Country body = countryService.findById(id);
 		return ResponseEntity.ok(body);
 	}
 	@RequestMapping(method = RequestMethod.GET,value = "/properties")

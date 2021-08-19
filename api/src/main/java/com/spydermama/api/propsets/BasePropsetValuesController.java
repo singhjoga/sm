@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.ApplicationObjects;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseController;
 import com.spydermama.api.common.domain.IdentifiableEntity;
@@ -45,7 +45,7 @@ public abstract class BasePropsetValuesController<T extends IdentifiableEntity<I
 		return ResponseEntity.ok(result);
 	}
 	@RequestMapping(method = RequestMethod.GET,value="/effective")
-	@Authorization(resource=ApplicationObjects.Credentials, action=Actions.Credentials.ViewPassword)
+	@Authorization(resource=AppObjects.Credentials, action=Actions.Credentials.ViewPassword)
 	@ApiOperation(value = "All properties of the given resource after resolving the references")
 	public @ResponseBody ResponseEntity<PropertysetValues> findAllEffective(//
 			@ApiParam(value="ID of the resource",example = "1", required = true) @RequestParam(value = "id", required = true) ID id) {

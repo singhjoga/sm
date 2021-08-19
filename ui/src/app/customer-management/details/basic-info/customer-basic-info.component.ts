@@ -11,6 +11,10 @@ import { Language } from '@app/01_models/Language';
 import { SystemService } from '@app/system/system-service';
 import { AbstractControl } from '@app/core/components/controls/abstract-control';
 import { FormControllerService } from '@app/core/classes/form-controller-service';
+import { ResourceControl } from '@app/core/components/controls/resource-control-interface';
+import { CustomerService } from '@app/customer-management/customer.service';
+import { RefData } from '@app/01_models/RefData';
+import { Settings } from '@app/system/Settings';
 @Component({
   selector: 'customer-basic-info',
   templateUrl: './customer-basic-info.component.html',
@@ -23,7 +27,9 @@ import { FormControllerService } from '@app/core/classes/form-controller-service
     }
   ]
 })
-export class CustomerBasicInfoComponent extends FormConroller<Customer> implements OnInit, ControlValueAccessor {
+export class CustomerBasicInfoComponent extends FormConroller<Customer> implements OnInit, ControlValueAccessor, ResourceControl {
+  @Input() id?: string | undefined;
+  @Input() mode: DialogMode=DialogMode.View;
 
   readonly FIELD_FIRST_NAME = 'firstName';
   readonly FIELD_LAST_NAME = 'lastName';
@@ -31,6 +37,8 @@ export class CustomerBasicInfoComponent extends FormConroller<Customer> implemen
   readonly FIELD_MOBILE = 'mobile';
   readonly FIELD_PHONE = 'phone';
   readonly FIELD_LANGUAGE_ID = 'languageId';
+  readonly FIELD_BIRTH_DATE = 'birthDate';
+  readonly FIELD_SEX_TYPE = 'sexType';
   readonly FIELD_IS_DISABLED = CommonFields.IsDisabled;
   readonly formGroup = this.fb.group({
     [this.FIELD_FIRST_NAME]: [null, [Validators.required]],
@@ -39,26 +47,42 @@ export class CustomerBasicInfoComponent extends FormConroller<Customer> implemen
     [this.FIELD_MOBILE]: [null],
     [this.FIELD_PHONE]: [null],
     [this.FIELD_LANGUAGE_ID]: [null],
+    [this.FIELD_BIRTH_DATE]: [null],
+    [this.FIELD_SEX_TYPE]: [null],
     [this.FIELD_IS_DISABLED]: [false],
   });
   languages: Language[] = [];
+  sexTypes: RefData[] = [];
   obj!: Customer;
   _onChangeCallbak = (_: any) => {};
   constructor(
     private fb: FormBuilder,
     private systemService: SystemService,
-    private formControllerService: FormControllerService
+    service: CustomerService,
+    public settings: Settings
   ) {
-    super("customer-basic-info");
+    super("customer-basic-info", service);
   }
+
 
   ngOnInit(): void {
     this.systemService.getLangues().then(resp => {
       this.languages = resp;
     });
-    this.formGroup.valueChanges.subscribe(change => {
-      this._onChangeCallbak(change);
-    })
+    this.systemService.getSexTypes().then(resp => {
+      this.sexTypes = resp;
+    });  
+
+    if (this._onChangeCallbak) {
+      this.formGroup.valueChanges.subscribe(change => {
+        this._onChangeCallbak(change);
+      })
+    }
+
+    super.init();
+    if (this.getMode() == DialogMode.Add) {
+      this.setDisabled(this.FIELD_IS_DISABLED,true);
+    }
   }
   selectedLanguage(): Language | null {
     var id = this.getValue(this.FIELD_LANGUAGE_ID);
@@ -78,8 +102,11 @@ export class CustomerBasicInfoComponent extends FormConroller<Customer> implemen
   public newObj(): Customer {
     return new Customer();
   }
-  public mode(): DialogMode {
-    return this.formControllerService.getMode();
+  public getMode(): DialogMode {
+    return this.mode;
+  }
+  public getId(): string {
+    return this.id!;
   }
   writeValue(obj: any): void {
     if (obj) {

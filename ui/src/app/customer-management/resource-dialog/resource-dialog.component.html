@@ -1,0 +1,13 @@
+<form-error [messages]="errorMessages"></form-error>
+<form #frm (ngSubmit)="onSave()">
+  <ng-template resourceDialog></ng-template>
+ <!-- <customer-basic-info #resourceControl [mode]="getMode()" [id]="getId()"></customer-basic-info>
+-->
+  <div class="card flex justify-content-end flex-wrap mt-4">
+    <p-button type="button" styleClass="p-button-sm p-button-outlined p-button-secondary" icon="pi pi-times"
+      label="Cancel" class="" (click)="onClose()"></p-button>
+    <p-button label="Save" icon="pi pi-check" styleClass="p-button-sm" class="ml-3"
+      [disabled]= "isReadOnly()" (click)="onSave()"></p-button>
+  </div>
+
+</form>

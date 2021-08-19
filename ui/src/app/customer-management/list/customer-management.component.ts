@@ -11,6 +11,8 @@ import { Table } from 'primeng/table';
 import { FilterMetadata } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { CustomerWithAddress } from '@app/01_models/CustomerWithAddress';
+import { ResourceDialogComponent } from '@app/customer-management/resource-dialog/resource-dialog.component';
+import { CustomerBasicInfoComponent } from '@app/customer-management/details/basic-info/customer-basic-info.component';
 @Component({
   selector: 'app-customer-management',
   templateUrl: './customer-management.component.html',
@@ -26,7 +28,8 @@ export class CustomerManagementComponent extends ListController<CustomerWithAddr
   clearFilterEnabled=false;
   constructor(private service: CustomerService,
     ngDialogService: DialogService) {
-      super(Constants.inst.CUSTOMER_LIST, new CustomerDataSource(service), CustomerDetailsComponent);
+      super(Constants.inst.OBJECT_TYPE_CUSTOMER, new CustomerDataSource(service), 
+      CustomerBasicInfoComponent, CustomerDetailsComponent);
   }
   ngOnInit() {
     super.onInit();
@@ -86,5 +89,7 @@ export class CustomerManagementComponent extends ListController<CustomerWithAddr
   getId(obj: CustomerWithAddress): string {
     return obj.customer?.id!;
   }
-
+  afterAdd(id:string) {
+     this.view(id);
+  }
 }

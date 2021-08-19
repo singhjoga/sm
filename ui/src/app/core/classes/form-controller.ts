@@ -1,18 +1,20 @@
 import { FormGroup, FormControl, NgForm, AbstractControl } from '@angular/forms';
 import { AbstractResource } from '@app/01_models/AbstractResource';
 import { ScreenController } from '@app/core/classes/screen-controller';
+import { CrudService } from '@app/core/services/crud-service';
 import { Constants, DialogMode } from '@app/shared/constants';
 import { AbstractValidator } from '../components/validators/abstract-validator';
 import { AppInjector } from '../injector.module';
 export abstract class FormConroller<T extends AbstractResource> extends ScreenController {
   errorMessages: string[] = [];
-
-  constructor(screenName: string) {
+  public obj!: T;
+  constructor(screenName: string, public service: CrudService<T, string>) {
     super(screenName);
   }
   public abstract getFormGroup(): FormGroup;
   public abstract newObj(): T;
-  public abstract mode(): DialogMode;
+  public abstract getMode(): DialogMode;
+  public abstract getId(): string;
   protected createFormGroup(controls: Object) {
     let config = {};
     for (let key in controls) {
@@ -34,24 +36,45 @@ export abstract class FormConroller<T extends AbstractResource> extends ScreenCo
     }
     return new FormControl(state, validators);
   }
-  protected init(obj: T) {
-    if (this.mode() == DialogMode.Add) {
-      this.model2Form(obj);
+  protected init() {
+    if (this.getMode() == DialogMode.Add) {
+      this.obj = this.newObj();
+      this.model2Form(this.obj);
     } else {
-      this.model2Form(obj);
+      this.service.findById(this.getId()).then(resp => {
+        this.obj = resp;
+        this.model2Form(this.obj);
+      });
     }
   }
+
   getValue(field: string): any {
     return this.getFormGroup().controls[field].value;
+  }
+  setValue(field: string, value:any): void {
+    return this.getFormGroup().controls[field].setValue(value);
+  }
+  setDisabled(field: string, isDisabled:boolean): void {
+    if (isDisabled) {
+      return this.getFormGroup().controls[field].disable();
+    }else{
+      return this.getFormGroup().controls[field].enable();
+    }
+
   }
   model2Form(obj: T) {
     Object.keys(this.getFormGroup().controls).forEach(key => {
       let value: any = obj[key];
       let control: AbstractControl = this.getFormGroup().controls[key];
       if (!(value == undefined || value == null)) {
-        control.setValue(value);
+        if (key.includes('Date')) {
+          control.setValue(new Date(value));
+        }else {
+          control.setValue(value);
+        }
+
       }
-      if (this.mode() == DialogMode.View) {
+      if (this.getMode() == DialogMode.View) {
         control.disable();
       }
     });
@@ -60,25 +83,32 @@ export abstract class FormConroller<T extends AbstractResource> extends ScreenCo
     Object.keys(this.getFormGroup().controls).forEach(key => {
       let control: AbstractControl = this.getFormGroup().controls[key];
       let value: any = control.value;
-      if (value == '') {
+      if (value === '') {
         value = null;
       }
-      if (typeof obj[key] != 'undefined') {
-        obj[key] = value;
-      }
+      obj[key] = value;
     });
   }
+  save(): Promise<any> {
+    this.form2Model(this.obj);
+    if (this.getMode() == DialogMode.Add) {
+      return this.service.add(this.obj);
+    } else {
+      return this.service.update(this.getId(), this.obj);
+    }
+  }
+
   isEdit() {
-    return this.mode() == DialogMode.Edit;
+    return this.getMode() == DialogMode.Edit;
   }
   isAdd() {
-    return this.mode() == DialogMode.Add;
+    return this.getMode() == DialogMode.Add;
   }
   isReadOnly() {
-    return this.mode() == DialogMode.View;
+    return this.getMode() == DialogMode.View;
   }
   modeText() {
-    return DialogMode[this.mode()];
+    return DialogMode[this.getMode()];
   }
 
 }

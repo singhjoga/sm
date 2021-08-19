@@ -8,9 +8,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.OperationGroups;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.EntityReference;
+import com.spydermama.api.common.auditlog.Auditable;
 import com.spydermama.api.common.domain.AbstractResource;
 import com.spydermama.api.system.country.Country;
 
@@ -19,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity(name="ADDR")
 @ApiModel(description = "Addresses")
-public class Address extends AbstractResource<String>{
+public class Address extends AbstractResource<String> implements Auditable<String>{
 	@Column(name="OBJ_TYPE")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)
@@ -92,7 +94,7 @@ public class Address extends AbstractResource<String>{
 
 	@Column(name="IS_DEFAULT")
 	@ApiModelProperty(value = "'true' if the address is default", position = 52,example = "false")
-	@JsonView(value= {Views.Update.class,Views.List.class})
+	@JsonView(value= {Views.Allways.class})
 	private Boolean isDefault;
 	
 	public String getObjectType() {
@@ -189,6 +191,16 @@ public class Address extends AbstractResource<String>{
 
 	public void setIsDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	@Override
+	public String getAppObjectType() {
+		return AppObjects.AddressesCode;
+	}
+
+	@Override
+	public String getName() {
+		return getStreet();
 	}
 
 }

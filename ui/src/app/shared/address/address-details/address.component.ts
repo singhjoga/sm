@@ -4,13 +4,18 @@ import { Address } from '@app/01_models/Address';
 import { FormConroller } from '@app/core/classes/form-controller'; 
 import { FormControllerService } from '@app/core/classes/form-controller-service';
 import { AbstractControl } from '@app/core/components/controls/abstract-control';
-import { DialogMode } from '@app/shared/constants';
+import { ResourceControl } from '@app/core/components/controls/resource-control-interface';
+import { AddressService } from '@app/shared/address/address.service';
+import { Constants, DialogMode } from '@app/shared/constants';
 @Component({
   selector: 'address-info-control',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss'],
 })
-export class AddressInfoControl extends FormConroller<Address> implements OnInit, ControlValueAccessor {
+export class AddressInfoControl extends FormConroller<Address> implements OnInit, ControlValueAccessor, ResourceControl {
+  @Input() id?: string | undefined;
+  @Input() mode!: DialogMode;
+  @Input() data?: any;
 
   readonly FIELD_STREET='street';
   readonly FIELD_HNO='houseNo';
@@ -19,7 +24,7 @@ export class AddressInfoControl extends FormConroller<Address> implements OnInit
   readonly FIELD_STATE='state';
   readonly FIELD_ZIP_CODE='zipCode';
   readonly FIELD_COUNTRY_ID='countryId';
-
+  readonly FIELD_IS_DEFAULT='isDefault';
   readonly formGroup = this.fb.group({
     [this.FIELD_STREET]: [null, [Validators.required]],
     [this.FIELD_HNO]: [null],
@@ -27,33 +32,41 @@ export class AddressInfoControl extends FormConroller<Address> implements OnInit
     [this.FIELD_CITY]: [null],
     [this.FIELD_STATE]: [null],  
     [this.FIELD_COUNTRY_ID]: [null], 
-    [this.FIELD_ZIP_CODE]: [null, [Validators.required]]
+    [this.FIELD_ZIP_CODE]: [null, [Validators.required]],
+    [this.FIELD_IS_DEFAULT]: [false],
   });
 
   constructor(private readonly fb: FormBuilder,
-    private formControllerService: FormControllerService) {
-    super("address");
+    private formControllerService: FormControllerService,
+    service: AddressService) {
+    super(Constants.inst.ADDRESS_LIST, service);
   }
   writeValue(obj: any): void {
-    console.log("Address value: "+obj);
+
   }
   registerOnChange(fn: any): void {
-    console.log("on change");
     this.formGroup.valueChanges.subscribe(fn);
   }
   registerOnTouched(fn: any): void {
 
   }
   ngOnInit(): void {
-    
+    super.init();
   }
   public getFormGroup(): FormGroup {
     return this.formGroup;
   }
   public newObj(): Address {
-    return new Address();
+    var obj = new Address();
+    obj.objectType=this.data.parentObjectType;
+    obj.objectId=this.data.parentObjectId;
+    return obj;
   }
-  public mode(): DialogMode {
-    return this.formControllerService.getMode();
+  public getMode(): DialogMode {
+    return this.mode;
   }
+  public getId(): string {
+   return this.id!;
+  }
+
 }

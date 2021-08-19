@@ -8,9 +8,9 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.OperationGroups;
-import com.spydermama.api.base.ApplicationObjects;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.Views;
-import com.spydermama.api.common.changehistory.Auditable;
+import com.spydermama.api.common.auditlog.Auditable;
 import com.spydermama.api.common.domain.IdentifiableEntity;
 
 import io.swagger.annotations.ApiModel;
@@ -56,8 +56,8 @@ public class Propertyset implements Auditable<Long>,IdentifiableEntity<Long>{
 		this.description = description;
 	}
 	@Override
-	public String getResourceType() {
-		return ApplicationObjects.Propertysets;
+	public String getAppObjectType() {
+		return AppObjects.Propertysets;
 	}
 	
 }

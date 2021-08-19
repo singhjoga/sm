@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.base.ApplicationObjects;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.common.services.BaseCrudService;
 
 @Service
@@ -29,6 +29,6 @@ public class DhabaService extends BaseCrudService<Dhaba, String>{
 
 	@Override
 	protected String getResourceType() {
-		return ApplicationObjects.DhabasCode;
+		return AppObjects.DhabasCode;
 	}
 }

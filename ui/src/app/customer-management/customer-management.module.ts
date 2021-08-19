@@ -8,6 +8,8 @@ import { CustomerDetailsComponent} from './details/customer-details.component'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomerBasicInfoComponent } from '@app/customer-management/details/basic-info/customer-basic-info.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { ResourceDialogComponent } from '@app/customer-management/resource-dialog/resource-dialog.component';
+import { ResourceDialogDirective } from '@app/customer-management/resource-dialog/resource-dialog-directive';
 //import {TranslateModule} from '@ngx-translate/core';
 const routes: Routes = [
   { path: 'customers',  component: CustomerManagementComponent}
@@ -17,7 +19,9 @@ const routes: Routes = [
   declarations: [
     CustomerManagementComponent,
     CustomerDetailsComponent,
-    CustomerBasicInfoComponent
+    CustomerBasicInfoComponent,
+    ResourceDialogComponent,
+    ResourceDialogDirective
   ],
   imports: [
     CommonModule,

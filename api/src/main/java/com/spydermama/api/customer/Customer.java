@@ -1,16 +1,24 @@
 package com.spydermama.api.customer;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.OperationGroups;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.EntityReference;
+import com.spydermama.api.common.annotations.PastDate;
+import com.spydermama.api.common.annotations.SystemReferenceData;
 import com.spydermama.api.common.annotations.UniqueKey;
+import com.spydermama.api.common.auditlog.Auditable;
 import com.spydermama.api.common.domain.AbstractResource;
+import com.spydermama.api.config.config.SystemReferenceDataType;
 import com.spydermama.api.system.language.Language;
 
 import io.swagger.annotations.ApiModel;
@@ -18,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity(name="CUST")
 @ApiModel(description = "Customer profile")
-public class Customer extends AbstractResource<String>{
+public class Customer extends AbstractResource<String> implements Auditable<String>{
 
 	@Column(name="FIRST_NAME")
 	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
@@ -59,8 +67,37 @@ public class Customer extends AbstractResource<String>{
 	@EntityReference(value = Language.class)
 	private String languageId;	
 
+	@Column(name="SEX_TYPE")
+	@ApiModelProperty(value = "Sex type", position = 15, required=false)
+	@JsonView(value= {Views.Allways.class})
+	@SystemReferenceData(value = SystemReferenceDataType.SexType)
+	private String sexType;
+	
+	@Column(name="BIRTH_DATE")
+	@ApiModelProperty(value = "Date of birth", position = 16, required=false)
+	@JsonView(value= {Views.Allways.class})
+	@PastDate(years = 16)
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	private Date birthDate;
+	
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public String getSexType() {
+		return sexType;
+	}
+
+	public void setSexType(String sexType) {
+		this.sexType = sexType;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setFirstName(String firstName) {
@@ -105,6 +142,16 @@ public class Customer extends AbstractResource<String>{
 
 	public void setLanguageId(String languageId) {
 		this.languageId = languageId;
+	}
+
+	@Override
+	public String getAppObjectType() {
+		return AppObjects.CustomersCode;
+	}
+
+	@Override
+	public String getName() {
+		return firstName+" "+lastName;
 	}
 
 }

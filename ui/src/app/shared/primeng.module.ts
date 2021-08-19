@@ -75,6 +75,7 @@ import {DeferModule} from 'primeng/defer';
 import {FocusTrapModule} from 'primeng/focustrap';
 import {MessageService} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
+import {CalendarModule} from 'primeng/calendar';
 const modules: any[] = [  
   LayoutModule,
   ReactiveFormsModule,
@@ -148,7 +149,8 @@ const modules: any[] = [
  SkeletonModule,
  TagModule,
  DeferModule,
- FocusTrapModule, 
+ FocusTrapModule,
+ CalendarModule
 ];
 
 @NgModule({

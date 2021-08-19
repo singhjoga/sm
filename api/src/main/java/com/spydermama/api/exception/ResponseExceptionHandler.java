@@ -39,7 +39,7 @@ public class ResponseExceptionHandler {
 	@ExceptionHandler(IllegalStateException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorResponse handleTechnicalException(IllegalStateException e) {
-		LOG.error(e.getMessage());
+		LOG.error(e.getMessage(),e);
 		return RestResponseBuilder.errorResponse(e.getMessage(), ErrorCodes.INTERNAL_ERROR);
 	}	
 	@ExceptionHandler(AccessDeniedException.class)
@@ -70,7 +70,7 @@ public class ResponseExceptionHandler {
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorResponse handleAccessDenied(IllegalArgumentException e) {
-		LOG.error(e.getMessage());
+		LOG.error(e.getMessage(),e);
 		return RestResponseBuilder.errorResponse(e.getMessage(), ErrorCodes.INTERNAL_ERROR);
 	}
 	@ExceptionHandler(BusinessRulesException.class)

@@ -22,6 +22,7 @@ import { TableFilterDirective } from './directives/table-filter';
 import { TableColumnFilterDirective } from './directives/table-column-filter';
 import { ConfirmationDialogNg } from '@app/core/components/dialogs/confirmation-dialog-ng/confirmation-dialog-ng';
 import { ConfirmationService } from 'primeng/api';
+import { DatePickerControl } from '@app/core/components/controls/datepicker/datepicker-control';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
@@ -35,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TableFilterDirective,
     ConfirmationDialogNg,
     DropdownControl,
-    CheckboxControl
+    CheckboxControl,
+    DatePickerControl
   ],
   imports: [
     PrimengModule,
@@ -66,7 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TableFilterDirective,
     ConfirmationDialogNg,
     DropdownControl,
-    CheckboxControl
+    CheckboxControl,
+    DatePickerControl
   ],
   providers: [
     KeycloakService,

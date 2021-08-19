@@ -29,7 +29,8 @@ public class RefDataService extends BaseEntityService<RefData, String>{
 	}
 
 	public List<RefDataValue> findByReferenceType(String typeCode, String langCode) {
-		return valueRepo.findByTypeCode(typeCode, getApplicableLanguage(langCode));
+		String applicableLangCode=getApplicableLanguage(langCode);
+		return valueRepo.findByTypeCode(typeCode, applicableLangCode);
 	}
 	
 }

@@ -17,58 +17,27 @@ import { ErrorResponse } from '@app/01_models/RestResponse';
   styleUrls: ['./customer-details.component.scss'],
   viewProviders:[FormControllerService]
 })
-export class CustomerDetailsComponent extends FormDialogConroller<Customer> implements OnInit{
-  readonly FIELD_BASIC_INFO='basicInfo';
-  readonly FIELD_ADDRESS='address';
-  readonly formGroup = this.createFormGroup({
-    [this.FIELD_BASIC_INFO]: [null],
-    [this.FIELD_ADDRESS]: [null],
-  });
+export class CustomerDetailsComponent implements OnInit{
+
   constructor(
     @Inject(LOCALE_ID) private locale: string,
-    service: CustomerService,
-    dialogRef: DynamicDialogRef,
-    config: DynamicDialogConfig,
-    private systemService: SystemService,
-    private controllerService: FormControllerService
+    private dialogRef: DynamicDialogRef,
+    private config: DynamicDialogConfig,
+
   ) {
-    super(Constants.inst.CUSTOMER_DETAILS, config, service, dialogRef);
-    controllerService.setMode(config.data.mode);
-  }
-  getFormGroup(): FormGroup {
-    return this.formGroup;
+
   }
 
   ngOnInit(): void {
 
-    if (this.mode()==DialogMode.Add) {
-     // this.getFormGroup().controls[this.FIELD_IS_DISABLED].disable();
-    }
-    //super.init();
-    if (this.mode() == DialogMode.Add) {
-      this.obj = this.newObj();
-      this.model2Form(this.obj);
-    } else {
-      this.service.findById(this.id()).then(resp => {
-        this.obj = resp;
-        this.formGroup.controls[this.FIELD_BASIC_INFO].setValue(this.obj);
-      });
-    }
   }
-  onSave() {
-    //this.form2Model(this.obj);
-    this.obj = this.formGroup.controls[this.FIELD_BASIC_INFO].value;
-
-    this.save().then(result => {
-      this.snackbar.showSuccess(this.getMessageText('save-success'));
-      this.dialogRef.close(result);
-    },
-      (error: ErrorResponse) => {
-        this.errorMessages = this.getApiErrorAsString(error);
-      }
-    );
+  getId():string {
+    return this.config.data.id;
   }
-  public newObj(): Customer {
-    return new Customer();
+  getMode():DialogMode {
+    return this.config.data.mode;
+  }
+  onClose() {
+    this.dialogRef.close();
   }
 }

@@ -58,6 +58,12 @@ public class CountryView{
 	@EntityReference(value = Language.class)
 	private String defaultLanguageId;
 
+	@Column(name="DATE_FORMAT")
+	@ApiModelProperty(value = "Date format for UI", position = 4, required=true)
+	@NotNull(groups=OperationGroups.Add.class)
+	@JsonView(value= {Views.Allways.class})
+	private String dateFormat;
+	
 	public String getCountryId() {
 		return countryId;
 	}
@@ -96,6 +102,14 @@ public class CountryView{
 
 	public void setDefaultLanguageId(String defaultLanguageId) {
 		this.defaultLanguageId = defaultLanguageId;
+	}
+
+	public String getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
 	}
 
 }

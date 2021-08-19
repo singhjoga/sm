@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.Actions;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.Authorization;
-import com.spydermama.api.common.changehistory.ChangeHistory;
+import com.spydermama.api.common.auditlog.AuditLog;
 import com.spydermama.api.common.domain.IdentifiableEntity;
 import com.spydermama.api.common.services.BaseCrudService;
 
@@ -32,8 +32,8 @@ public abstract class BaseParentResourceController<T extends IdentifiableEntity<
 	@JsonView(value = Views.List.class)
 	@ApiOperation( value="Returns the change history for given resource id")
 	@ResponseBody
-	public ResponseEntity<List<ChangeHistory>> getHistory(@PathVariable ID id) {
-		List<ChangeHistory> body = service.getHistory(id);
+	public ResponseEntity<List<AuditLog>> getHistory(@PathVariable ID id) {
+		List<AuditLog> body = service.getHistory(id);
 		return ResponseEntity.ok(body);
 	}
 }

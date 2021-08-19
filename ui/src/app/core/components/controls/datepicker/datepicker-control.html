@@ -1,0 +1,5 @@
+<label [for]="controlName">{{label()}}<span *ngIf="required" style="color:red">*</span></label><br>
+<p-calendar [formControlName]="controlName" [monthNavigator]="true" [yearNavigator]="true"
+    [inputId]="controlName" [showIcon]="true" [yearRange]="yearRange" [dateFormat]="dateFormat">
+</p-calendar>
+<small style="color:red">{{errorMessage}}</small>

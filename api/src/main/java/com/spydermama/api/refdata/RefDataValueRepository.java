@@ -8,7 +8,8 @@ import com.spydermama.api.common.repos.EntityRepository;
 
 
 public interface RefDataValueRepository extends EntityRepository<RefDataValue, RefDataValueId>{
-	String QUERY1="SELECT * FROM REF_DATA_VAL WHERE CODE IN (SELECT CODE FROM REF_DATA WHERE TYPE_CODE=?1 AND LANG_CODE=?2 AND IS_DISABLED=0) ORDER BY VALUE";
+	String QUERY1="SELECT v.* FROM REF_DATA_VAL v INNER JOIN REF_DATA d ON v.CODE=d.CODE AND d.IS_DISABLED=0 AND d.TYPE_CODE=?1"
+			+ " WHERE  v.LANG_CODE=?2 ORDER BY d.DISPLAY_ORDER";
 	@Query(value = QUERY1, nativeQuery = true)
 	public List<RefDataValue> findByTypeCode(String typeCode, String langCode);
 }

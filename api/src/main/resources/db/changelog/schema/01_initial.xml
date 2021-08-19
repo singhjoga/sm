@@ -51,6 +51,7 @@
                 <constraints foreignKeyName="REF_DATA_FK1"	references="REF_DATA(CODE)"/> 
             </column>
             <column name="IS_DISABLED" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="DISPLAY_ORDER" type="INT" defaultValueNumeric ="0"/>
         </createTable>
         <createIndex indexName="REF_DATA_IDX1" tableName="REF_DATA">
         	<column name="TYPE_CODE"/>
@@ -68,6 +69,7 @@
             </column>
             <column name="ENG_NAME" type="VARCHAR2(100 BYTE)"/>
             <column name="LOCAL_NAME" type="VARCHAR2(100 BYTE)"/>
+            <column name="IS_DISABLED" type="BOOLEAN" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
     
@@ -101,7 +103,8 @@
             <column name="ENG_NAME" type="VARCHAR2(500 BYTE)"/>
             <column name="DEF_LANG_CODE" type="VARCHAR2(100 BYTE)">
                 <constraints foreignKeyName="COUNTRY_LANG_FK1" referencedTableName="LANG" referencedColumnNames="CODE"/>
-            </column>            
+            </column>
+            <column name="DATE_FORMAT" type="VARCHAR2(100 BYTE)"/>        
         </createTable>
     </changeSet> 
  	<changeSet id="01.06" author="jogasingh">
@@ -140,6 +143,10 @@
             <column name="LANG_CODE" type="VARCHAR2(100 BYTE)">
                 <constraints foreignKeyName="CUST_FK2" referencedTableName="LANG" referencedColumnNames="CODE"/>
             </column>
+            <column name="SEX_TYPE" type="VARCHAR2(10 BYTE)">
+                <constraints foreignKeyName="CUST_FK3" referencedTableName="REF_DATA" referencedColumnNames="CODE"/>
+            </column>
+             <column name="BIRTH_DATE" type="DATE"/>
              <column name="IS_DISABLED" type="BOOLEAN" defaultValueBoolean="false"/>
              <column name="CREATE_DATE" type="TIMESTAMP"/>
              <column name="CREATE_USER" type="VARCHAR2(50 BYTE)"/>

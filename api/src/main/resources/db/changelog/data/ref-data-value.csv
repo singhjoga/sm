@@ -13,3 +13,8 @@ italian;en;Italian;Italian cuisine
 chinese;en;Chinese;Chinese cuisine
 arabic;en;Arabic;Arabic food
 pizza;en;Pizza;Pizza & Pasta
+sex_type;en;Sex;Sex of a Person
+male;en;Male;Male
+female;en;Female;Female
+sex_other;en;Others;Others
+sex_unknown;en;Not Given;Not Given

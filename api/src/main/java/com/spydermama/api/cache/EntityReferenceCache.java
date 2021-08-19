@@ -16,7 +16,6 @@ import com.spydermama.api.base.Constants;
 import com.spydermama.api.common.annotations.EntityReference;
 import com.spydermama.api.common.annotations.SystemReferenceData;
 import com.spydermama.api.common.annotations.UserReferenceData;
-import com.spydermama.api.common.domain.LookupData;
 import com.spydermama.api.refdata.RefData;
 
 public class EntityReferenceCache {
@@ -32,14 +31,16 @@ public class EntityReferenceCache {
 				Class<?> refEntity = field.getAnnotation(EntityReference.class).value();
 				addEntityRefCache(refEntity, cls, field);
 			}
+			/*
 			fields = FieldUtils.getFieldsListWithAnnotation(cls, UserReferenceData.class);
 			for (Field field: fields) {
 				Class<?> refEntity = RefData.class;
 				addEntityRefCache(refEntity,cls , field);
 			}
+			*/
 			fields = FieldUtils.getFieldsListWithAnnotation(cls, SystemReferenceData.class);
 			for (Field field: fields) {
-				Class<?> refEntity = LookupData.class;
+				Class<?> refEntity = RefData.class;
 				addEntityRefCache(refEntity, cls, field);
 			}
 		}

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.OperationGroups;
 import com.spydermama.api.base.RegEx;
 import com.spydermama.api.base.Views;
+import com.spydermama.api.common.annotations.LifecycleStatus;
 import com.spydermama.api.common.domain.IdentifiableEntity;
 
 import io.swagger.annotations.ApiModel;
@@ -43,6 +44,12 @@ public class Language implements IdentifiableEntity<String>{
 	@JsonView(value= {Views.Allways.class})
 	private String localName;
 
+	@Column(name="IS_DISABLED")
+	@ApiModelProperty(value = "'true' if the entry is disabled i.e. not in use", position = 52,example = "false")
+	@JsonView(value= {Views.Update.class,Views.List.class})
+	@LifecycleStatus	
+	private Boolean isDisabled;	
+	
 	public String getId() {
 		return id;
 	}
@@ -60,6 +67,12 @@ public class Language implements IdentifiableEntity<String>{
 	}
 	public void setLocalName(String localName) {
 		this.localName = localName;
+	}
+	public Boolean getIsDisabled() {
+		return isDisabled;
+	}
+	public void setIsDisabled(Boolean isDisabled) {
+		this.isDisabled = isDisabled;
 	}
 
 }

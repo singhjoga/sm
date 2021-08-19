@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.ApplicationObjects;
+import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseParentResourceController;
@@ -21,9 +22,9 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = ApplicationObjects.Addresses)
+@Authorization(resource = AppObjects.Addresses)
 @RequestMapping({"/api/v1/addresses"})
-@Api(tags = {ApplicationObjects.Addresses})
+@Api(tags = {AppObjects.Addresses})
 public class AddressController extends BaseParentResourceController<Address, String>{
 	private AddressService service;
 	
@@ -35,10 +36,13 @@ public class AddressController extends BaseParentResourceController<Address, Str
 	@RequestMapping(method = RequestMethod.GET)
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all customers")
+	@ApiOperation( value="Returns all addresses for an object and object id")
 	@ResponseBody
-	public ResponseEntity<List<Address>> getHistory() {
-		List<Address> body = service.findAll();
+	public ResponseEntity<List<Address>> findAll(
+			@RequestParam(name = "objectType") String objectType,
+			@RequestParam(name = "objectId") String objectId
+			) {
+		List<Address> body = service.findAllDefault(objectType,objectId);
 		return ResponseEntity.ok(body);
 	}
 }

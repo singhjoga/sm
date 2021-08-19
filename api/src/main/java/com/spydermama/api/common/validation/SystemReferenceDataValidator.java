@@ -6,8 +6,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import com.spydermama.api.common.annotations.SystemReferenceData;
 import com.spydermama.api.common.db.EntityManagerProvider;
-import com.spydermama.api.common.domain.LookupData;
 import com.spydermama.api.config.config.SystemReferenceDataType;
+import com.spydermama.api.refdata.RefData;
 
 public class SystemReferenceDataValidator implements ConstraintValidator<SystemReferenceData, Object>{
 
@@ -24,11 +24,11 @@ public class SystemReferenceDataValidator implements ConstraintValidator<SystemR
 		if (value==null) return true;
 		SystemReferenceDataType type = annotation.value();
 	    EntityManager em = EntityManagerProvider.getEntityManager();
-	    LookupData result=em.find(LookupData.class, value);
+	    RefData result=em.find(RefData.class, value);
 	    if (result==null) {
 	    	return false;
 	    }
-	    return result.getReferenceType().equals(type.name());
+	    return result.getTypeId().equals(type.getCode());
 	}
 
 }

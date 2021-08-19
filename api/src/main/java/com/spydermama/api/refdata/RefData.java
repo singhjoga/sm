@@ -43,6 +43,11 @@ public class RefData implements IdentifiableEntity<String>{
 	@LifecycleStatus	
 	private Boolean isDisabled;
 
+	@Column(name="DISPLAY_ORDER")
+	@ApiModelProperty(value = "Display order", position = 5,example = "0")
+	@JsonView(value= {Views.Update.class,Views.List.class})
+	private Integer displayOrder;
+	
 	public String getId() {
 		return id;
 	}
@@ -61,5 +66,11 @@ public class RefData implements IdentifiableEntity<String>{
 	}
 	public void setIsDisabled(Boolean isDisabled) {
 		this.isDisabled = isDisabled;
+	}
+	public Integer getDisplayOrder() {
+		return displayOrder;
+	}
+	public void setDisplayOrder(Integer displayOrder) {
+		this.displayOrder = displayOrder;
 	}
 }

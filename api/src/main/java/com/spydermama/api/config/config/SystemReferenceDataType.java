@@ -1,11 +1,16 @@
 package com.spydermama.api.config.config;
 
 public enum SystemReferenceDataType {
-	PropertyType, //
-	ComponentStatus, //
-	ReleaseReferenceType, //
-	DbEngine, //
-	UserRefData, //
-	CredentialsProvider, //
-	CredentialsType
+	SexType("sex_type");//
+	
+	private String code;
+
+	private SystemReferenceDataType(String code) {
+		this.code = code;
+	}
+
+	public String getCode() {
+		return code;
+	}
+	
 }

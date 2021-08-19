@@ -3,34 +3,38 @@ import { AbstractResource } from '@app/01_models/AbstractResource';
 import { CrudService } from '@app/core/services/crud-service';
 
 export abstract class AbstractDataSource <T extends AbstractResource>{
-  allData: AbstractResource[]=[];
-  pageData: AbstractResource[] = [];
-  sortedData?: AbstractResource[];
+  allData: T[]=[];
+  pageData: T[] = [];
+  sortedData?: T[];
   loading: boolean=false;
   lastLoadEvent: LazyLoadEvent|undefined;
-  constructor(private service: CrudService<T, string>) {
-    this.refresh();
+  constructor(private config: DataSourceConfig<T>) {
+    //this.refresh();
+  }
+  private service(): CrudService<T, string> {
+    return this.config.service!;
   }
   public delete(id: string):Promise<void> {
-    return this.service.delete(id);
+    return this.service().delete(id);
   }
   public refresh():Promise<void> {
     return new Promise<void>((resolve,reject)=> {
       setTimeout(()=> {
         this.findAll().then(resp => {
           this.allData=resp;
-          if (!this.lastLoadEvent) {
+      /*    if (!this.lastLoadEvent) {
             this.pageData=[];
           }else{
             this.lazyLoad(this.lastLoadEvent);
           }
+          */
           resolve();
         })
       })
     });
   }
   public findAll():Promise<any[]> {
-    return this.service.findAll();
+    return this.service().findAll();
   }
   public findInDataById(id: string):[number, AbstractResource|null] {
     let tableData = this.sortedData == undefined?this.allData:this.sortedData;
@@ -38,7 +42,7 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
     let dataObj;
     for (dataObj of tableData) {
       index++;
-      if (dataObj.id==id) {
+      if (this.getId(dataObj)==id) {
         break;
       }
     }
@@ -50,6 +54,7 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
    // return [pageIndex,dataObj];
     return [index,dataObj];
   }
+
   public pageNoOf(obj: AbstractResource):[number, AbstractResource|null] {
     if (obj.id == undefined || obj.id == null) {
       throw Error('Object id cannot be null or undefined');
@@ -57,12 +62,13 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
     return this.findInDataById(obj.id);
   }
 
-  items(): AbstractResource[] {
+  items(): T[] {
     if (this.allData.length ==0) {
      // this.refresh();
     }
     return this.allData;
   }
+  /*
   lazyLoad(event: LazyLoadEvent) {
     this.pageData = this.getPagedData(this.getSortedData([...this.allData ], event), event);
     this.lastLoadEvent=event;
@@ -88,8 +94,14 @@ export abstract class AbstractDataSource <T extends AbstractResource>{
 
     return [...this.sortedData];
   }
+*/
+  abstract getId(obj:T):string;
 }
 
 function compare(a: string | number, b: string | number, isAsc: boolean): number {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+export interface DataSourceConfig<T extends AbstractResource> {
+  service?: CrudService<T, string>;
 }

@@ -1,8 +1,8 @@
 package com.spydermama.api.common.events;
 
-import com.spydermama.api.common.domain.Resource;
+import com.spydermama.api.common.domain.AppObect;
 
-public class BaseEvent<T extends Resource> {
+public class BaseEvent<T extends AppObect> {
 	private T data;
 	private String resourceType;
 	private String action;

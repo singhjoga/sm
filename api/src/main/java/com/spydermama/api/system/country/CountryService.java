@@ -23,4 +23,8 @@ public class CountryService extends BaseService{
 		LOG.info("Countries in '"+lang+"' language. User language '"+langCode+"'");
 		return repo.findByLangCode(lang);
 	}
+	
+	public Country findById(String id) {
+		return repo.findById(id).orElse(null);
+	}
 }

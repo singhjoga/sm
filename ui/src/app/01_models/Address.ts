@@ -14,4 +14,5 @@ export class Address extends AbstractResource{
   objectType?: string;
   latitude?: number;
   longitude?: number;
+  isDefault?: boolean;
 }

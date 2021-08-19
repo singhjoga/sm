@@ -30,3 +30,4 @@ PrimeNG Issues
 - Dialog header/footer not in template
 - Table Lazy Loading - Sorting and Filtering must be manually
 - Go to page - not easy, calculate the page index +1
+- DataView PrimeFlex support

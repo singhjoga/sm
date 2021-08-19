@@ -48,7 +48,7 @@ public class StaticCache {
 
 	private void loadLanguages() {
 		languages = new HashSet<>();
-		langService.findAll().stream().forEach(e->languages.add(e.getId()));
+		langService.findAllByIsDisabled(false).stream().forEach(e->languages.add(e.getId()));
 	}
 	
 }

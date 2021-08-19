@@ -1,0 +1,55 @@
+<div>
+    <div class="flex flex-row">
+        <div class="flex-grow-1 grid">
+            <ng-container *ngFor="let item of dataSource.items()">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="flex-row">
+                            <span *ngIf="item.isDefault" class="mr-3">
+                                <i class="pi pi-tag address-icon default-address"></i><span class="default-address">default</span>
+                            </span>
+                            <button pButton (click)="onEdit(item)"
+                                class="address-icon p-button-rounded p-button-text p-button-plain"
+                                icon="pi pi-pencil"></button>
+                            <button pButton (click)="onDelete(item)"
+                                class="address-icon p-button-rounded p-button-text p-button-plain"
+                                icon="pi pi-trash"></button>
+                        </div>
+                        {{item.street}} {{item.houseNo}}<br>
+                        {{item.zipCode}} {{item.city}} {{item.area}}<br>
+                        {{item.state}}
+                    </div>
+                </div>
+            </ng-container>
+            <!--
+            <p-dataView [value]="dataSource.items()" layout="grid">
+                <ng-template let-item pTemplate="gridItem">
+                    <div class="flex col-6">
+                        <div class="flex">
+                            <div class="flex">
+                                <span *ngIf="item.isDefault" class="mr-3">
+                                    <i class="pi pi-tag address-icon"></i><span class="default-address">default</span>
+                                </span>
+                                <button pButton (click)="onEdit(item)"
+                                    class="address-icon p-button-rounded p-button-text p-button-plain"
+                                    icon="pi pi-pencil"></button>
+                                <button pButton (click)="onDelete(item)"
+                                    class="address-icon p-button-rounded p-button-text p-button-plain"
+                                    icon="pi pi-trash"></button>
+                            </div>
+                            <div>{{item.street}} {{item.houseNo}}</div>
+                 
+                            {{item.zipCode}} {{item.city}} {{item.area}}<br>
+                            {{item.state}}
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+            -->
+        </div>
+        <div>
+            <button pButton (click)="onAdd()" label="Add"
+                class="address-icon p-button-rounded p-button-text p-button-plain" icon="pi pi-plus"></button>
+        </div>
+    </div>
+</div>

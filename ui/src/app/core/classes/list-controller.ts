@@ -1,31 +1,36 @@
-import { BaseConroller } from "./base-controller";
+
 import { Table } from 'primeng/table';
 import { DialogUtil } from '../components/dialogs/dialog-service';
 import { AppInjector } from '../injector.module';
 import { ScreenController } from "@app/core/classes/screen-controller";
-import { AbstractResource } from "@app/01_models/AbstractResource";
 import { AbstractDataSource } from "@app/core/classes/base-datasource";
 import { Constants, DialogMode } from "@app/shared/constants";
 import { DialogService } from 'primeng/dynamicdialog';
 import { ErrorResponse } from "@app/01_models/RestResponse";
+import { ResourceDialogComponent } from "@app/customer-management/resource-dialog/resource-dialog.component";
 export abstract class ListController<T> extends ScreenController {
     selection: T[] = [];
     dataSource: AbstractDataSource<T>;
-    detailsDialog: any;
+    editDialog: any;
+    viewDialog: any;
     public dialogUtil: DialogUtil;
     public ngDialogService: DialogService
-    constructor(screenName: string, dataSource: AbstractDataSource<T>, detailsDialog: any) {
-        super(screenName);
+    constructor(private objectType: string, dataSource: AbstractDataSource<T>,
+         detailsDialog: any, viewDialog: any) {
+        super(objectType+'List');
         this.dataSource = dataSource;
-        this.detailsDialog = detailsDialog;
+        this.editDialog = detailsDialog;
         this.dialogUtil = AppInjector.get(DialogUtil);
         this.ngDialogService = AppInjector.get(DialogService);
+        this.viewDialog=viewDialog;
     }
     onInit() {
 
     }
     onAfterViewInit(): void {
-
+        this.dataSource.refresh().then(result => {
+            
+        });
     }
     abstract getTable(): Table;
     abstract getId(obj:T):string;
@@ -46,15 +51,20 @@ export abstract class ListController<T> extends ScreenController {
     }
     openDetailsDialog(mode: DialogMode, id?: string) {
         this.ngDialogService
-            .open(this.detailsDialog, {
+            .open(ResourceDialogComponent, {
                 width: '800px',
-                header: this.getTitleOfDialog(mode, Constants.inst.CUSTOMER_DETAILS),
-                data: { mode: mode, id: id }
+                header: this.getTitleOfDialog(mode, this.detailsObject()),
+                data: { mode: mode, id: id, component: this.editDialog, data: this.detailsData()}
             })
             .onClose
             .subscribe(result => {
                 if (result != Constants.inst.DIALOG_CLOSE) {
                     this.refresh(mode, result, id);
+                    if (mode == DialogMode.Add) {
+                        this.afterAdd(result);
+                    }else{
+                        this.afterAdd(id!); 
+                    }
                 }
             })
     }
@@ -80,20 +90,27 @@ export abstract class ListController<T> extends ScreenController {
         var s = this.selection;
         this.openDetailsDialog(DialogMode.Add)
     }
-    onEdit() {
-        if (this.selection.length == 0) {
+    onEdit(obj?: T) {
+        if (!obj && this.selection.length == 0) {
             return;
         }
-        let obj: T = this.selection[0];
-        this.openDetailsDialog(DialogMode.Edit, this.getId(obj));
+        let editObj=obj;
+        if (!editObj) {
+            editObj = this.selection[0];
+        }
+        this.edit(this.getId(editObj));
     }
-    onDelete() {
-        this.askIsDeleteOK(this.selection.length)
+    edit(id:string) {
+        this.openDetailsDialog(DialogMode.Edit, id);
+    }
+    onDelete(obj?: T) {
+        let delObj:T[] = obj?[obj]:this.selection;
+        this.askIsDeleteOK(delObj.length)
             .then(async result => {
                 if (this.dialogUtil.isConfirmationResultYes(result)) {
                     let deletedCount: number = 0;
                     let lastError: ErrorResponse | null = null;
-                    let selection = [...this.selection];
+                    let selection = [...delObj];
                     var i = -1;
                     for (let obj of selection) {
                         i++;
@@ -120,8 +137,34 @@ export abstract class ListController<T> extends ScreenController {
                 }
             });
     }
-    onView(obj: T) {
-        this.openDetailsDialog(DialogMode.View, this.getId(obj));
+    onView(obj?: T) {
+        if (!obj && this.selection.length == 0) {
+            return;
+        }
+        let editObj=obj;
+        if (!editObj) {
+            editObj = this.selection[0];
+        }
+        this.view(this.getId(editObj));
     }
-
+    view(id:string) {
+        this.ngDialogService
+        .open(this.viewDialog, {
+            width: '800px',
+            header: this.getTitleOfDialog(DialogMode.View, this.detailsObject()),
+            data: { mode: DialogMode.View, id: id}
+        })
+    }
+    private detailsObject(): string {
+        return this.objectType+"Details";
+    }
+    detailsData():any {
+        return null;
+    }
+    afterAdd(id:string) {
+     //do something by overwriting it   
+    }
+    afterEdit(id:string) {
+        //do something by overwriting it   
+    }
 }

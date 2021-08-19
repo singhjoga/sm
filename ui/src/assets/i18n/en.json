@@ -25,7 +25,10 @@
     "street": "Street",
     "zipCode": "Zip Code",
     "languageId": "Language",
-    "isDisabled": "Is Disabled?"
+    "isDisabled": "Is Disabled?",
+    "isDefault": "Is Default Address?",
+    "birthDate": "Birth Date",
+    "sexType": "Sex"
   },
   "errors": {
     "required": "Mandatory field",
@@ -39,6 +42,8 @@
   },
   "features": {
     "customerList": "Customer List",
-    "customerDetails": "Customer Details"
+    "customerDetails": "Customer Details",
+    "addressList": "Address List",
+    "addressDetails": "Address Details"
   }
 }

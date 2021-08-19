@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationModule } from './00_navigation/navigation.module';
@@ -12,7 +12,14 @@ import { CustomerManagementModule } from './customer-management/customer-managem
 import { HomeComponent } from './02_home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SystemModule } from '@app/system/system.module';
+import { Settings } from './system/Settings';
+import { Observable } from 'rxjs';
+
 //import { FlexLayoutModule } from '@angular/flex-layout'
+
+function initialize(settings: Settings):() =>Observable<any> {
+  return () =>settings.load();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +39,12 @@ import { SystemModule } from '@app/system/system.module';
     SystemModule
    // FlexLayoutModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initialize,
+    deps: [Settings],
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

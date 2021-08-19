@@ -44,6 +44,12 @@ public class Country implements IdentifiableEntity<String>{
 	@JsonView(value= {Views.Allways.class})
 	private String englishName;
 	
+	@Column(name="DATE_FORMAT")
+	@ApiModelProperty(value = "Date format for UI", position = 4, required=true)
+	@NotNull(groups=OperationGroups.Add.class)
+	@JsonView(value= {Views.Allways.class})
+	private String dateFormat;
+	
 	public String getId() {
 		return id;
 	}
@@ -61,6 +67,12 @@ public class Country implements IdentifiableEntity<String>{
 	}
 	public void setEnglishName(String englishName) {
 		this.englishName = englishName;
+	}
+	public String getDateFormat() {
+		return dateFormat;
+	}
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
 	}
 
 }
