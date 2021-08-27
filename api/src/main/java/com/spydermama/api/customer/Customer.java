@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spydermama.api.system.constants.SystemReferenceDataType;
 import com.spydermama.api.system.language.Language;
 import com.technovator.api.common.annotations.EntityReference;
 import com.technovator.api.common.annotations.PastDate;
@@ -18,6 +17,7 @@ import com.technovator.api.common.annotations.UniqueKey;
 import com.technovator.api.common.auditlog.AuditableMain;
 import com.technovator.api.common.constants.AppObjects;
 import com.technovator.api.common.constants.OperationGroups;
+import com.technovator.api.common.constants.SystemReferenceDataType;
 import com.technovator.api.common.constants.Views;
 import com.technovator.api.common.domain.AbstractResource;
 
