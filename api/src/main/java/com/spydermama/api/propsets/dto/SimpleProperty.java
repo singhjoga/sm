@@ -1,7 +1,7 @@
 package com.spydermama.api.propsets.dto;
 
-import com.spydermama.api.common.properties.PropertyWithValue;
-import com.spydermama.api.common.properties.ReferencedValue;
+import com.technovator.api.common.properties.PropertyWithValue;
+import com.technovator.api.common.properties.ReferencedValue;
 
 public class SimpleProperty extends BaseProperty implements PropertyWithValue, ReferencedValue{
 	private String value;

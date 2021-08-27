@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.base.Views;
-import com.spydermama.api.common.annotations.Authorization;
-import com.spydermama.api.common.controllers.BaseParentResourceController;
+import com.technovator.api.common.annotations.Authorization;
+import com.technovator.api.common.constants.Actions;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.constants.Views;
+import com.technovator.api.common.controllers.BaseParentResourceController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spydermama.api.base.Views;
-import com.spydermama.api.common.properties.PropertyValue;
+import com.technovator.api.common.constants.Views;
+import com.technovator.api.common.properties.PropertyValue;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

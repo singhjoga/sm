@@ -2,7 +2,7 @@ package com.spydermama.api.customer;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.address.Address;
-import com.spydermama.api.base.Views;
+import com.technovator.api.common.constants.Views;
 
 import io.swagger.annotations.ApiModelProperty;
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
-import com.spydermama.api.common.db.EntityManagerProvider;
-import com.spydermama.api.common.db.NativeQueryBuilder;
-import com.spydermama.api.common.repos.EntityRepository;
+import com.technovator.api.common.db.EntityManagerProvider;
+import com.technovator.api.common.db.NativeQueryBuilder;
+import com.technovator.api.common.repos.EntityRepository;
 
 
 public interface CountryRepo extends EntityRepository<Country, String>{

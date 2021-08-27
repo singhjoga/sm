@@ -3,9 +3,9 @@ package com.spydermama.api.propsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.exception.ResourceNotFoundException;
 import com.spydermama.api.propsets.domain.Propertyset;
 import com.spydermama.api.propsets.repository.PropertysetRepository;
+import com.technovator.api.common.exception.ResourceNotFoundException;
 
 @Service
 public class PropertysetService {

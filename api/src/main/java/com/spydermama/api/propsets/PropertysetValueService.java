@@ -11,9 +11,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.common.properties.PropertiesHelper;
-import com.spydermama.api.exception.BadRequestException;
-import com.spydermama.api.exception.ResourceNotFoundException;
 import com.spydermama.api.propsets.domain.PropertysetProp;
 import com.spydermama.api.propsets.domain.PropertysetPropValue;
 import com.spydermama.api.propsets.domain.PropertysetPropValueView;
@@ -25,6 +22,9 @@ import com.spydermama.api.propsets.repository.PropertysetParentRepository;
 import com.spydermama.api.propsets.repository.PropertysetPropRepository;
 import com.spydermama.api.propsets.repository.PropertysetPropValueRepository;
 import com.spydermama.api.propsets.repository.PropertysetPropValueViewRepository;
+import com.technovator.api.common.exception.BadRequestException;
+import com.technovator.api.common.exception.ResourceNotFoundException;
+import com.technovator.api.common.properties.PropertiesHelper;
 
 @Service
 public class PropertysetValueService {

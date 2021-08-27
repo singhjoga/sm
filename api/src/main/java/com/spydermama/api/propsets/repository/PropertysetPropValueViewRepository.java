@@ -2,10 +2,10 @@ package com.spydermama.api.propsets.repository;
 
 import java.util.List;
 
-import com.spydermama.api.common.db.EntityManagerProvider;
-import com.spydermama.api.common.db.NativeQueryBuilder;
-import com.spydermama.api.common.repos.EntityRepository;
 import com.spydermama.api.propsets.domain.PropertysetPropValueView;
+import com.technovator.api.common.db.EntityManagerProvider;
+import com.technovator.api.common.db.NativeQueryBuilder;
+import com.technovator.api.common.repos.EntityRepository;
 
 public interface PropertysetPropValueViewRepository extends EntityRepository<PropertysetPropValueView, Long> {
 	public List<PropertysetPropValueView> findByPropertysetIdAndResourceInstanceId(Long propsetId,String instanceId);

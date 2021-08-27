@@ -10,10 +10,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spydermama.api.base.OperationGroups;
-import com.spydermama.api.base.RegEx;
-import com.spydermama.api.base.Views;
-import com.spydermama.api.common.annotations.LifecycleStatus;
+import com.technovator.api.common.annotations.LifecycleStatus;
+import com.technovator.api.common.constants.OperationGroups;
+import com.technovator.api.common.constants.RegEx;
+import com.technovator.api.common.constants.Views;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

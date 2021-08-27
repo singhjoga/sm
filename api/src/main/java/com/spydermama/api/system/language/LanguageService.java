@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.common.services.BaseEntityService;
+import com.technovator.api.common.services.BaseEntityService;
 
 @Service
 public class LanguageService extends BaseEntityService<Language, String>{

@@ -2,7 +2,7 @@ package com.spydermama.api.system.language;
 
 import java.util.List;
 
-import com.spydermama.api.common.repos.EntityRepository;
+import com.technovator.api.common.repos.EntityRepository;
 
 
 public interface LanguageRepo extends EntityRepository<Language, String>{

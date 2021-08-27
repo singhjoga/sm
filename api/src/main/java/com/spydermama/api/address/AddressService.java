@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.base.Actions;
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.common.auditlog.AuditableMain;
-import com.spydermama.api.common.services.BaseCrudService;
-import com.spydermama.api.exception.BadRequestException;
+import com.technovator.api.common.auditlog.AuditableMain;
+import com.technovator.api.common.constants.Actions;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.exception.BadRequestException;
+import com.technovator.api.common.services.BaseCrudService;
 
 @Service
 public class AddressService extends BaseCrudService<Address, String>{

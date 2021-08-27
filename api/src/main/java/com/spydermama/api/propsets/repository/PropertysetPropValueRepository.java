@@ -2,11 +2,11 @@ package com.spydermama.api.propsets.repository;
 
 import java.util.List;
 
-import com.spydermama.api.common.db.EntityManagerProvider;
-import com.spydermama.api.common.db.NativeQueryBuilder;
-import com.spydermama.api.common.repos.EntityRepository;
 import com.spydermama.api.propsets.domain.PropertysetProp;
 import com.spydermama.api.propsets.domain.PropertysetPropValue;
+import com.technovator.api.common.db.EntityManagerProvider;
+import com.technovator.api.common.db.NativeQueryBuilder;
+import com.technovator.api.common.repos.EntityRepository;
 
 public interface PropertysetPropValueRepository extends EntityRepository<PropertysetPropValue, Long> {
 	List<PropertysetProp> findByPropertyId(Long propsetId);

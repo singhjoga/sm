@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.common.services.BaseService;
+import com.technovator.api.common.services.BaseService;
 
 @Service
 public class CountryService extends BaseService{

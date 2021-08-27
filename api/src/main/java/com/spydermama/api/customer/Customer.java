@@ -9,17 +9,17 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.base.OperationGroups;
-import com.spydermama.api.base.Views;
-import com.spydermama.api.common.annotations.EntityReference;
-import com.spydermama.api.common.annotations.PastDate;
-import com.spydermama.api.common.annotations.SystemReferenceData;
-import com.spydermama.api.common.annotations.UniqueKey;
-import com.spydermama.api.common.auditlog.AuditableMain;
-import com.spydermama.api.common.domain.AbstractResource;
-import com.spydermama.api.config.config.SystemReferenceDataType;
+import com.spydermama.api.system.constants.SystemReferenceDataType;
 import com.spydermama.api.system.language.Language;
+import com.technovator.api.common.annotations.EntityReference;
+import com.technovator.api.common.annotations.PastDate;
+import com.technovator.api.common.annotations.SystemReferenceData;
+import com.technovator.api.common.annotations.UniqueKey;
+import com.technovator.api.common.auditlog.AuditableMain;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.constants.OperationGroups;
+import com.technovator.api.common.constants.Views;
+import com.technovator.api.common.domain.AbstractResource;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

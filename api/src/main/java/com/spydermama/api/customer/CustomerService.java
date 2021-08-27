@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.spydermama.api.address.Address;
 import com.spydermama.api.address.AddressService;
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.common.services.BaseCrudService;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.services.BaseCrudService;
 
 @Service
 public class CustomerService extends BaseCrudService<Customer, String>{

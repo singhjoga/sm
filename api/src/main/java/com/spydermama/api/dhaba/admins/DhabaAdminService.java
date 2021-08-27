@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.common.services.BaseChildEntityService;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.services.BaseChildEntityService;
 
 @Service
 public class DhabaAdminService extends BaseChildEntityService<DhabaAdmin, DhabaAdmin, String>{

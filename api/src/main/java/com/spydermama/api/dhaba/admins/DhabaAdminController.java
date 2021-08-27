@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.common.annotations.Authorization;
-import com.spydermama.api.common.controllers.BaseChildResourceController;
+import com.technovator.api.common.annotations.Authorization;
+import com.technovator.api.common.constants.AppObjects;
+import com.technovator.api.common.controllers.BaseChildResourceController;
 
 import io.swagger.annotations.Api;
 
