@@ -12,7 +12,7 @@ import { SystemService } from '@app/system/system-service';
 import { AbstractControl } from '@app/core/components/controls/abstract-control';
 import { FormControllerService } from '@app/core/classes/form-controller-service';
 import { ResourceControl } from '@app/core/components/controls/resource-control-interface';
-import { CustomerService } from '@app/customer-management/customer.service';
+import { CustomerService } from '@app/features/customer-management/customer.api.service';
 import { RefData } from '@app/01_models/RefData';
 import { Settings } from '@app/system/Settings';
 @Component({

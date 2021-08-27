@@ -15,4 +15,5 @@ public interface AppObjects {
 	public static final String AddressesCode = "addr";
 	public static final String Dhabas = "Dhabas";
 	public static final String DhabasCode = "dhaba";
+	public static final String DhabasAdminCode = "dhabaadmin";
 }

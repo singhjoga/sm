@@ -1,0 +1,17 @@
+id;name;taxno;email;phone;self;pickup;dinein;3rdparty
+100;Amar Restaurant;X123;cust01@tc.com;069xxx;1;0;1;1
+101;Suresh  Restaurant;X124;cust02@tc.com;069xxx;0;1;0;0
+102;Bunty  Restaurant;X125;cust03@tc.com;069xxx;1;0;1;1
+103;Haman  Restaurant;X126;cust04@tc.com;069xxx;0;1;0;0
+104;Jashan  Restaurant;X127;cust05@tc.com;069xxx;1;0;1;1
+105;Neelam  Restaurant;X128;cust06@tc.com;069xxx;0;1;0;0
+106;Hargun  Restaurant;X129;cust07@tc.com;069xxx;1;0;1;1
+107;Gurjot  Restaurant;X130;cust08@tc.com;069xxx;0;1;0;0
+108;Gursimran  Restaurant;X131;cust09@tc.com;069xxx;1;0;1;1
+109;Sanjot  Restaurant;X132;cust10@tc.com;069xxx;0;1;0;0
+110;Laadi  Restaurant;X133;cust11@tc.com;069xxx;1;0;1;1
+111;Kuldip  Restaurant;X134;cust12@tc.com;069xxx;0;1;0;0
+112;Karamjit  Restaurant;X135;cust13@tc.com;069xxx;1;0;1;1
+113;Major Singh  Restaurant;X136;cust14@tc.com;069xxx;0;1;0;0
+114;Kala Singh  Restaurant;X137;cust15@tc.com;069xxx;1;0;1;1
+115;Jass  Restaurant;X138;cust16@tc.com;069xxx;0;1;0;0

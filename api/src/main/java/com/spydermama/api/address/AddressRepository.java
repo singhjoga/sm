@@ -7,5 +7,6 @@ import com.spydermama.api.common.repos.EntityRepository;
 
 public interface AddressRepository extends EntityRepository<Address, String>{
 	List<Address> findAllByObjectTypeAndIsDefault(String objectType, Boolean isDefault);
+	List<Address> findAllByObjectType(String objectType);
 	List<Address> findAllByObjectTypeAndObjectId(String objectType, String objectId);
 }

@@ -16,7 +16,7 @@ import com.spydermama.api.common.annotations.EntityReference;
 import com.spydermama.api.common.annotations.PastDate;
 import com.spydermama.api.common.annotations.SystemReferenceData;
 import com.spydermama.api.common.annotations.UniqueKey;
-import com.spydermama.api.common.auditlog.Auditable;
+import com.spydermama.api.common.auditlog.AuditableMain;
 import com.spydermama.api.common.domain.AbstractResource;
 import com.spydermama.api.config.config.SystemReferenceDataType;
 import com.spydermama.api.system.language.Language;
@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity(name="CUST")
 @ApiModel(description = "Customer profile")
-public class Customer extends AbstractResource<String> implements Auditable<String>{
+public class Customer extends AbstractResource<String> implements AuditableMain<String>{
 
 	@Column(name="FIRST_NAME")
 	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)

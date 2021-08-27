@@ -1,35 +1,27 @@
 import { AfterViewInit, Component, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
-import { CustomerDataSource } from '../customer-datasource';
 import { Customer } from '@app/01_models/Customer';
-import { CustomerService } from '../customer.service';
-import { Constants, DialogMode } from '@app/shared/constants';
 import { DialogService} from 'primeng/dynamicdialog';
-import { CustomerDetailsComponent } from '../details/customer-details.component';
 import { ListController } from '@app/core/classes/list-controller';
-import { ErrorResponse } from '@app/01_models/RestResponse';
 import { Table } from 'primeng/table';
 import { FilterMetadata } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { CustomerWithAddress } from '@app/01_models/CustomerWithAddress';
-import { ResourceDialogComponent } from '@app/customer-management/resource-dialog/resource-dialog.component';
-import { CustomerBasicInfoComponent } from '@app/customer-management/details/basic-info/customer-basic-info.component';
+import { CustomerUiService } from '../customer.ui.service';
 @Component({
   selector: 'app-customer-management',
   templateUrl: './customer-management.component.html',
   styleUrls: ['./customer-management.component.scss'],
   providers: [DialogService, ConfirmationService]
 })
-export class CustomerManagementComponent extends ListController<CustomerWithAddress> implements OnInit, AfterViewInit {
+export class CustomerManagementComponent extends ListController<Customer, CustomerWithAddress> implements OnInit, AfterViewInit {
 
   displayedColumns = ['firstName', 'lastName', 'email', 'address', 'area', 'city', 'zipCode', 'contactInfo'];
   @ViewChild('dataTable') 
   dataTable!: Table;
   globalFilter: string='';
   clearFilterEnabled=false;
-  constructor(private service: CustomerService,
-    ngDialogService: DialogService) {
-      super(Constants.inst.OBJECT_TYPE_CUSTOMER, new CustomerDataSource(service), 
-      CustomerBasicInfoComponent, CustomerDetailsComponent);
+  constructor(uiService: CustomerUiService) {
+      super(uiService);
   }
   ngOnInit() {
     super.onInit();
@@ -37,7 +29,6 @@ export class CustomerManagementComponent extends ListController<CustomerWithAddr
   ngAfterViewInit(): void {
     super.onAfterViewInit();
   }
- 
 
   clearFilters() {
   //  this.hasActiveFilter();
@@ -90,6 +81,8 @@ export class CustomerManagementComponent extends ListController<CustomerWithAddr
     return obj.customer?.id!;
   }
   afterAdd(id:string) {
-     this.view(id);
+     this.view(id).onClose.subscribe(result => {
+       this.refresh(id);
+     });
   }
 }

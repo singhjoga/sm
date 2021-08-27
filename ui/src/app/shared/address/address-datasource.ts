@@ -1,6 +1,6 @@
 import { AbstractDataSource, DataSourceConfig } from '@app/core/classes/base-datasource';
 import { Address } from '@app/01_models/Address';
-import { AddressService } from '@app/shared/address/address.service';
+import { AddressService } from '@app/shared/address/address.api.service';
 
 export class AddressDataSource extends AbstractDataSource<Address>{
   constructor(public addressDataConfig: AddressDataSourceConfig) {

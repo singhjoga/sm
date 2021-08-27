@@ -12,7 +12,7 @@ import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.OperationGroups;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.EntityReference;
-import com.spydermama.api.common.auditlog.Auditable;
+import com.spydermama.api.common.auditlog.AuditableMain;
 import com.spydermama.api.common.domain.AbstractResource;
 import com.spydermama.api.system.country.Country;
 
@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity(name="ADDR")
 @ApiModel(description = "Addresses")
-public class Address extends AbstractResource<String> implements Auditable<String>{
+public class Address extends AbstractResource<String> implements AuditableMain<String>{
 	@Column(name="OBJ_TYPE")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)

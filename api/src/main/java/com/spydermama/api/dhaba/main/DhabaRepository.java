@@ -1,4 +1,4 @@
-package com.spydermama.api.dhaba;
+package com.spydermama.api.dhaba.main;
 
 import java.util.List;
 
@@ -6,5 +6,6 @@ import com.spydermama.api.common.repos.EntityRepository;
 
 
 public interface DhabaRepository extends EntityRepository<Dhaba, String>{
-	List<Dhaba> findAllByIsDisabledOrderByFirstName(Boolean isDisabled);
+	List<Dhaba> findAllByIsDisabledOrderByName(Boolean isDisabled);
+	List<Dhaba> findAllByOrderByName();
 }

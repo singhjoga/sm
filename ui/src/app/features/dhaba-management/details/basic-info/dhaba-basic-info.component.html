@@ -1,0 +1,38 @@
+<ng-container [formGroup]="formGroup">
+  <div class="card">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_NAME"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_TAXNO"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_EMAIL"></input-control>
+      </div>
+      <div class="field col-12 md:col-6">
+        <input-control [controller]="this" [controlName]="FIELD_PHONE"></input-control>
+      </div>
+      <p-fieldset class="col-12" [legend]="getLabelText('deliveryOptions')">
+        <div class="formgrid grid">
+        <div class="field col-12 md:col-6" styleClass="p-field-checkbox">
+          <checkbox-control [controller]="this" [controlName]="FIELD_DELIVERY_SELF"></checkbox-control>
+        </div>
+        <div class="field col-12 md:col-6" styleClass="p-field-checkbox">
+          <checkbox-control [controller]="this" [controlName]="FIELD_DELIVERY_PICKUP"></checkbox-control>
+        </div>
+        <div class="field col-12 md:col-6" styleClass="p-field-checkbox">
+          <checkbox-control [controller]="this" [controlName]="FIELD_DELIVERY_DINEIN"></checkbox-control>
+        </div>
+        <div class="field col-12 md:col-6" styleClass="p-field-checkbox">
+          <checkbox-control [controller]="this" [controlName]="FIELD_DELIVERY_3RDPARTY"></checkbox-control>
+        </div>
+      </div>
+      </p-fieldset>
+
+      <div class="col-12 md:col-6" styleClass="p-field-checkbox">
+        <checkbox-control [controller]="this" [controlName]="FIELD_IS_DISABLED"></checkbox-control>
+      </div>
+    </div>
+  </div>
+</ng-container>

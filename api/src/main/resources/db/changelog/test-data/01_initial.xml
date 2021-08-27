@@ -26,7 +26,27 @@
 	<changeSet id="01.02" author="jogasingh" context="tst">
 		<loadUpdateData  
 	            encoding="UTF-8"  
-	            file="customers-addresses.csv"  
+	            file="dhabas.csv"  
+	            primaryKey="id"  
+	            quotchar="'"  
+	            relativeToChangelogFile="true"    
+	            separator=";"  
+	            tableName="DHABA">  
+	        <column  header="id" name="id" type="STRING"/>  
+	        <column  header="name" name="NAME" type="STRING"/>   
+	        <column  header="taxno" name="TAX_NO" type="STRING"/>   
+	        <column  header="email" name="ORDER_EMAIL" type="STRING"/>   
+	        <column  header="phone" name="ORDER_PHONE" type="STRING"/>   
+	        <column  header="self" name="DELIVERY_SELF" type="BOOLEAN"/>
+	        <column  header="pickup" name="DELIVERY_PICKUP" type="BOOLEAN"/>
+	        <column  header="dinein" name="DELIVERY_DINEIN" type="BOOLEAN"/>
+	        <column  header="3rdparty" name="DELIVERY_3RDPARTY" type="BOOLEAN"/>
+	    </loadUpdateData> 
+    </changeSet>
+   	<changeSet id="01.03" author="jogasingh" context="tst">
+		<loadUpdateData  
+	            encoding="UTF-8"  
+	            file="addresses.csv"  
 	            primaryKey="id"  
 	            quotchar="'"  
 	            relativeToChangelogFile="true"    
@@ -46,7 +66,7 @@
 	    </loadUpdateData> 
     </changeSet>
 
-    <changeSet id="01.03" author="jogasingh" context="tst">
+    <changeSet id="01.04" author="jogasingh" context="tst">
 		<loadUpdateData  
 	            encoding="UTF-8"  
 	            file="system-prop.csv"  

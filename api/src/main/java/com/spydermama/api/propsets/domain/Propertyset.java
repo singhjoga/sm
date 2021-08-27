@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.spydermama.api.base.OperationGroups;
 import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.Views;
-import com.spydermama.api.common.auditlog.Auditable;
+import com.spydermama.api.common.auditlog.AuditableMain;
 import com.spydermama.api.common.domain.IdentifiableEntity;
 
 import io.swagger.annotations.ApiModel;
@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity(name="PROP_SET")
 @ApiModel(description = "Propertyset model")
-public class Propertyset implements Auditable<Long>,IdentifiableEntity<Long>{
+public class Propertyset implements AuditableMain<Long>,IdentifiableEntity<Long>{
 
 	@Id
 	@Column(name="PROP_SET_ID")

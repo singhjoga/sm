@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { NavigationComponent } from './navigation.component';
 import { PrimengModule } from '../shared/primeng.module';
-import {CustomerManagementModule} from '@app/customer-management/customer-management.module';
+import {CustomerManagementModule} from '@app/features/features.module';
 import {HomeComponent} from '@app/02_home/home.component'
 const routes: Routes = [
   {path: 'home', component: HomeComponent},

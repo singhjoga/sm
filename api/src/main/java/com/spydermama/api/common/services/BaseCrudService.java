@@ -39,13 +39,15 @@ import com.spydermama.api.common.auditlog.AuditLog;
 import com.spydermama.api.common.auditlog.AuditLogService;
 import com.spydermama.api.common.auditlog.Auditable;
 import com.spydermama.api.common.auditlog.AuditableChild;
+import com.spydermama.api.common.auditlog.AuditableMain;
+import com.spydermama.api.common.auditlog.AuditableReference;
 import com.spydermama.api.common.controllers.RestResponse.ErrorResponse;
 import com.spydermama.api.common.controllers.RestResponse.ValidationError;
 import com.spydermama.api.common.controllers.RestResponseBuilder;
 import com.spydermama.api.common.db.EntityManagerProvider;
 import com.spydermama.api.common.domain.AbstractResource;
-import com.spydermama.api.common.domain.IdentifiableEntity;
 import com.spydermama.api.common.domain.AppObect;
+import com.spydermama.api.common.domain.IdentifiableEntity;
 import com.spydermama.api.common.events.ResourceChangeEvent;
 import com.spydermama.api.common.repos.BaseRepository;
 import com.spydermama.api.exception.BadRequestException;
@@ -113,9 +115,9 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 	public List<AuditLog> getHistory(ID id) {
 		T obj = getById(id, true);
 		if (obj != null) {
-			return auditService.find((Auditable<?>) obj, additionalHistory(id));
+			return auditService.find((AuditableMain<?>) obj, additionalHistory(id));
 		} else {
-			return auditService.find(getResourceType(), id.toString());
+			return auditService.find(getAppObjectType(), id.toString());
 		}
 	}
 
@@ -177,9 +179,7 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 		beforeDelete(saved);
 		repo.delete(saved);
 		if (saved instanceof Auditable) {
-			saveHistory(Actions.Crud.Delete, (Auditable<?>) saved, "Deleted", null);
-		} else if (saved instanceof AuditableChild) {
-			saveChildHistory(Actions.Crud.Delete, (AuditableChild<?>) saved, "Deleted");
+			saveHistory(Actions.Crud.Delete, (Auditable) saved, "Deleted", null);
 		}
 		afterDelete(saved);
 		fireResourceChangeEvent(saved, Crud.Delete);
@@ -216,20 +216,45 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 		// entity specific login can come here
 	}
 
-	protected void saveHistory(String action, Auditable<?> obj, String details, String prefix) {
-		auditService.add(action, obj, details, prefix);
+	protected void saveHistory(String action, Auditable obj, String details, String filter) {
+		if (obj instanceof AuditableMain) {
+			auditService.add(action, (AuditableMain<?>)obj, details, filter);
+		} else if (obj instanceof AuditableChild) {
+			saveChildHistory(action, (AuditableChild<?>) obj, details);
+		} else if (obj instanceof AuditableReference) {
+			saveReferenceHistory(action, (AuditableReference<?,?>) obj, details);
+		}
 	}
 
 	protected void saveChildHistory(String action, AuditableChild<?> obj, String details) {
 		Object parentId = obj.getParentId();
 		Object parent = EntityManagerProvider.getEntityManager().find(obj.getParentEntity(), parentId);
-		String prefix = obj.getAppObjectType() + " [" + obj.getName() + "]";
-		if (action.equals(Actions.Crud.Add)) {
-			details = "added";
+		if (parent == null) {
+			throw new IllegalArgumentException("Parent entity '"+obj.getParentEntity().getName()+" does not exist for id: "+parentId);
 		}
-		auditService.add(Actions.Crud.Update, (Auditable<?>) parent, details, prefix);
+		String filter = obj.getAppObjectType();
+		details += " [" + obj.getName() + "]";
+		auditService.add(Actions.Crud.Update, (AuditableMain<?>) parent, details, filter);
 	}
 
+	protected void saveReferenceHistory(String action, AuditableReference<?,?> obj, String details) {
+		Object parentId = obj.getParentId();
+		//find parent entity
+		Object parent = EntityManagerProvider.getEntityManager().find(obj.getParentEntity(), parentId);
+		if (parent == null) {
+			throw new IllegalArgumentException("Parent entity '"+obj.getParentEntity().getName()+" does not exist for id: "+parentId);
+		}
+		//find referenced entity
+		AuditableMain<?> ref = EntityManagerProvider.getEntityManager().find(obj.getReferenceEntity(), obj.getReferenceId());
+		if (ref == null) {
+			throw new IllegalArgumentException("Reference entity '"+obj.getReferenceEntity().getName()+" does not exist for id: "+obj.getReferenceId());
+		}
+		String filter = obj.getAppObjectType();
+		
+		details += " [" + ref.getName() + "]";
+		auditService.add(Actions.Crud.Update, (AuditableMain<?>) parent, details, filter);
+	}
+	
 	public boolean isEqual(Object compareWith, Object obj) {
 		String changes = compareAndCopy(compareWith, obj, false);
 		return StringUtils.isEmpty(changes);
@@ -340,12 +365,8 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 		}
 		save(obj);
 		afterSave(obj, null, true);
-//		if (!(obj instanceof CommonData) && (obj instanceof Auditable)) {
 		if (obj instanceof Auditable) {
-			// write the audit log, otherwise it is taken from the entity itself
-			saveHistory(Actions.Crud.Add, (Auditable<?>) obj, "Added", null);
-		} else if (obj instanceof AuditableChild) {
-			saveChildHistory(Actions.Crud.Add, (AuditableChild<?>) obj, "Added");
+			saveHistory(Actions.Crud.Add, (Auditable) obj, "Added", null);
 		}
 		fireResourceChangeEvent(obj, Crud.Add);
 		return obj;
@@ -370,10 +391,9 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 		}
 		save(saved);
 		if (saved instanceof Auditable) {
-			saveHistory(Actions.Crud.Update, (Auditable<?>) saved, changes, null);
-		} else if (obj instanceof AuditableChild) {
-			saveChildHistory(Actions.Crud.Update, (AuditableChild<?>) saved, changes);
+			saveHistory(Actions.Crud.Update, (AuditableMain<?>) saved, changes, null);
 		}
+
 		afterSave(saved, copy, false);
 		fireResourceChangeEvent(saved, Crud.Update);
 	}
@@ -538,5 +558,5 @@ public abstract class BaseCrudService<T extends IdentifiableEntity<ID>, ID exten
 		}
 	}
 
-	protected abstract String getResourceType();
+	protected abstract String getAppObjectType();
 }

@@ -1,0 +1,12 @@
+.full-width-table {
+  width: 100%;
+}
+.mat-column-select {
+  overflow: initial;
+}
+.highlight{
+  background: #b3d7f0; /* green */
+}
+::ng-deep .p-datatable-header {
+  padding-bottom: 0.25rem !important;
+}

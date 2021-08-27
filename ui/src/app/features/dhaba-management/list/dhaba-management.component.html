@@ -1,0 +1,130 @@
+<p-toast></p-toast>
+<p-table #dataTable [value]="dataSource().items()"
+    selectionMode="multiple" [(selection)]="selection" [metaKeySelection]=true
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,30,50,100]"
+    [globalFilterFields]="displayedColumns" (onFilter)="onDataTableFilter()" [paginator]="true" [rows]="10"
+    [totalRecords]="dataSource().allData.length" [loading]="dataSource().loading"
+    dataKey="id">
+
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span>
+                <button pButton label="Add" class="p-button-outlined" icon="pi pi-plus" (click)="onAdd()"></button>
+                <button pButton label="Edit" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-file-o" (click)="onEdit()"
+                    [disabled]="selection.length != 1"></button>
+                <button pButton label="View" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-file-o" (click)="onView()"
+                [disabled]="selection.length != 1"></button>
+                <button pButton label="Delete" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-times" (click)="onDelete()"
+                    [disabled]="selection.length==0"></button>
+                <button pButton label="Refresh" style="margin-left: 2rem;" class="p-button-outlined" icon="pi pi-refresh" (click)="dataSource().refresh()"
+                    ></button>
+                <button pButton label="Clear" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clearFilters()" [disabled]="!clearFilterEnabled"></button>
+            </span>
+
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText [(ngModel)]="globalFilter" type="text" (input)="appliyGlobalFilter($event)"
+                    placeholder="Search keyword" />
+            </span>
+
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <!--
+            <th style="width: 1rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            -->
+            <th pSortableColumn="name">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Name
+                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Email
+                    <p-columnFilter type="text" field="orderEmail" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Phone
+                    <p-columnFilter type="text" field="orderPhone" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Tax No.
+                    <p-columnFilter type="text" field="taxNo" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Address
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Area
+                    <p-columnFilter type="text" field="addresses[0]?.area" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    City
+                    <p-columnFilter type="text" field="addresses[0]?.city" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Zip Code
+                    <p-columnFilter type="text" field="addresses[0]?.zipCode" display="menu"></p-columnFilter>
+                </div>
+            </th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr [pSelectableRow]="item" [pSelectableRowIndex]="rowIndex" 
+        (dblclick)="onView(item)" >
+
+            <td>
+                <span *ngIf="item.addresses && item.addresses.length>1">
+                <a href="#" [pRowToggler]="item">
+                    <i [ngClass]="expanded ? 'pi pi-fw pi-chevron-circle-down' : 'pi pi-fw pi-chevron-circle-right'"></i>
+                </a>
+                </span>
+                {{item.name}}
+            </td>
+            <td>{{item.orderEmail}}</td>
+            <td>{{item.orderPhone}}</td>
+            <td>{{item.taxNo}}</td>
+            <td><span *ngIf="item.addresses && item.addresses.length>0">{{item.addresses[0]?.street}} {{item.addresses[0]?.houseNo}}</span></td>
+            <td><span *ngIf="item.addresses && item.addresses.length>0">{{item.addresses[0]?.area}}</span></td>
+            <td><span *ngIf="item.addresses && item.addresses.length>0">{{item.addresses[0]?.city}}</span></td>
+            <td><span *ngIf="item.addresses && item.addresses.length>0">{{item.addresses[0]?.zipCode}}</span></td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-item >
+        <ng-container *ngFor="let addr of item.addresses; let i = index">
+        <tr *ngIf="i > 0">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{item.addresses[i]?.street}} {{item.addresses[i]?.houseNo}}</td>
+            <td>{{item.addresses[i]?.area}}</td>
+            <td>{{item.addresses[i]?.city}}</td>
+            <td>{{item.addresses[i]?.zipCode}}</td>
+        </tr>
+    </ng-container>
+
+    </ng-template>
+
+</p-table>
+

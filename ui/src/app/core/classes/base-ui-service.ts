@@ -1,35 +1,38 @@
+import { AbstractResource } from '@app/01_models/AbstractResource';
+import { AbstractDataSource } from "@app/core/classes/base-datasource";
+import { ScreenController } from "@app/core/classes/screen-controller";
+import { ResourceDialogComponent } from "@app/features/resource-dialog/resource-dialog.component";
+import { DialogMode } from "@app/shared/constants";
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogUtil } from '../components/dialogs/dialog-service';
 import { AppInjector } from '../injector.module';
-import { ScreenController } from "@app/core/classes/screen-controller";
-import { AbstractDataSource } from "@app/core/classes/base-datasource";
-import { Constants, DialogMode } from "@app/shared/constants";
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ResourceDialogComponent } from "@app/customer-management/resource-dialog/resource-dialog.component";
-export abstract class BaseUiService<T, LIST_TYPE> extends ScreenController{
+export abstract class BaseUiService<T extends AbstractResource, LIST_TYPE> extends ScreenController{
     editDialog: any;
     viewDialog: any;
     public dialogUtil: DialogUtil;
     public ngDialogService: DialogService
-    constructor(private objectType:string, detailsDialog: any, viewDialog: any, 
+    constructor(private objectType:string, editDialog: any, viewDialog: any, 
         public listDataSource: AbstractDataSource<LIST_TYPE>) {
         super(objectType);
-        this.editDialog = detailsDialog;
+        this.editDialog = editDialog;
         this.dialogUtil = AppInjector.get(DialogUtil);
         this.ngDialogService = AppInjector.get(DialogService);
         this.viewDialog=viewDialog;
     }
-    abstract getId(obj:T):string;
+    getId(obj:T):string {
+        return obj.id!;
+    }
 
-    openDetailsDialog(mode: DialogMode, id?: string): DynamicDialogRef {
+    openDetailsDialog(mode: DialogMode, id: string, data:any): DynamicDialogRef {
         return this.ngDialogService
             .open(ResourceDialogComponent, {
                 width: '800px',
                 header: this.getTitleOfDialog(mode, this.detailsTitleKey()),
-                data: { mode: mode, id: id, component: this.editDialog, data: this.detailsData()}
+                data: { mode: mode, id: id, component: this.editDialog, data: data}
             });
     }
-    showAddDialog() {
-        this.openDetailsDialog(DialogMode.Add);
+    showAddDialog(data:any): DynamicDialogRef {
+        return this.openDetailsDialog(DialogMode.Add,'',data);
     }
     getIdOf(obj?:string|T):string {
         var id;
@@ -40,25 +43,25 @@ export abstract class BaseUiService<T, LIST_TYPE> extends ScreenController{
         }
         return id;
     }
-    showEditDialog(obj?:string|T) {
-        this.openDetailsDialog(DialogMode.Edit, this.getIdOf());
+    showEditDialog(obj:string|T, data:any): DynamicDialogRef {
+        return this.openDetailsDialog(DialogMode.Edit, this.getIdOf(obj), data);
     }
     delete(id: string):Promise<any> {
         return this.listDataSource.delete(id);
     }
 
-    showViewDialog(obj?:string|T) {
-        this.ngDialogService
+    showViewDialog(obj?:string|T): DynamicDialogRef {
+        return this.ngDialogService
         .open(this.viewDialog, {
             width: '800px',
             header: this.getTitleOfDialog(DialogMode.View, this.detailsTitleKey()),
             data: { mode: DialogMode.View, id: this.getIdOf(obj)}
         })
     }
-    private detailsTitleKey(): string {
+    detailsTitleKey(): string {
         return this.objectType+"Details";
     }
-    private listTitleKey(): string {
+    listTitleKey(): string {
         return this.objectType+"List";
     }
     detailsData():any {

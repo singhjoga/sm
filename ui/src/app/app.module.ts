@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PrimengModule } from './shared/primeng.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CoreModule } from './core/core.module';
-import { CustomerManagementModule } from './customer-management/customer-management.module'
+import { CustomerManagementModule } from './features/features.module'
 import { HomeComponent } from './02_home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SystemModule } from '@app/system/system.module';

@@ -26,9 +26,18 @@
     "zipCode": "Zip Code",
     "languageId": "Language",
     "isDisabled": "Is Disabled?",
-    "isDefault": "Is Default Address?",
+    "isDefault": "Is Default?",
     "birthDate": "Birth Date",
-    "sexType": "Sex"
+    "sexType": "Sex",
+    "name": "Name",
+    "orderEmail": "Email for Orders",
+    "orderPhone": "Phone for Orders",
+    "taxNo": "Tax No.",
+    "deliverySelf": "Self Delivery by the Restaurant",
+    "deliveryPickup": "Self Pickup by the Customer",
+    "deliveryDineIn": "Eat inside the Restaurant",
+    "delivery3rdParty": "Delivery by 3rd Party",
+    "deliveryOptions": "Delivery Options"
   },
   "errors": {
     "required": "Mandatory field",
@@ -44,6 +53,8 @@
     "customerList": "Customer List",
     "customerDetails": "Customer Details",
     "addressList": "Address List",
-    "addressDetails": "Address Details"
+    "addressDetails": "Address Details",
+    "dhabaList": "Restaurant List",
+    "dhabaDetails": "Restaurant Details"
   }
 }

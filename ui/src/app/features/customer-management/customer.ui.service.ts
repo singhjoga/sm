@@ -15,8 +15,4 @@ export class CustomerUiService extends BaseUiService<Customer, CustomerWithAddre
     super(Constants.inst.OBJECT_TYPE_CUSTOMER, 
     CustomerBasicInfoComponent, CustomerDetailsComponent, new CustomerDataSource(service));
   }
-  getId(obj: Customer): string {
-    return obj.id!;
-  }
-
 }

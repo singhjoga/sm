@@ -1,9 +1,9 @@
 <p-toast></p-toast>
-<p-table #dataTable [value]="dataSource.items()"
+<p-table #dataTable [value]="dataSource().items()"
     selectionMode="multiple" [(selection)]="selection" [metaKeySelection]=true
     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,30,50,100]"
     [globalFilterFields]="displayedColumns" (onFilter)="onDataTableFilter()" [paginator]="true" [rows]="10"
-    [totalRecords]="dataSource.allData.length" [loading]="dataSource.loading">
+    [totalRecords]="dataSource().allData.length" [loading]="dataSource().loading">
 
     <ng-template pTemplate="caption">
         <div class="table-header">
@@ -15,7 +15,7 @@
                 [disabled]="selection.length != 1"></button>
                 <button pButton label="Delete" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-times" (click)="onDelete()"
                     [disabled]="selection.length==0"></button>
-                <button pButton label="Refresh" style="margin-left: 2rem;" class="p-button-outlined" icon="pi pi-refresh" (click)="dataSource.refresh()"
+                <button pButton label="Refresh" style="margin-left: 2rem;" class="p-button-outlined" icon="pi pi-refresh" (click)="dataSource().refresh()"
                     ></button>
                 <button pButton label="Clear" style="margin-left: 0.25rem;" class="p-button-outlined" icon="pi pi-filter-slash"
                     (click)="clearFilters()" [disabled]="!clearFilterEnabled"></button>

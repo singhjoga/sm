@@ -15,10 +15,10 @@ import com.spydermama.api.utils.CommonUtil;
 public class AuditLogService extends BaseService{
 	@Autowired
 	private AuditLogRepository repo;
-	public String add(String action, Auditable<?> auditable, String details) {
+	public String add(String action, AuditableMain<?> auditable, String details) {
 		return add(action,auditable, details, null);
 	}
-	public String add(String action, Auditable<?> auditable, String details, String prefix) {
+	public String add(String action, AuditableMain<?> auditable, String details, String filter) {
 		if (StringUtils.isEmpty(details)) {
 			return null;
 		}
@@ -31,7 +31,7 @@ public class AuditLogService extends BaseService{
 		obj.setObjectId(auditable.getId().toString());
 		obj.setObjectName(auditable.getName());
 		obj.setUser(getLoggedUser());
-		obj.setFilterValue(prefix);
+		obj.setFilterValue(filter);
 		repo.save(obj);
 		
 		return obj.getId();
@@ -40,10 +40,10 @@ public class AuditLogService extends BaseService{
 	public List<AuditLog> find(String entity, String entityId) {
 		return repo.findByObjectTypeAndObjectIdOrderByDateDesc(entity, entityId);
 	}
-	public List<AuditLog> find(Auditable<?> auditable) {
+	public List<AuditLog> find(AuditableMain<?> auditable) {
 		return find(auditable,null);
 	}
-	public List<AuditLog> find(Auditable<?> auditable, List<AuditLog> childAuditables) {
+	public List<AuditLog> find(AuditableMain<?> auditable, List<AuditLog> childAuditables) {
 		List<AuditLog> history = repo.findByObjectTypeAndObjectIdOrderByDateDesc(auditable.getAppObjectType(), auditable.getId().toString());
 	/*	addToResult(history, auditable);
 		if (childAuditables != null && !childAuditables.isEmpty()) {
@@ -55,7 +55,7 @@ public class AuditLogService extends BaseService{
 		return history; 
 	}
 	
-	private void addToResult(List<AuditLog> history, Auditable<?> auditable) {
+	private void addToResult(List<AuditLog> history, AuditableMain<?> auditable) {
 		//add the added record, which is not part of the history to preserve space
 		AuditLog add = new AuditLog();
 		if (auditable instanceof AbstractResource) { //this the case always

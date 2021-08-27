@@ -1,20 +1,14 @@
-import { OnInit, Component, ViewChild,LOCALE_ID, Inject, ComponentFactoryResolver } from '@angular/core';
-import {Customer} from '@app/01_models/Customer';
-import {CommonFields, Constants, DialogMode} from '@app/shared/constants';
-import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
-import {DynamicDialogRef, DynamicDialogConfig} from 'primeng/dynamicdialog';
-import { FormGroup, FormControl, NgForm } from '@angular/forms'; 
-import {FormConroller} from '@app/core/classes/form-controller';
-import { Language } from '@app/01_models/Language';
-import { SystemService } from '@app/system/system-service';
-import { FormDialogConroller } from '@app/core/classes/form-dialog-controller';
-import { FormControllerService } from '@app/core/classes/form-controller-service';
+import { Component, ComponentFactoryResolver, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { ErrorResponse } from '@app/01_models/RestResponse';
+import { FormControllerService } from '@app/core/classes/form-controller-service';
 import { ScreenController } from '@app/core/classes/screen-controller';
-import { AppInjector } from '@app/core/injector.module'; 
-import { SnackbarService } from '@app/core/services/snackbar.service';
 import { ResourceControl } from '@app/core/components/controls/resource-control-interface';
-import { ResourceDialogDirective } from '@app/customer-management/resource-dialog/resource-dialog-directive';
+import { AppInjector } from '@app/core/injector.module';
+import { SnackbarService } from '@app/core/services/snackbar.service';
+import { ResourceDialogDirective } from '@app/features/resource-dialog/resource-dialog-directive';
+import { Constants, DialogMode } from '@app/shared/constants';
+import { SystemService } from '@app/system/system-service';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'resource-dialog',
   templateUrl: './resource-dialog.component.html',

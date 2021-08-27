@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spydermama.api.base.Actions;
 import com.spydermama.api.base.AppObjects;
-import com.spydermama.api.common.auditlog.Auditable;
+import com.spydermama.api.common.auditlog.AuditableMain;
 import com.spydermama.api.common.services.BaseCrudService;
 import com.spydermama.api.exception.BadRequestException;
 
@@ -81,7 +81,7 @@ public class AddressService extends BaseCrudService<Address, String>{
 			}
 			if (saveExisting) {
 				repo.save(existingDefault);
-				saveHistory(Actions.Crud.Update, (Auditable<?>) existingDefault, "isDefault set to false", null);
+				saveHistory(Actions.Crud.Update, (AuditableMain<?>) existingDefault, "isDefault set to false", null);
 			}
 		}
 		super.beforeSave(newObj, oldObj, isAdd);
@@ -101,11 +101,14 @@ public class AddressService extends BaseCrudService<Address, String>{
 	public List<Address> findAllDefault(String objectType) {
 		return repo.findAllByObjectTypeAndIsDefault(objectType, true);
 	}
+	public List<Address> findAllByObjectType(String objectType) {
+		return repo.findAllByObjectType(objectType);
+	}
 	public List<Address> findAllDefault(String objectType, String objectId) {
 		return repo.findAllByObjectTypeAndObjectId(objectType, objectId);
 	}
 	@Override
-	protected String getResourceType() {
+	protected String getAppObjectType() {
 		return AppObjects.AddressesCode;
 	}
 }

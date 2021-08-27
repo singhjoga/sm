@@ -1,4 +1,4 @@
-package com.spydermama.api.dhaba;
+package com.spydermama.api.dhaba.main;
 
 import java.util.List;
 
@@ -15,15 +15,16 @@ import com.spydermama.api.base.AppObjects;
 import com.spydermama.api.base.Views;
 import com.spydermama.api.common.annotations.Authorization;
 import com.spydermama.api.common.controllers.BaseParentResourceController;
+import com.spydermama.api.customer.CustomerWithAddress;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@Authorization(resource = AppObjects.Customers)
+@Authorization(resource = AppObjects.Dhabas)
 @RequestMapping({"/api/v1/dhabas"})
-@Api(tags = {AppObjects.Customers})
+@Api(tags = {AppObjects.Dhabas})
 public class DhabaController extends BaseParentResourceController<Dhaba, String>{
 	private DhabaService service;
 	
@@ -35,10 +36,20 @@ public class DhabaController extends BaseParentResourceController<Dhaba, String>
 	@RequestMapping(method = RequestMethod.GET)
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all customers")
+	@ApiOperation( value="Returns all dhabas")
 	@ResponseBody
-	public ResponseEntity<List<Dhaba>> getHistory() {
+	public ResponseEntity<List<Dhaba>> findAll() {
 		List<Dhaba> body = service.findAll();
+		return ResponseEntity.ok(body);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/withaddress")
+	@Authorization(action = Actions.Crud.View)
+	@JsonView(value = Views.List.class)
+	@ApiOperation( value="Returns all dhabas with addresses")
+	@ResponseBody
+	public ResponseEntity<List<Dhaba>> findAllWithAddress() {
+		List<Dhaba> body = service.findAllWithAddress(false);
 		return ResponseEntity.ok(body);
 	}
 }

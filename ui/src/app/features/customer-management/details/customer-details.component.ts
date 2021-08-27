@@ -1,6 +1,6 @@
 import { OnInit, Component, ViewChild,LOCALE_ID, Inject } from '@angular/core';
 import {Customer} from '@app/01_models/Customer';
-import {CustomerService} from '../customer.service';
+import {CustomerService} from '../customer.api.service';
 import {CommonFields, Constants, DialogMode} from '@app/shared/constants';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import {DynamicDialogRef, DynamicDialogConfig} from 'primeng/dynamicdialog';

@@ -1,34 +1,27 @@
-
+import { ErrorResponse } from "@app/01_models/RestResponse";
+import { AbstractDataSource } from "@app/core/classes/base-datasource";
+import { ScreenController } from "@app/core/classes/screen-controller";
+import { Constants, DialogMode } from "@app/shared/constants";
+import { FilterMetadata } from "primeng/api";
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { DialogUtil } from '../components/dialogs/dialog-service';
 import { AppInjector } from '../injector.module';
-import { ScreenController } from "@app/core/classes/screen-controller";
-import { AbstractDataSource } from "@app/core/classes/base-datasource";
-import { Constants, DialogMode } from "@app/shared/constants";
-import { DialogService } from 'primeng/dynamicdialog';
-import { ErrorResponse } from "@app/01_models/RestResponse";
-import { ResourceDialogComponent } from "@app/customer-management/resource-dialog/resource-dialog.component";
-export abstract class ListController<T> extends ScreenController {
+import { BaseUiService } from './base-ui-service';
+export abstract class ListController<T, LIST_TYPE> extends ScreenController {
     selection: T[] = [];
-    dataSource: AbstractDataSource<T>;
-    editDialog: any;
-    viewDialog: any;
     public dialogUtil: DialogUtil;
-    public ngDialogService: DialogService
-    constructor(private objectType: string, dataSource: AbstractDataSource<T>,
-         detailsDialog: any, viewDialog: any) {
-        super(objectType+'List');
-        this.dataSource = dataSource;
-        this.editDialog = detailsDialog;
+    globalFilter: string='';
+    clearFilterEnabled=false;
+    constructor(private uiService: BaseUiService<T, LIST_TYPE>) {
+        super(uiService.listTitleKey());
         this.dialogUtil = AppInjector.get(DialogUtil);
-        this.ngDialogService = AppInjector.get(DialogService);
-        this.viewDialog=viewDialog;
     }
     onInit() {
 
     }
     onAfterViewInit(): void {
-        this.dataSource.refresh().then(result => {
+        this.dataSource().refresh().then(result => {
             
         });
     }
@@ -49,48 +42,46 @@ export abstract class ListController<T> extends ScreenController {
         let titleText = this.getLabelText('error');
         return this.dialogUtil.showErrorDialog(titleText, msgText);
     }
-    openDetailsDialog(mode: DialogMode, id?: string) {
-        this.ngDialogService
-            .open(ResourceDialogComponent, {
-                width: '800px',
-                header: this.getTitleOfDialog(mode, this.detailsObject()),
-                data: { mode: mode, id: id, component: this.editDialog, data: this.detailsData()}
-            })
-            .onClose
-            .subscribe(result => {
-                if (result != Constants.inst.DIALOG_CLOSE) {
-                    this.refresh(mode, result, id);
-                    if (mode == DialogMode.Add) {
-                        this.afterAdd(result);
-                    }else{
-                        this.afterAdd(id!); 
-                    }
-                }
-            })
-    }
-    refresh(mode: DialogMode, saveResult: any, id) {
-        this.dataSource.refresh().then(r => {
-            let objId = (mode == DialogMode.Add ? saveResult : id);
-            let [rowIndex, obj] = this.dataSource.findInDataById(objId);
-            if (rowIndex == -1 || obj == null) {
-                Error("Data not found for id: " + saveResult);
-            } else {
-                setTimeout(() => {
-                    let table = this.getTable();
-                    let pageIndex = Math.trunc(rowIndex / table.rows);
-                    let first = pageIndex * table.rows;
-                    table.first = first;
-                    this.selection = [];
-                    this.selection.push(<T>obj!);
-                });
+    refresh(id?:string) {
+        this.dataSource().refresh().then(r => {
+            if (id && this.getTable()) {
+                this.setTableSelection(id);
             }
         });
     }
+    setTableSelection(id: string) {
+        let [rowIndex, obj] = this.dataSource().findInDataById(id);
+        if (rowIndex == -1 || obj == null) {
+            Error("Data not found for id: " + id);
+        } else {
+            setTimeout(() => {
+                let table = this.getTable();
+                let pageIndex = Math.trunc(rowIndex / table.rows);
+                let first = pageIndex * table.rows;
+                table.first = first;
+                this.selection = [];
+                this.selection.push(<T>obj!);
+            });
+        }
+
+    }
     onAdd() {
-        var s = this.selection;
-        this.openDetailsDialog(DialogMode.Add)
+       this.afteAddUpdate(this.uiService.showAddDialog(this.detailsData()),DialogMode.Add);
+    }
+    private afteAddUpdate(dialogRef: DynamicDialogRef, mode: DialogMode, id?) {
+        dialogRef.onClose
+        .subscribe(result => {
+            if (result != Constants.inst.DIALOG_CLOSE) {
+                if (mode == DialogMode.Add) {
+                    this.afterAdd(result);
+                }else{
+                    this.afterAdd(id!); 
+                }
+            }
+        })
     }
     onEdit(obj?: T) {
+
         if (!obj && this.selection.length == 0) {
             return;
         }
@@ -101,7 +92,7 @@ export abstract class ListController<T> extends ScreenController {
         this.edit(this.getId(editObj));
     }
     edit(id:string) {
-        this.openDetailsDialog(DialogMode.Edit, id);
+        this.afteAddUpdate(this.uiService.showEditDialog(id, this.detailsData()),DialogMode.Edit, id);
     }
     onDelete(obj?: T) {
         let delObj:T[] = obj?[obj]:this.selection;
@@ -116,7 +107,7 @@ export abstract class ListController<T> extends ScreenController {
                         i++;
                         const id = this.getId(obj);
                         try {
-                            await this.dataSource.delete(id);
+                            await this.dataSource().delete(id);
                             deletedCount++;
                             this.selection.splice(i, 1);
                         } catch (error: any) {
@@ -125,7 +116,7 @@ export abstract class ListController<T> extends ScreenController {
                         }
                     }
                     if (deletedCount > 0) {
-                        this.dataSource.refresh();
+                        this.dataSource().refresh();
                     }
                     if (lastError) {
                         this.showDeleteFailed(this.getApiErrorAsString(lastError).toString(), deletedCount);
@@ -147,24 +138,64 @@ export abstract class ListController<T> extends ScreenController {
         }
         this.view(this.getId(editObj));
     }
-    view(id:string) {
-        this.ngDialogService
-        .open(this.viewDialog, {
-            width: '800px',
-            header: this.getTitleOfDialog(DialogMode.View, this.detailsObject()),
-            data: { mode: DialogMode.View, id: id}
-        })
+    dataSource(): AbstractDataSource<LIST_TYPE> {
+        return this.uiService.listDataSource;
     }
-    private detailsObject(): string {
-        return this.objectType+"Details";
+    view(id:string): DynamicDialogRef {
+        return this.uiService.showViewDialog(id);
     }
     detailsData():any {
         return null;
     }
     afterAdd(id:string) {
-     //do something by overwriting it   
+        this.refresh(id);
     }
     afterEdit(id:string) {
-        //do something by overwriting it   
+        this.refresh(id);
+    }
+    
+  clearFilters() {
+    //  this.hasActiveFilter();
+      this.getTable().clear();
+      this.getTable().filterGlobal('', 'contains');
+      this.globalFilter='';
+    }
+    inputElement(event:any):HTMLInputElement {
+      return event.target as HTMLInputElement;
+    }
+    appliyGlobalFilter(event:any) {
+      this.getTable().filterGlobal(event.target.value, 'contains');
+    }
+    hasActiveFilter():boolean {
+      if (!this.getTable()) {
+        return false;
+      }
+      if (this.globalFilter.trim() != '') {
+        return true;
+      }
+      if (this.getTable().filters) {
+        let tableFilters = this.getTable().filters;
+        for (var field in tableFilters) {
+          if (field=='global') {
+            continue;
+          }
+          var filtersValue =tableFilters[field];
+          let filters:FilterMetadata[];
+          if (Array.isArray(filtersValue)) {
+            filters=filtersValue;
+          }else{
+            filters = [filtersValue];
+          }
+          for (let filter of filters) {
+            if (filter.value) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+    onDataTableFilter() {
+      this.clearFilterEnabled=this.hasActiveFilter();
     }
 }

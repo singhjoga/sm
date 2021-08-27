@@ -1,0 +1,14 @@
+<p-tabView>
+  <p-tabPanel header="Basic Information">
+    <dhaba-basic-info [id]="getId()"></dhaba-basic-info>
+  </p-tabPanel>
+  <p-tabPanel header="Addresses">
+    <address-list-control parentObjectType="dhaba" [parentObjectId]="getId()"></address-list-control>
+  </p-tabPanel>
+
+</p-tabView>
+
+<div class="card flex justify-content-end flex-wrap mt-4">
+  <p-button type="button" styleClass="p-button-sm p-button-outlined p-button-secondary" icon="pi pi-times" label="Close"
+    class="" (click)="onClose()"></p-button>
+</div>

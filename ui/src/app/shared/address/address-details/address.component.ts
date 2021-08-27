@@ -5,7 +5,7 @@ import { FormConroller } from '@app/core/classes/form-controller';
 import { FormControllerService } from '@app/core/classes/form-controller-service';
 import { AbstractControl } from '@app/core/components/controls/abstract-control';
 import { ResourceControl } from '@app/core/components/controls/resource-control-interface';
-import { AddressService } from '@app/shared/address/address.service';
+import { AddressService } from '@app/shared/address/address.api.service';
 import { Constants, DialogMode } from '@app/shared/constants';
 @Component({
   selector: 'address-info-control',

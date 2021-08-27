@@ -56,7 +56,7 @@ public class CustomerService extends BaseCrudService<Customer, String>{
 		return result;
 	}
 	@Override
-	protected String getResourceType() {
+	protected String getAppObjectType() {
 		return AppObjects.CustomersCode;
 	}
 }

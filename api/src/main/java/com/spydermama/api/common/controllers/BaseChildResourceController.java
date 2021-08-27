@@ -31,7 +31,7 @@ public abstract class BaseChildResourceController<T extends IdentifiableEntity<I
 	@Authorization(action=Actions.Crud.View)
 	@JsonView(value=Views.List.class) 
 	public @ResponseBody ResponseEntity<List<T>> findAll(//
-			@ApiParam(value="ID of the parent resource",example = "1", required = true) @RequestParam(value = "parentId", required = true) PARENT_ID parentId) {
+			@ApiParam(value="ID of the parent object",example = "1", required = true) @RequestParam(value = "parentId", required = true) PARENT_ID parentId) {
 
 		List<T> body = service.findAll(parentId);
 		return ResponseEntity.ok(body);
