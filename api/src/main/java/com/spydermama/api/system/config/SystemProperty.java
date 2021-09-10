@@ -16,12 +16,12 @@ public class SystemProperty{
 
 	@Id
 	@Column(name="NAME")
-	@ApiModelProperty(value = "Property name", position = 1, required=true)
+	@Schema(description = "Property name", position = 1, required=true)
 	@JsonView(value = {Views.Allways.class})
 	private String name;
 
 	@Column(name="VALUE")
-	@ApiModelProperty(value = "Property value", position = 2, required=true)
+	@Schema(description = "Property value", position = 2, required=true)
 	@JsonView(value= {Views.Allways.class})
 	private String value;
 

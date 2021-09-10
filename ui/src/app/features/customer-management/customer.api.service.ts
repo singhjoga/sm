@@ -12,8 +12,11 @@ export class CustomerService extends CrudService<Customer, string>{
   constructor(http: HttpClientService, sb: SnackbarService,) {
     super(http, sb);
   }
+  getBaseApiUrl(): string {
+    return "http://localhost:8890/v1";
+  }  
   getApiUrl() {
-    return this.getBaseApiUrl() + '/customers';
+    return this.getBaseApiUrl();
   }
   async findAllWithAddress(): Promise<CustomerWithAddress[]> {
     var url = this.getApiUrl() + "/withaddress";

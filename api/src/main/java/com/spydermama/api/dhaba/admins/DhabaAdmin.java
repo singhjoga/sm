@@ -33,7 +33,7 @@ public class DhabaAdmin implements IdentifiableEntity<DhabaAdmin>, AuditableRefe
 	@Column(name="DHABA_ID")
 	@Id
 	@Size(min = 1, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Dhaba ID", position = 1, required=true)
+	@Schema(description = "Dhaba ID", position = 1, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Dhaba.class)
@@ -43,7 +43,7 @@ public class DhabaAdmin implements IdentifiableEntity<DhabaAdmin>, AuditableRefe
 	@Column(name="CUST_ID")
 	@Id
 	@Size(min = 1, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Customer ID", position = 1, required=true)
+	@Schema(description = "Customer ID", position = 1, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Customer.class)

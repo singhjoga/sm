@@ -26,7 +26,7 @@ public class CountryName{
 	@Id
 	@Column(name="CODE")
 	@Size(min = 3, max = 20, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Reference Code. Use as a Key other places for the references", position = 1, required=true)
+	@Schema(description = "Reference Code. Use as a Key other places for the references", position = 1, required=true)
 	@Pattern(regexp = RegEx.NAME,groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value = {Views.List.class, Views.Add.class})
@@ -34,14 +34,14 @@ public class CountryName{
 
 	@Id
 	@Column(name="LANG_CODE")
-	@ApiModelProperty(value = "Language Id", position = 2, required=true)
+	@Schema(description = "Language Id", position = 2, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Language.class)
 	private String languageId;
 
 	@Column(name="LOCAL_NAME")
-	@ApiModelProperty(value = "Local name", position = 3, required=true)
+	@Schema(description = "Local name", position = 3, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String localName;

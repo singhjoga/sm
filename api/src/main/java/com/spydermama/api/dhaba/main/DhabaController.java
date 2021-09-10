@@ -36,7 +36,7 @@ public class DhabaController extends BaseParentResourceController<Dhaba, String>
 	@RequestMapping(method = RequestMethod.GET)
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all dhabas")
+	@Operation( value="Returns all dhabas")
 	@ResponseBody
 	public ResponseEntity<List<Dhaba>> findAll() {
 		List<Dhaba> body = service.findAll();
@@ -46,7 +46,7 @@ public class DhabaController extends BaseParentResourceController<Dhaba, String>
 	@RequestMapping(method = RequestMethod.GET, value = "/withaddress")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all dhabas with addresses")
+	@Operation( value="Returns all dhabas with addresses")
 	@ResponseBody
 	public ResponseEntity<List<Dhaba>> findAllWithAddress() {
 		List<Dhaba> body = service.findAllWithAddress(false);

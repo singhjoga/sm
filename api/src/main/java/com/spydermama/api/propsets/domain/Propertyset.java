@@ -22,19 +22,19 @@ public class Propertyset implements AuditableMain<Long>,IdentifiableEntity<Long>
 
 	@Id
 	@Column(name="PROP_SET_ID")
-	@ApiModelProperty(value = "Internal ID", position = 1, required=true)
+	@Schema(description = "Internal ID", position = 1, required=true)
 	@JsonView(value= {Views.List.class})
 	private Long id;
 	@Column(name="NAME")
 	@Size(min = 1, max = 200,groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)
-	@ApiModelProperty(value = "Name", position = 2, required=true)
+	@Schema(description = "Name", position = 2, required=true)
 	@JsonView(value= {Views.Allways.class})
 	private String name;
 	@Column(name="DESCRIPTION")
 	@Size(max = 3000,groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)
-	@ApiModelProperty(value = "Long description", position = 3,required=false)
+	@Schema(description = "Long description", position = 3,required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String description;
 	public Long getId() {

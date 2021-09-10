@@ -13,8 +13,11 @@ export class AddressService extends CrudService<Address, string>{
   constructor(http: HttpClientService, sb: SnackbarService,) {
     super(http, sb);
   }
+  getBaseApiUrl(): string {
+    return "http://localhost:8889";
+  }
   getApiUrl() {
-    return this.getBaseApiUrl() + '/addresses';
+    return this.getBaseApiUrl() + '/v1';
   }
   async findAllForObj(objectType:string, objectId:string): Promise<Address[]> {
     var url = this.getApiUrl() + "?objectType="+objectType+"&objectId="+objectId;

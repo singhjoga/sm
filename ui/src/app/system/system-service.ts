@@ -18,8 +18,11 @@ export class SystemService extends BaseService {
         this.http = http;
         this.snackBar = sb;
     }
+    getBaseApiUrl(): string {
+        return "http://localhost:8888/v1";
+    }
     async getLangues(): Promise<Language[]> {
-        const url = this.getBaseApiUrl() + '/system/languages';
+        const url = this.getBaseApiUrl() + '/languages';
         return this.http.get<Language[]>(url)
             .pipe(
                 catchError(error => {
@@ -42,7 +45,7 @@ export class SystemService extends BaseService {
         return this.getRefData('sex_type');
     }
     async getCountries(): Promise<Country[]> {
-        const url = this.getBaseApiUrl() + '/system/countries';
+        const url = this.getBaseApiUrl() + '/countries';
         return this.http.get<Country[]>(url)
             .pipe(
                 catchError(error => {
@@ -52,7 +55,7 @@ export class SystemService extends BaseService {
             ).toPromise();
     }
     async getCounty(id: string): Promise<Country> {
-        const url = this.getBaseApiUrl() + '/system/countries/' + id;
+        const url = this.getBaseApiUrl() + '/countries/' + id;
         return this.http.get<Country>(url)
             .pipe(
                 catchError(error => {
@@ -62,7 +65,7 @@ export class SystemService extends BaseService {
             ).toPromise();
     }
     async getSystemProperties(): Promise<SystemProperties> {
-        const url = this.getBaseApiUrl() + '/system/properties';
+        const url = this.getBaseApiUrl() + '/properties';
         return this.http.get<SystemProperties>(url)
             .pipe(
                 catchError(error => {

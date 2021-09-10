@@ -44,7 +44,7 @@ public class SystemController extends BaseController{
 	@RequestMapping(method = RequestMethod.GET,value = "/languages")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all supported languages")
+	@Operation( value="Returns all supported languages")
 	@ResponseBody
 	public ResponseEntity<List<Language>> getLanguages() {
 		List<Language> body = langService.findAllByIsDisabled(false);
@@ -53,7 +53,7 @@ public class SystemController extends BaseController{
 	@RequestMapping(method = RequestMethod.GET,value = "/countries")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns list of countries")
+	@Operation( value="Returns list of countries")
 	@ResponseBody
 	public ResponseEntity<List<CountryView>> getCountries() {
 		List<CountryView> body = countryService.findAllByLanguage(getUserLanguage());
@@ -62,7 +62,7 @@ public class SystemController extends BaseController{
 	@RequestMapping(method = RequestMethod.GET,value = "/countries/{id}")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns list of countries")
+	@Operation( value="Returns list of countries")
 	@ResponseBody
 	public ResponseEntity<Country> getCountry(
 			@PathVariable String id) {
@@ -72,7 +72,7 @@ public class SystemController extends BaseController{
 	@RequestMapping(method = RequestMethod.GET,value = "/properties")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all system properties")
+	@Operation( value="Returns all system properties")
 	@ResponseBody
 	public ResponseEntity<StringMap> getProperties() {
 		StringMap body = systemService.getProperties();

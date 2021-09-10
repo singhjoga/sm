@@ -11,8 +11,11 @@ export class DhabaService extends CrudService<Dhaba, string>{
   constructor(http: HttpClientService, sb: SnackbarService,) {
     super(http, sb);
   }
+  getBaseApiUrl(): string {
+    return "http://localhost:8891/v1";
+  }  
   getApiUrl() {
-    return this.getBaseApiUrl() + '/dhabas';
+    return this.getBaseApiUrl();
   }
   async findAllWithAddress(): Promise<Dhaba[]> {
     var url = this.getApiUrl() + "/withaddress";

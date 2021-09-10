@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.spydermama.api.system.SystemReferenceDataType;
 import com.spydermama.api.system.language.Language;
 import com.technovator.api.common.annotations.EntityReference;
 import com.technovator.api.common.annotations.PastDate;
@@ -17,7 +18,6 @@ import com.technovator.api.common.annotations.UniqueKey;
 import com.technovator.api.common.auditlog.AuditableMain;
 import com.technovator.api.common.constants.AppObjects;
 import com.technovator.api.common.constants.OperationGroups;
-import com.technovator.api.common.constants.SystemReferenceDataType;
 import com.technovator.api.common.constants.Views;
 import com.technovator.api.common.domain.AbstractResource;
 
@@ -30,20 +30,20 @@ public class Customer extends AbstractResource<String> implements AuditableMain<
 
 	@Column(name="FIRST_NAME")
 	@Size(min = 1, max = 50, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "First name", position = 2, required=true)
+	@Schema(description = "First name", position = 2, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String firstName;	
 
 	@Column(name="LAST_NAME")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Last name", position = 3, required=false)
+	@Schema(description = "Last name", position = 3, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String lastName;	
 
 	@Column(name="EMAIL")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Email address", position = 4, required=true)
+	@Schema(description = "Email address", position = 4, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@UniqueKey
@@ -51,30 +51,30 @@ public class Customer extends AbstractResource<String> implements AuditableMain<
 
 	@Column(name="PHONE")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Phone", position = 12, required=false)
+	@Schema(description = "Phone", position = 12, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String phone;
 
 	@Column(name="MOBILE")
 	@Size(min = 0, max = 50, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Mobile phone no", position = 13, required=false)
+	@Schema(description = "Mobile phone no", position = 13, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String mobile;
 
 	@Column(name="LANG_CODE")
-	@ApiModelProperty(value = "Reference Id for Language", position = 14, required=false)
+	@Schema(description = "Reference Id for Language", position = 14, required=false)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Language.class)
 	private String languageId;	
 
 	@Column(name="SEX_TYPE")
-	@ApiModelProperty(value = "Sex type", position = 15, required=false)
+	@Schema(description = "Sex type", position = 15, required=false)
 	@JsonView(value= {Views.Allways.class})
-	@SystemReferenceData(value = SystemReferenceDataType.SexType)
+	@SystemReferenceData(value = "sex_type")
 	private String sexType;
 	
 	@Column(name="BIRTH_DATE")
-	@ApiModelProperty(value = "Date of birth", position = 16, required=false)
+	@Schema(description = "Date of birth", position = 16, required=false)
 	@JsonView(value= {Views.Allways.class})
 	@PastDate(years = 16)
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")

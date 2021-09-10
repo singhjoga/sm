@@ -1,1 +1,4 @@
 
+[submodule "api/common"]
+	path = api/common
+	url = https://github.com/singhjoga/api-common.git

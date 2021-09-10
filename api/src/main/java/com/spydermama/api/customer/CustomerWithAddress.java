@@ -8,9 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class CustomerWithAddress{
 	@JsonView(value= {Views.Allways.class})
-	@ApiModelProperty(value = "Customer object", position = 1, required=true)
+	@Schema(description = "Customer object", position = 1, required=true)
 	private Customer customer;
-	@ApiModelProperty(value = "Default address", position = 2, required=true)	
+	@Schema(description = "Default address", position = 2, required=true)	
 	@JsonView(value= {Views.Allways.class})
 	private Address address;
 	public Customer getCustomer() {

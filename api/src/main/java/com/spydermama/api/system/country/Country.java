@@ -25,27 +25,27 @@ public class Country implements IdentifiableEntity<String>{
 	@Id
 	@Column(name="CODE")
 	@Size(min = 3, max = 20, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Reference Code. Use as a Key other places for the references", position = 1, required=true)
+	@Schema(description = "Reference Code. Use as a Key other places for the references", position = 1, required=true)
 	@Pattern(regexp = RegEx.NAME,groups=OperationGroups.Always.class)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value = {Views.List.class, Views.Add.class})
 	private String id;
 
 	@Column(name="DEF_LANG_CODE")
-	@ApiModelProperty(value = "Default language Id", position = 2, required=true)
+	@Schema(description = "Default language Id", position = 2, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@EntityReference(value = Language.class)
 	private String defaultLanguageId;
 
 	@Column(name="ENG_NAME")
-	@ApiModelProperty(value = "Name in English", position = 3, required=true)
+	@Schema(description = "Name in English", position = 3, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String englishName;
 	
 	@Column(name="DATE_FORMAT")
-	@ApiModelProperty(value = "Date format for UI", position = 4, required=true)
+	@Schema(description = "Date format for UI", position = 4, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	private String dateFormat;

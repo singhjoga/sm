@@ -26,7 +26,7 @@ public class Dhaba extends AbstractResource<String> implements AuditableMain<Str
 
 	@Column(name="NAME")
 	@Size(min = 1, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Name", position = 2, required=true)
+	@Schema(description = "Name", position = 2, required=true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@UniqueKey
@@ -34,39 +34,39 @@ public class Dhaba extends AbstractResource<String> implements AuditableMain<Str
 
 	@Column(name="ORDER_EMAIL")
 	@Size(min = 0, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Email for orders", position = 3, required=false)
+	@Schema(description = "Email for orders", position = 3, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String orderEmail;	
 
 	@Column(name="ORDER_PHONE")
 	@Size(min = 0, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Phone no. for orders", position = 4, required=false)
+	@Schema(description = "Phone no. for orders", position = 4, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String orderPhone;
 	
 	@Column(name="TAX_NO")
 	@Size(min = 0, max = 500, groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Tax no", position = 5, required=true)
+	@Schema(description = "Tax no", position = 5, required=true)
 	@JsonView(value= {Views.Allways.class})
 	private String taxNo;
 
 	@Column(name="DELIVERY_SELF")
-	@ApiModelProperty(value = "Makes delivery by itself", position = 6, required=false)
+	@Schema(description = "Makes delivery by itself", position = 6, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Boolean deliverySelf;
 
 	@Column(name="DELIVERY_PICKUP")
-	@ApiModelProperty(value = "Allows self pickup", position = 7, required=false)
+	@Schema(description = "Allows self pickup", position = 7, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Boolean deliveryPickup;
 	
 	@Column(name="DELIVERY_DINEIN")
-	@ApiModelProperty(value = "Allows dine-in", position = 8, required=false)
+	@Schema(description = "Allows dine-in", position = 8, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Boolean deliveryDineIn;
 	
 	@Column(name="DELIVERY_3RDPARTY")
-	@ApiModelProperty(value = "Delivery through 3rd party", position = 9, required=false)
+	@Schema(description = "Delivery through 3rd party", position = 9, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Boolean delivery3rdParty;
 

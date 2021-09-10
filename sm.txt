@@ -11,6 +11,9 @@ Joga Singh: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWx
 Customer 1: 
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MTQ0MzQ2NjUsImV4cCI6MTY0NTk3MDg0MywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoiY3VzdG9tZXIxQGdtYWlsLmNvbSIsIm5hbWUiOiJDdXN0b21lciAxIiwiZW1haWwiOiJjdXN0b21lcjFAZ21haWwuY29tIiwicm9sZSI6WyJjdXN0b21lciIsImd1ZXMiXX0.NcEl4Xe3Ft9DWeJj3dBC5-Edo4U_8l9PjeNez4t6V2c
 
+docker login -u singhjoga
+Docker Hub token: 2fd02884-8234-4ef7-956a-2eb36921753d
+
 
 
 
@@ -31,3 +34,58 @@ PrimeNG Issues
 - Table Lazy Loading - Sorting and Filtering must be manually
 - Go to page - not easy, calculate the page index +1
 - DataView PrimeFlex support
+
+
+mvn spring-boot:run -Dspring-boot.run.profiles=tst
+
+sudo kubeadm init --apiserver-advertise-address=192.168.56.10 --pod-network-cidr=192.168.0.0/16
+
+token: 7uwejp.50bmj5d98brhlqve
+--discovery-token-ca-cert-hash: 0e30fcf11a60c8ea9d072f7bd67a44dbfbfd540edb46df0a3bbf887a5d4c3970
+
+kubeadm join --token 7uwejp.50bmj5d98brhlqve 192.168.56.10:6443 --discovery-token-ca-cert-hash sha256:0e30fcf11a60c8ea9d072f7bd67a44dbfbfd540edb46df0a3bbf887a5d4c3970
+kubeadm join 192.168.56.10:6443 --token 25svs9.kua84juj7ah1flp6 --discovery-token-ca-cert-hash sha256:0e30fcf11a60c8ea9d072f7bd67a44dbfbfd540edb46df0a3bbf887a5d4c3970
+
+
+kubectl drain k8smaster --delete-emptydir-data --force --ignore-daemonsets
+kubeadm reset
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+kubectl delete node k8smaster
+
+
+
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+  rm -rf $HOME/.kube
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.56.10:6443 --token fzcgrq.a6wxfxpjty8twlav \
+        --discovery-token-ca-cert-hash sha256:6771ebbb249c9e47b91d22993dddd306978071f2d9bd7e2bdc9f1e6f17cfcf3b
+
+
+
+
+
+
+
+
+
+TODO:
+- Entity References with MicroServices
+
+ kaniko, img, and buildah.
+

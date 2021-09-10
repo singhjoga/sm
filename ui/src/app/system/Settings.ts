@@ -12,9 +12,12 @@ export class Settings extends BaseService{
     constructor(private httpClient: HttpClient) {
         super();
     }
+    getBaseApiUrl(): string {
+        return "http://localhost:8888/v1";
+    }
     load():Observable<any> {
         console.log("Loading system settings...")
-        const url = this.getBaseApiUrl() + '/system/properties';
+        const url = this.getBaseApiUrl() + '/properties';
         return this.httpClient.get<SystemProperties>(url)
             .pipe(
                 map((resp:SystemProperties) => {

@@ -22,34 +22,34 @@ import io.swagger.annotations.ApiModelProperty.AccessMode;
 @ApiModel(description = "Propertyset Property Value View")
 public class PropertysetPropValueView{
 	@Id 
-	@ApiModelProperty(value = "Internal ID", position = 1, required=true, accessMode = AccessMode.READ_ONLY)
+	@Schema(description = "Internal ID", position = 1, required=true, accessMode = AccessMode.READ_ONLY)
 	@JsonView(value= {Views.List.class})
 	@Column(name="PROP_SET_PROP_VAL_ID")
 	private Long id;
 	
-	@ApiModelProperty(value = "Propertyset Property ID", position = 2, required=true)
+	@Schema(description = "Propertyset Property ID", position = 2, required=true)
 	@JsonView(value= {Views.List.class, Views.Add.class})
 	@Column(name="PROP_SET_PROP_ID")
 	private Long propertyId;
 	
 	@Column(name="RES_INST_ID")
 	@Size(min = 1, max = 200)
-	@ApiModelProperty(value = "Resource Instance ID", position = 3, required=false)
+	@Schema(description = "Resource Instance ID", position = 3, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String resourceInstanceId;
 
 	@Column(name="PROP_INST_IDX")
-	@ApiModelProperty(value = "Propery Instance Index", position = 4, required=false)
+	@Schema(description = "Propery Instance Index", position = 4, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Integer propertyInstanceIndex;
 
 	@Column
 	@Size(max=3000)
 	@JsonView(value = Views.Allways.class)
-	@ApiModelProperty(value = "A valid value as per type", position = 11, required=true)
+	@Schema(description = "A valid value as per type", position = 11, required=true)
 	private String value;
 
-	@ApiModelProperty(value = "Propertyset ID", position = 2, required=true)
+	@Schema(description = "Propertyset ID", position = 2, required=true)
 	@JsonView(value= {Views.List.class, Views.Add.class})
 	@Column(name="PROP_SET_ID")
 	private Long propertysetId;
@@ -58,18 +58,18 @@ public class PropertysetPropValueView{
 	@Size(min = 1, max = 200)
 	@NotNull(groups=OperationGroups.Add.class)
 	@Pattern(regexp = RegEx.PROPERTY_NAME,groups=OperationGroups.Always.class)
-	@ApiModelProperty(value = "Property name", position = 3, required=true)
+	@Schema(description = "Property name", position = 3, required=true)
 	@JsonView(value= {Views.Allways.class})
 	private String name;
 
 	@Column(name="DISPLAY_NAME")
 	@Size(min = 1, max = 200)
 	@NotNull(groups=OperationGroups.Add.class)
-	@ApiModelProperty(value = "Property name", position = 4, required=true)
+	@Schema(description = "Property name", position = 4, required=true)
 	@JsonView(value= {Views.Allways.class})
 	private String displayName;
 	
-	@ApiModelProperty(value = "Display order", position = 5, required = true)
+	@Schema(description = "Display order", position = 5, required = true)
 	@NotNull(groups=OperationGroups.Add.class)
 	@JsonView(value= {Views.Allways.class})
 	@Column(name="DISPLAY_ORDER")
@@ -80,35 +80,35 @@ public class PropertysetPropValueView{
 	@Column(name="TYPE_CODE")
 	@Size(min = 1, max = 50)
 	@NotNull(groups=OperationGroups.Add.class)
-	@ApiModelProperty(value = "Type of property e.g. STR, BOOL, NUM, UID, PWD etc.", position = 6, required=true, example="STR")
+	@Schema(description = "Type of property e.g. STR, BOOL, NUM, UID, PWD etc.", position = 6, required=true, example="STR")
 	@JsonView(value= {Views.Allways.class})	
 	private String typeCode; 
 	
 	@Column(name="VALID_VALUES")
 	@Size(max = 3000)
-	@ApiModelProperty(value = "Valid values based on type code", position = 7, required=false)
+	@Schema(description = "Valid values based on type code", position = 7, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String validValues;
 	
-	@ApiModelProperty(value = "'true' if the property is disabled i.e. not in use", position = 6,example = "false")
+	@Schema(description = "'true' if the property is disabled i.e. not in use", position = 6,example = "false")
 	@JsonView(value= {Views.Update.class,Views.List.class})
 	@Column(name="IS_DISABLED")
 	@LifecycleStatus
 	private Boolean isDisabled=false;
 	
-	@ApiModelProperty(value = "'true' if the property is optional", position = 6,example = "false")
+	@Schema(description = "'true' if the property is optional", position = 6,example = "false")
 	@JsonView(value= {Views.Update.class,Views.List.class})
 	@Column(name="IS_OPTIONAL")
 	private Boolean isOptional=false;
 
-	@ApiModelProperty(value = "'true' if the multiple instances of the properties are allowed", position = 7,example = "false")
+	@Schema(description = "'true' if the multiple instances of the properties are allowed", position = 7,example = "false")
 	@JsonView(value= {Views.Update.class,Views.List.class})
 	@Column(name="IS_MULTI_INST")
 	private Boolean isMultiInstance=false;
 	
 	@Column(name="GROUP_NAME")
 	@Size(max = 3000)
-	@ApiModelProperty(value = "Grouping name. Used for displaying propertie", position = 8, required=false)
+	@Schema(description = "Grouping name. Used for displaying propertie", position = 8, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String groupName;	
 	public String getValue() {

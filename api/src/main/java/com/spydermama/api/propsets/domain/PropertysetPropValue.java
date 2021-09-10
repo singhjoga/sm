@@ -16,31 +16,31 @@ import io.swagger.annotations.ApiModelProperty.AccessMode;
 @ApiModel(description = "Propertyset Property Value")
 public class PropertysetPropValue implements PropertyValue{
 	@Id 
-	@ApiModelProperty(value = "Internal ID", position = 1, required=true, accessMode = AccessMode.READ_ONLY)
+	@Schema(description = "Internal ID", position = 1, required=true, accessMode = AccessMode.READ_ONLY)
 	@JsonView(value= {Views.List.class})
 	@Column(name="PROP_SET_PROP_VAL_ID")
 	private Long id;
 	
-	@ApiModelProperty(value = "Propertyset Property ID", position = 2, required=true)
+	@Schema(description = "Propertyset Property ID", position = 2, required=true)
 	@JsonView(value= {Views.List.class, Views.Add.class})
 	@Column(name="PROP_SET_PROP_ID")
 	private Long propertyId;
 	
 	@Column(name="RES_INST_ID")
 	@Size(min = 1, max = 200)
-	@ApiModelProperty(value = "Resource Instance ID", position = 3, required=false)
+	@Schema(description = "Resource Instance ID", position = 3, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private String resourceInstanceId;
 
 	@Column(name="PROP_INST_IDX")
-	@ApiModelProperty(value = "Propery Instance Index", position = 4, required=false)
+	@Schema(description = "Propery Instance Index", position = 4, required=false)
 	@JsonView(value= {Views.Allways.class})
 	private Integer propertyInstanceIndex;
 	
 	@Column
 	@Size(max=3000)
 	@JsonView(value = Views.Allways.class)
-	@ApiModelProperty(value = "A valid value as per type", position = 11, required=true)
+	@Schema(description = "A valid value as per type", position = 11, required=true)
 	private String value;
 
 	public Long getId() {

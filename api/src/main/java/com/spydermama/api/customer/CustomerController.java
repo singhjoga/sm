@@ -37,7 +37,7 @@ public class CustomerController extends BaseParentResourceController<Customer, S
 	@RequestMapping(method = RequestMethod.GET)
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all customers")
+	@Operation( value="Returns all customers")
 	@ResponseBody
 	public ResponseEntity<List<Customer>> findAll() {
 		List<Customer> body = service.findAll();
@@ -46,7 +46,7 @@ public class CustomerController extends BaseParentResourceController<Customer, S
 	@RequestMapping(method = RequestMethod.GET, value = "/withaddress")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all customers with address")
+	@Operation( value="Returns all customers with address")
 	@ResponseBody
 	public ResponseEntity<List<CustomerWithAddress>> findAllWithAddress() {
 		List<CustomerWithAddress> body = service.findAllWithAddress(false);
@@ -55,7 +55,7 @@ public class CustomerController extends BaseParentResourceController<Customer, S
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}/addresses")
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all customers with address")
+	@Operation( value="Returns all customers with address")
 	@ResponseBody
 	public ResponseEntity<List<CustomerWithAddress>> findAllWithAddress(@PathVariable String id,
 			@RequestParam(name = "isDisabled",required = false) Boolean isDisabled) {

@@ -36,7 +36,7 @@ public class AddressController extends BaseParentResourceController<Address, Str
 	@RequestMapping(method = RequestMethod.GET)
 	@Authorization(action = Actions.Crud.View)
 	@JsonView(value = Views.List.class)
-	@ApiOperation( value="Returns all addresses for an object and object id")
+	@Operation( value="Returns all addresses for an object and object id")
 	@ResponseBody
 	public ResponseEntity<List<Address>> findAll(
 			@RequestParam(name = "objectType") String objectType,
