@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PrimengModule } from '../shared/primeng.module';
-import { KeycloakService } from './services/keycloak.service';
+import { AuthService } from './services/auth.service';
 import { HttpClientService } from './services/http-client.service';
 import { SnackbarService } from './services/snackbar.service';
 import { NumericDirective } from './directives/number-input-directive';
@@ -10,7 +10,6 @@ import { InputControl } from './components/controls/input/input-control';
 import { DropdownControl } from './components/controls/dropdown/dropdown-control';
 import { CheckboxControl } from '@app/core/components/controls/checkbox/checkbox-control';
 import { FormError } from './components/controls/form-error/form-error'
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -23,6 +22,7 @@ import { TableColumnFilterDirective } from './directives/table-column-filter';
 import { ConfirmationDialogNg } from '@app/core/components/dialogs/confirmation-dialog-ng/confirmation-dialog-ng';
 import { ConfirmationService } from 'primeng/api';
 import { DatePickerControl } from '@app/core/components/controls/datepicker/datepicker-control';
+import { OAuthModule } from 'angular-oauth2-oidc';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
@@ -42,9 +42,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     PrimengModule,
     CommonModule,
-    FlexLayoutModule,
     HttpClientModule,
     InjectorModule,
+    OAuthModule.forRoot(),
     TranslateModule.forChild({
       defaultLanguage: 'en',
       // missingTranslationHandler: {provide: CustomMissingTranslationHandler, useClass: CustomMissingTranslationHandler},
@@ -59,7 +59,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [
     NumericDirective,
     InputControl,
-    FlexLayoutModule,
     TranslateModule,
     FormError,
     ConfirmationDialog,
@@ -72,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DatePickerControl
   ],
   providers: [
-    KeycloakService,
+    AuthService,
     HttpClientService,
     SnackbarService,
     CustomMissingTranslationHandler,

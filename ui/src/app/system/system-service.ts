@@ -1,6 +1,6 @@
 import { HttpClientService } from "@app/core/services/http-client.service";
 import { SnackbarService } from '@app/core/services/snackbar.service';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BaseService } from "@app/core/services/base-service";
 import { Language } from "@app/01_models/Language";
@@ -14,7 +14,7 @@ export class SystemService extends BaseService {
     http: HttpClientService;
     snackBar: SnackbarService;
     constructor(http: HttpClientService, sb: SnackbarService) {
-        super();
+        super(sb);
         this.http = http;
         this.snackBar = sb;
     }
@@ -23,55 +23,25 @@ export class SystemService extends BaseService {
     }
     async getLangues(): Promise<Language[]> {
         const url = this.getBaseApiUrl() + '/languages';
-        return this.http.get<Language[]>(url)
-            .pipe(
-                catchError(error => {
-                    this.snackBar.showError(error.message);
-                    return throwError(error);
-                })
-            ).toPromise();
+        return this.exec(this.http.get<Language[]>(url));
     }
     async getRefData(type: string): Promise<RefData[]> {
         const url = this.getBaseApiUrl() + '/refdata/' + type;
-        return this.http.get<RefData[]>(url)
-            .pipe(
-                catchError(error => {
-                    this.snackBar.showError(error.message);
-                    return throwError(error);
-                })
-            ).toPromise();
+        return this.exec(this.http.get<RefData[]>(url));
     }
     async getSexTypes(): Promise<RefData[]> {
         return this.getRefData('sex_type');
     }
     async getCountries(): Promise<Country[]> {
         const url = this.getBaseApiUrl() + '/countries';
-        return this.http.get<Country[]>(url)
-            .pipe(
-                catchError(error => {
-                    this.snackBar.showError(error.message);
-                    return throwError(error);
-                })
-            ).toPromise();
+        return this.exec(this.http.get<Country[]>(url));
     }
     async getCounty(id: string): Promise<Country> {
         const url = this.getBaseApiUrl() + '/countries/' + id;
-        return this.http.get<Country>(url)
-            .pipe(
-                catchError(error => {
-                    this.snackBar.showError(error.message);
-                    return throwError(error);
-                })
-            ).toPromise();
+        return this.exec(this.http.get<Country>(url));
     }
     async getSystemProperties(): Promise<SystemProperties> {
         const url = this.getBaseApiUrl() + '/properties';
-        return this.http.get<SystemProperties>(url)
-            .pipe(
-                catchError(error => {
-                    this.snackBar.showError(error.message);
-                    return throwError(error);
-                })
-            ).toPromise();
+        return this.exec(this.http.get<SystemProperties>(url));
     }
 }

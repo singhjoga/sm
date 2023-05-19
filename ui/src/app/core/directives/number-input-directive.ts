@@ -1,7 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnInit, Optional, Renderer2 } from "@angular/core";
 import { NgControl } from "@angular/forms";
 
-import { connectableObservableDescriptor } from "rxjs/internal/observable/ConnectableObservable";
 @Directive({
   selector: "[validator]"
 })

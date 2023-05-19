@@ -5,7 +5,6 @@ import { CoreModule } from '@app/core/core.module';
 import { PrimengModule } from '../shared/primeng.module';
 import { CustomerManagementComponent} from './customer-management/list/customer-management.component'
 import { CustomerDetailsComponent} from './customer-management/details/customer-details.component'
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CustomerBasicInfoComponent } from '@app/features/customer-management/details/basic-info/customer-basic-info.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ResourceDialogComponent } from '@app/features/resource-dialog/resource-dialog.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CoreModule,
     PrimengModule,
-    FlexLayoutModule,
     SharedModule
     //TranslateModule
   ],

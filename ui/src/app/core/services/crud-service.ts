@@ -5,64 +5,45 @@ import {ErrorResponse, AddResponse} from '@app/01_models/RestResponse'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {BaseService} from './base-service';
+import { interval, firstValueFrom } from 'rxjs';
 export abstract class CrudService< T extends AbstractResource, ID> extends BaseService{
     public http: HttpClientService;
     public snackBar: SnackbarService
     constructor(http: HttpClientService, sb: SnackbarService) {
-        super();
+        super(sb);
         this.http=http;
         this.snackBar=sb;
     }
     abstract getApiUrl();
 
     async add(obj:T): Promise<string> {
-        return this.http.post<AddResponse>(this.getApiUrl(),obj)
+
+        const source$ = this.http.post<AddResponse>(this.getApiUrl(),obj)
         .pipe(
             map((resp: AddResponse) => resp.id),
             catchError(error => {
                 this.snackBar.showError(error.message);
-                return throwError(error);
+                return throwError(() => new Error(error));
             })
-        ).toPromise();
+        );
+        var result = firstValueFrom(source$);
+
+        return result;
     }
     async update(id:string, obj:T): Promise<any> {
         const url=this.getApiUrl()+"/"+id;
-        return this.http.put<any>(url,obj)
-        .pipe(
-            catchError(error => {
-                this.snackBar.showError(error.message);
-                return throwError(error);
-            })
-        ).toPromise();
+        return this.exec(this.http.put<any>(url,obj));
     }
     async delete(id:string): Promise<any> {
         const url=this.getApiUrl()+"/"+id;
-        return this.http.delete(url)
-        .pipe(
-            catchError(error => {
-                this.snackBar.showError(error.message);
-                return throwError(error);
-            })
-        ).toPromise();
+        return this.exec(this.http.delete(url));
     }
     async findAll(): Promise<T[]> {
-        return this.http.get<T[]>(this.getApiUrl())
-        .pipe(
-            catchError(error => {
-                this.snackBar.showError(error.message);
-                return throwError(error);
-            })
-        ).toPromise();
+        return this.exec(this.http.get<T[]>(this.getApiUrl()));
     }
     async findById(id: string): Promise<T> {
         let url=this.getApiUrl()+'/'+id
-        return this.http.get<T>(url)
-        .pipe(
-            catchError(error => {
-                this.snackBar.showError(error.message);
-                return throwError(error);
-            })
-        ).toPromise();
+        return this.exec(this.http.get<T>(url));
     }
 
     public getHttp(): HttpClientService {

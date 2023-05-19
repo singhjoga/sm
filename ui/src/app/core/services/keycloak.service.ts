@@ -16,26 +16,25 @@
  */
 
 import {Injectable} from '@angular/core';
-import {KeycloakInstance, KeycloakInitOptions} from "keycloak-js";
 
 const configOptions = {
     url: 'http://127.0.0.1:8080/auth', realm: 'sm', clientId: 'sm-ui'
 }
 @Injectable()
-export class KeycloakService {
+export class KeycloakAuthService {
     
     // TODO: remove ts-ignore and import Keycloak.
     //  I have no idea how to import keycloak-js. I was always getting 404 error on 127.0.0.1:8080/app-angular2/keycloak-js so I worked it around with an import in index.html
     // @ts-ignore
      
-    static keycloakAuth: KeycloakInstance = Keycloak(configOptions);
+    static keycloakAuth: KeycloakInstance; // = Keycloak(configOptions);
     constructor() { 
-        this.init();
+        //this.init();
     }
     init(options?: any): Promise<any> {
         console.log("Initializing Keycloak");
         return new Promise((resolve, reject) => {
-            KeycloakService.keycloakAuth.init(options)
+            KeycloakAuthService.keycloakAuth.init(options)
                 .then(() => {
                     console.log("Initializing success");
                     resolve("success");
@@ -49,28 +48,28 @@ export class KeycloakService {
 
     authenticated(): boolean|undefined {
     
-        return KeycloakService.keycloakAuth.authenticated;
+        return false; //KeycloakService.keycloakAuth.authenticated;
     }
 
     login() {
-        KeycloakService.keycloakAuth.login();
+        KeycloakAuthService.keycloakAuth.login();
     }
 
     logout() {
-        KeycloakService.keycloakAuth.logout();
+        KeycloakAuthService.keycloakAuth.logout();
     }
 
     account() {
-        KeycloakService.keycloakAuth.accountManagement();
+        KeycloakAuthService.keycloakAuth.accountManagement();
     }
 
     getToken(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
-            if (KeycloakService.keycloakAuth.token) {
-                KeycloakService.keycloakAuth
+            if (KeycloakAuthService.keycloakAuth.token) {
+                KeycloakAuthService.keycloakAuth
                     .updateToken(5)
                     .then(() => {
-                        resolve(<string>KeycloakService.keycloakAuth.token);
+                        resolve(<string>KeycloakAuthService.keycloakAuth.token);
                     })
                     .catch(() => {
                         reject('Failed to refresh token');

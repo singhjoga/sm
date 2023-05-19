@@ -14,12 +14,52 @@ import { AppRoutingModule } from './app-routing.module';
 import { SystemModule } from '@app/system/system.module';
 import { Settings } from './system/Settings';
 import { Observable } from 'rxjs';
-
+import { OAuthService, NullValidationHandler, AuthConfig } from 'angular-oauth2-oidc';
 //import { FlexLayoutModule } from '@angular/flex-layout'
+export const authCodeFlowConfig: AuthConfig = {
+  issuer: 'https://keycloak.chessbuddy.com/auth/realms/chessbuddy',
 
-function initialize(settings: Settings):() =>Observable<any> {
-  return () =>settings.load();
+  // URL of the SPA to redirect the user to after login
+  redirectUri: window.location.origin + '/index.html',
+  clientId: 'ui',
+  responseType: 'code',
+  scope: true
+    ? 'openid profile email api'
+    : 'openid profile email offline_access api',
+
+ // silentRefreshRedirectUri: `${window.location.origin}/silent-refresh.html`,
+
+ // useSilentRefresh: useSilentRefreshForCodeFlow,
+
+  showDebugInformation: true,
+
+ // sessionChecksEnabled: false,
+  // disablePKCI: true,
+
+ // clearHashAfterLogin: true,
+  timeoutFactor: 0.01,
+};
+function initialize(settings: Settings, oauthService: OAuthService){
+  return () => {
+    const observable = new Observable((subscriber) => {
+      oauthService.configure(authCodeFlowConfig);
+      oauthService.loadDiscoveryDocumentAndTryLogin().then((result) => {
+          if (result) {
+            const claims = oauthService.getIdentityClaims();
+            const accToken = oauthService.getAccessToken();
+            if (claims) {
+             var username = claims['given_name'];
+             console.log('username='+username)
+            }
+          }
+          subscriber.next(0);
+          subscriber.complete();
+        });
+    });
+    return observable;
+  }
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,12 +79,14 @@ function initialize(settings: Settings):() =>Observable<any> {
     SystemModule
    // FlexLayoutModule
   ],
+  
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initialize,
-    deps: [Settings],
+    deps: [Settings, OAuthService],
     multi: true
   },],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
